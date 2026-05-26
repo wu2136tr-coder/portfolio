@@ -162,7 +162,7 @@
                         <!-- 可點擊顯示證照之按鈕 -->
                         <button onclick="openCertModal()" class="flex items-center gap-1.5 hover:text-accent transition-colors text-left group/btn cursor-pointer">
                             <i class="fa-solid fa-award text-accent group-hover/btn:scale-110 transition-transform"></i>
-                            <span class="underline decoration-dotted font-bold">MOS 365 (Word, Excel, PPT) 國際認證</span>
+                            <span class="underline decoration-dotted font-bold">MOS 360 (Word, Excel, PPT) 國際認證</span>
                         </button>
                         <div class="flex items-center gap-1.5 text-stone-500">
                             <i class="fa-solid fa-graduation-cap text-stone-400"></i>
@@ -321,123 +321,33 @@
                 <button onclick="closeCertModal()" class="text-stone-400 hover:text-stone-600 text-2xl font-light leading-none">&times;</button>
             </div>
             
-            <!-- 證照展示區 (採用 100% 向量級向量圖重建，不需依賴外部網絡或容易遺失的本地圖片) -->
+            <!-- 證照展示區 (載入實體圖片 word.png, excel.png, ppt.png) -->
             <div class="p-6 overflow-y-auto space-y-6">
-                <p class="text-xs text-stone-500 text-center">系統已重構向量憑證，支援精準無損預覽及防偽校驗碼查詢。</p>
+                <p class="text-xs text-stone-500 text-center">點擊證書圖片，可在新分頁開啟高清大圖檢視驗證。</p>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     
                     <!-- Word 證照 -->
                     <div class="space-y-3 text-center">
                         <span class="inline-block px-2.5 py-1 bg-blue-50 text-blue-700 text-xs font-semibold rounded-md">Word Expert</span>
-                        <div class="border border-beige-200 rounded-xl overflow-hidden bg-white shadow-sm p-1">
-                            <svg viewBox="0 0 400 280" class="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
-                                <rect width="400" height="280" fill="#FCFAF7" rx="8"/>
-                                <rect x="8" y="8" width="384" height="264" fill="none" stroke="#EADCC9" stroke-width="1.5" rx="6"/>
-                                <rect x="12" y="12" width="376" height="256" fill="none" stroke="#B88E56" stroke-width="0.75" stroke-dasharray="3,3" rx="4"/>
-                                <!-- Seal -->
-                                <circle cx="50" cy="55" r="24" fill="#E81123"/>
-                                <circle cx="50" cy="55" r="22" fill="none" stroke="#FFFFFF" stroke-width="1"/>
-                                <text x="50" y="44" font-family="'Noto Sans TC', sans-serif" font-size="3" fill="#FFFFFF" text-anchor="middle" letter-spacing="0.5">OFFICIAL SEAL OF</text>
-                                <text x="50" y="48" font-family="'Noto Sans TC', sans-serif" font-size="4" fill="#FFFFFF" text-anchor="middle" font-weight="bold">MICROSOFT</text>
-                                <text x="50" y="66" font-family="'Noto Sans TC', sans-serif" font-size="3" fill="#FFFFFF" text-anchor="middle" letter-spacing="0.5">CERTIFICATION</text>
-                                <path d="M42 55 Q50 63 58 55" fill="none" stroke="#FFFFFF" stroke-width="1"/>
-                                <circle cx="50" cy="55" r="12" fill="none" stroke="#FFFFFF" stroke-width="0.5" stroke-dasharray="1,1"/>
-                                <!-- Top Right Header -->
-                                <text x="350" y="35" font-family="'Noto Sans TC', sans-serif" font-size="7" fill="#3D352B" text-anchor="end" font-weight="900" letter-spacing="1">Microsoft Office Specialist</text>
-                                <!-- Body Text -->
-                                <text x="200" y="105" font-family="'Noto Sans TC', sans-serif" font-size="11" fill="#7C7267" text-anchor="middle" letter-spacing="0.5">This certifies that</text>
-                                <text x="200" y="130" font-family="'Noto Sans TC', sans-serif" font-size="18" fill="#3D352B" text-anchor="middle" font-weight="bold" letter-spacing="1.5">WU HUI HUA</text>
-                                <text x="200" y="152" font-family="'Noto Sans TC', sans-serif" font-size="7" fill="#7C7267" text-anchor="middle">has successfully completed the requirements to be recognized as a</text>
-                                <!-- Certificate Title -->
-                                <rect x="80" y="165" width="240" height="28" fill="#0078D4" rx="4"/>
-                                <text x="200" y="182" font-family="'Noto Sans TC', sans-serif" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="bold" letter-spacing="1">Word Expert</text>
-                                <text x="200" y="205" font-family="'Noto Sans TC', sans-serif" font-size="8" fill="#3D352B" text-anchor="middle" font-weight="bold">Microsoft 365 Apps</text>
-                                <!-- Footer info -->
-                                <text x="25" y="235" font-family="'Noto Sans TC', sans-serif" font-size="5.5" fill="#7C7267">Date of achievement: May 15, 2026</text>
-                                <text x="25" y="243" font-family="'Noto Sans TC', sans-serif" font-size="5" fill="#7C7267">verify.certiport.com</text>
-                                <text x="25" y="251" font-family="'Noto Sans TC', sans-serif" font-size="5.5" fill="#3D352B" font-weight="bold">Code: wYeXw-2FET</text>
-                                <!-- Signature -->
-                                <path d="M300 232 Q315 220 330 230 T360 225" fill="none" stroke="#2C251E" stroke-width="1.25"/>
-                                <text x="330" y="240" font-family="'Noto Sans TC', sans-serif" font-size="6" fill="#3D352B" text-anchor="middle" font-weight="bold">Satya Nadella</text>
-                                <text x="330" y="246" font-family="'Noto Sans TC', sans-serif" font-size="4.5" fill="#7C7267" text-anchor="middle">Chief Executive Officer, Microsoft</text>
-                            </svg>
-                        </div>
+                        <a href="word.png" target="_blank" class="block border border-beige-200 rounded-xl overflow-hidden hover:border-accent hover:shadow-md transition-all p-1 bg-white">
+                            <img src="word.png" alt="Word Expert Certificate" class="w-full h-auto object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x420?text=Word+Expert+Certificate';">
+                        </a>
                     </div>
                     
                     <!-- Excel 證照 -->
                     <div class="space-y-3 text-center">
                         <span class="inline-block px-2.5 py-1 bg-green-50 text-green-700 text-xs font-semibold rounded-md">Excel Expert</span>
-                        <div class="border border-beige-200 rounded-xl overflow-hidden bg-white shadow-sm p-1">
-                            <svg viewBox="0 0 400 280" class="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
-                                <rect width="400" height="280" fill="#FCFAF7" rx="8"/>
-                                <rect x="8" y="8" width="384" height="264" fill="none" stroke="#EADCC9" stroke-width="1.5" rx="6"/>
-                                <rect x="12" y="12" width="376" height="256" fill="none" stroke="#B88E56" stroke-width="0.75" stroke-dasharray="3,3" rx="4"/>
-                                <!-- Seal -->
-                                <circle cx="50" cy="55" r="24" fill="#E81123"/>
-                                <circle cx="50" cy="55" r="22" fill="none" stroke="#FFFFFF" stroke-width="1"/>
-                                <text x="50" y="44" font-family="'Noto Sans TC', sans-serif" font-size="3" fill="#FFFFFF" text-anchor="middle" letter-spacing="0.5">OFFICIAL SEAL OF</text>
-                                <text x="50" y="48" font-family="'Noto Sans TC', sans-serif" font-size="4" fill="#FFFFFF" text-anchor="middle" font-weight="bold">MICROSOFT</text>
-                                <text x="50" y="66" font-family="'Noto Sans TC', sans-serif" font-size="3" fill="#FFFFFF" text-anchor="middle" letter-spacing="0.5">CERTIFICATION</text>
-                                <path d="M42 55 Q50 63 58 55" fill="none" stroke="#FFFFFF" stroke-width="1"/>
-                                <circle cx="50" cy="55" r="12" fill="none" stroke="#FFFFFF" stroke-width="0.5" stroke-dasharray="1,1"/>
-                                <!-- Top Right Header -->
-                                <text x="350" y="35" font-family="'Noto Sans TC', sans-serif" font-size="7" fill="#3D352B" text-anchor="end" font-weight="900" letter-spacing="1">Microsoft Office Specialist</text>
-                                <!-- Body Text -->
-                                <text x="200" y="105" font-family="'Noto Sans TC', sans-serif" font-size="11" fill="#7C7267" text-anchor="middle" letter-spacing="0.5">This certifies that</text>
-                                <text x="200" y="130" font-family="'Noto Sans TC', sans-serif" font-size="18" fill="#3D352B" text-anchor="middle" font-weight="bold" letter-spacing="1.5">WU HUI HUA</text>
-                                <text x="200" y="152" font-family="'Noto Sans TC', sans-serif" font-size="7" fill="#7C7267" text-anchor="middle">has successfully completed the requirements to be recognized as a</text>
-                                <!-- Certificate Title -->
-                                <rect x="80" y="165" width="240" height="28" fill="#107C41" rx="4"/>
-                                <text x="200" y="182" font-family="'Noto Sans TC', sans-serif" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="bold" letter-spacing="1">Excel Expert</text>
-                                <text x="200" y="205" font-family="'Noto Sans TC', sans-serif" font-size="8" fill="#3D352B" text-anchor="middle" font-weight="bold">Microsoft 365 Apps</text>
-                                <!-- Footer info -->
-                                <text x="25" y="235" font-family="'Noto Sans TC', sans-serif" font-size="5.5" fill="#7C7267">Date of achievement: May 15, 2026</text>
-                                <text x="25" y="243" font-family="'Noto Sans TC', sans-serif" font-size="5" fill="#7C7267">verify.certiport.com</text>
-                                <text x="25" y="251" font-family="'Noto Sans TC', sans-serif" font-size="5.5" fill="#3D352B" font-weight="bold">Code: Mn54-s4Lm</text>
-                                <!-- Signature -->
-                                <path d="M300 232 Q315 220 330 230 T360 225" fill="none" stroke="#2C251E" stroke-width="1.25"/>
-                                <text x="330" y="240" font-family="'Noto Sans TC', sans-serif" font-size="6" fill="#3D352B" text-anchor="middle" font-weight="bold">Satya Nadella</text>
-                                <text x="330" y="246" font-family="'Noto Sans TC', sans-serif" font-size="4.5" fill="#7C7267" text-anchor="middle">Chief Executive Officer, Microsoft</text>
-                            </svg>
-                        </div>
+                        <a href="excel.png" target="_blank" class="block border border-beige-200 rounded-xl overflow-hidden hover:border-accent hover:shadow-md transition-all p-1 bg-white">
+                            <img src="excel.png" alt="Excel Expert Certificate" class="w-full h-auto object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x420?text=Excel+Expert+Certificate';">
+                        </a>
                     </div>
                     
                     <!-- PowerPoint 證照 -->
                     <div class="space-y-3 text-center">
                         <span class="inline-block px-2.5 py-1 bg-orange-50 text-orange-700 text-xs font-semibold rounded-md">PowerPoint Associate</span>
-                        <div class="border border-beige-200 rounded-xl overflow-hidden bg-white shadow-sm p-1">
-                            <svg viewBox="0 0 400 280" class="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
-                                <rect width="400" height="280" fill="#FCFAF7" rx="8"/>
-                                <rect x="8" y="8" width="384" height="264" fill="none" stroke="#EADCC9" stroke-width="1.5" rx="6"/>
-                                <rect x="12" y="12" width="376" height="256" fill="none" stroke="#B88E56" stroke-width="0.75" stroke-dasharray="3,3" rx="4"/>
-                                <!-- Seal -->
-                                <circle cx="50" cy="55" r="24" fill="#E81123"/>
-                                <circle cx="50" cy="55" r="22" fill="none" stroke="#FFFFFF" stroke-width="1"/>
-                                <text x="50" y="44" font-family="'Noto Sans TC', sans-serif" font-size="3" fill="#FFFFFF" text-anchor="middle" letter-spacing="0.5">OFFICIAL SEAL OF</text>
-                                <text x="50" y="48" font-family="'Noto Sans TC', sans-serif" font-size="4" fill="#FFFFFF" text-anchor="middle" font-weight="bold">MICROSOFT</text>
-                                <text x="50" y="66" font-family="'Noto Sans TC', sans-serif" font-size="3" fill="#FFFFFF" text-anchor="middle" letter-spacing="0.5">CERTIFICATION</text>
-                                <path d="M42 55 Q50 63 58 55" fill="none" stroke="#FFFFFF" stroke-width="1"/>
-                                <circle cx="50" cy="55" r="12" fill="none" stroke="#FFFFFF" stroke-width="0.5" stroke-dasharray="1,1"/>
-                                <!-- Top Right Header -->
-                                <text x="350" y="35" font-family="'Noto Sans TC', sans-serif" font-size="7" fill="#3D352B" text-anchor="end" font-weight="900" letter-spacing="1">Microsoft Office Specialist</text>
-                                <!-- Body Text -->
-                                <text x="200" y="105" font-family="'Noto Sans TC', sans-serif" font-size="11" fill="#7C7267" text-anchor="middle" letter-spacing="0.5">This certifies that</text>
-                                <text x="200" y="130" font-family="'Noto Sans TC', sans-serif" font-size="18" fill="#3D352B" text-anchor="middle" font-weight="bold" letter-spacing="1.5">WU HUI HUA</text>
-                                <text x="200" y="152" font-family="'Noto Sans TC', sans-serif" font-size="7" fill="#7C7267" text-anchor="middle">has successfully completed the requirements to be recognized as a</text>
-                                <!-- Certificate Title -->
-                                <rect x="80" y="165" width="240" height="28" fill="#C43E1C" rx="4"/>
-                                <text x="200" y="182" font-family="'Noto Sans TC', sans-serif" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="bold" letter-spacing="0.5">PowerPoint Associate</text>
-                                <text x="200" y="205" font-family="'Noto Sans TC', sans-serif" font-size="8" fill="#3D352B" text-anchor="middle" font-weight="bold">Microsoft 365 Apps</text>
-                                <!-- Footer info -->
-                                <text x="25" y="235" font-family="'Noto Sans TC', sans-serif" font-size="5.5" fill="#7C7267">Date of achievement: May 15, 2026</text>
-                                <text x="25" y="243" font-family="'Noto Sans TC', sans-serif" font-size="5" fill="#7C7267">verify.certiport.com</text>
-                                <text x="25" y="251" font-family="'Noto Sans TC', sans-serif" font-size="5.5" fill="#3D352B" font-weight="bold">Code: 4uHb-Xaqa</text>
-                                <!-- Signature -->
-                                <path d="M300 232 Q315 220 330 230 T360 225" fill="none" stroke="#2C251E" stroke-width="1.25"/>
-                                <text x="330" y="240" font-family="'Noto Sans TC', sans-serif" font-size="6" fill="#3D352B" text-anchor="middle" font-weight="bold">Satya Nadella</text>
-                                <text x="330" y="246" font-family="'Noto Sans TC', sans-serif" font-size="4.5" fill="#7C7267" text-anchor="middle">Chief Executive Officer, Microsoft</text>
-                            </svg>
-                        </div>
+                        <a href="ppt.png" target="_blank" class="block border border-beige-200 rounded-xl overflow-hidden hover:border-accent hover:shadow-md transition-all p-1 bg-white">
+                            <img src="ppt.png" alt="PowerPoint Certificate" class="w-full h-auto object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x420?text=PowerPoint+Certificate';">
+                        </a>
                     </div>
                     
                 </div>
