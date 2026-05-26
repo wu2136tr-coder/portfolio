@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>智寫 AI 視覺設計提示詞生成器</title>
+  <!-- 引入 Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght=300;400;500;700;900&display=swap');
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+    }
+    /* 自訂柔和扁平陰影，貼近實體精緻文書版面 */
+    .custom-shadow {
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    /* 捲動軸美化 */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #efede8;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #c7c2ba;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #a5a098;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-[#efede8] py-10 px-6 text-[#2c3e50] antialiased">
+
+  <!-- 隱藏複製專用的 Textarea (配合 iframe 與跨瀏覽器安全剪貼簿機制) -->
+  <textarea id="copy-helper" class="absolute -top-[9999px] -left-[9999px] opacity-0" readonly></textarea>
+
+  <!-- 浮動 Toast 通知容器 -->
+  <div id="toast-container" class="fixed top-5 right-5 z-50 flex flex-col gap-3 max-w-sm w-full pointer-events-none"></div>
+
+  <!-- 主要工作容器 -->
+  <div class="max-w-4xl mx-auto">
+    
+    <!-- STEP 01 ・ 選擇視覺設計群組 -->
+    <div class="mb-8">
+      <div class="flex justify-between items-center mb-4">
+        <p class="text-xs tracking-[0.3em] text-[#7a7a7a] font-bold">
+          STEP 01 ・ 選擇視覺設計群組
+        </p>
+        <span id="selected-type-badge" class="text-xs bg-[#5578b5] text-white px-3 py-1 rounded-full font-medium transition-all hidden"></span>
+      </div>
+
+      <!-- 第一層：主群組選擇 (A組、B組、C組、D組) -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- A組・品牌行銷 -->
+        <button id="btn-group-a" class="group relative flex items-center justify-between p-5 rounded-sm border bg-white transition-all duration-300 border-[#d7d2c9] hover:border-[#5578b5] hover:shadow-sm text-left">
+          <div class="text-left">
+            <span class="text-[11px] font-bold text-[#5578b5] tracking-widest block mb-1">A 組</span>
+            <h3 class="text-sm font-bold text-[#1f1f1f]">品牌行銷</h3>
+            <p class="text-[11px] text-gray-400 mt-0.5">官網首屏、海報</p>
+          </div>
+          <div class="text-2xl opacity-80 group-hover:scale-110 transition-transform">🎨</div>
+          <!-- 作用指示燈條 -->
+          <div id="indicator-a" class="absolute bottom-0 left-0 w-full h-[3px] bg-transparent transition-colors"></div>
+        </button>
+
+        <!-- B組・商品電商 -->
+        <button id="btn-group-b" class="group relative flex items-center justify-between p-5 rounded-sm border bg-white transition-all duration-300 border-[#d7d2c9] hover:border-[#5578b5] hover:shadow-sm text-left">
+          <div class="text-left">
+            <span class="text-[11px] font-bold text-[#5578b5] tracking-widest block mb-1">B 組</span>
+            <h3 class="text-sm font-bold text-[#1f1f1f]">商品電商</h3>
+            <p class="text-[11px] text-gray-400 mt-0.5">白底圖、情境圖</p>
+          </div>
+          <div class="text-2xl opacity-80 group-hover:scale-110 transition-transform">🛒</div>
+          <!-- 作用指示燈條 -->
+          <div id="indicator-b" class="absolute bottom-0 left-0 w-full h-[3px] bg-transparent transition-colors"></div>
+        </button>
+
+        <!-- C組・內容創作 -->
+        <button id="btn-group-c" class="group relative flex items-center justify-between p-5 rounded-sm border bg-white transition-all duration-300 border-[#d7d2c9] hover:border-[#5578b5] hover:shadow-sm text-left">
+          <div class="text-left">
+            <span class="text-[11px] font-bold text-[#5578b5] tracking-widest block mb-1">C 組</span>
+            <h3 class="text-sm font-bold text-[#1f1f1f]">內容創作</h3>
+            <p class="text-[11px] text-gray-400 mt-0.5">便當格、教學圖</p>
+          </div>
+          <div class="text-2xl opacity-80 group-hover:scale-110 transition-transform">✍️</div>
+          <!-- 作用指示燈條 -->
+          <div id="indicator-c" class="absolute bottom-0 left-0 w-full h-[3px] bg-transparent transition-colors"></div>
+        </button>
+
+        <!-- D組・品牌推廣 (與A組對齊) -->
+        <button id="btn-group-d" class="group relative flex items-center justify-between p-5 rounded-sm border bg-white transition-all duration-300 border-[#d7d2c9] hover:border-[#5578b5] hover:shadow-sm text-left">
+          <div class="text-left">
+            <span class="text-[11px] font-bold text-[#5578b5] tracking-widest block mb-1">D 組</span>
+            <h3 class="text-sm font-bold text-[#1f1f1f]">品牌推廣</h3>
+            <p class="text-[11px] text-gray-400 mt-0.5">社群主圖、促銷海報</p>
+          </div>
+          <div class="text-2xl opacity-80 group-hover:scale-110 transition-transform">📣</div>
+          <!-- 作用指示燈條 -->
+          <div id="indicator-d" class="absolute bottom-0 left-0 w-full h-[3px] bg-transparent transition-colors"></div>
+        </button>
+      </div>
+    </div>
+
+    <!-- STEP 02 ・ 選擇特定系列 (名稱將隨 STEP 01 選擇動態切換) -->
+    <div class="mb-8">
+      <p id="step2-title" class="text-xs tracking-[0.3em] text-[#7a7a7a] font-bold mb-4">
+        STEP 02 ・ 選擇品牌行銷系列
+      </p>
+
+      <!-- 第二層：子類別卡片容器 (動態載入 A1~A6, B1~B6, C1~C6, D1~D6 加上自訂 CAT) -->
+      <div id="cards-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 transition-all duration-300">
+        <!-- 子類別按鈕會在此處動態生成，並在最後一項附加「＋自訂設計」按鈕 -->
+      </div>
+    </div>
+
+    <!-- STEP 03 ・ 填寫視覺設計參數 -->
+    <div class="mb-8">
+      <p class="text-xs tracking-[0.3em] text-[#7a7a7a] font-bold mb-4">
+        STEP 03 ・ 填寫視覺設計參數
+      </p>
+
+      <!-- 核心資訊輸入表單 -->
+      <div class="bg-white border border-[#d7d2c9] rounded-sm p-6 custom-shadow space-y-5">
+        
+        <div>
+          <label id="label-sender" class="block text-[14px] text-[#4a4a4a] font-medium mb-2">主體物件描述 (Core Subject)</label>
+          <input type="text" id="input-sender" placeholder="例：頂級香水玻璃瓶，裡面有金色液體與花瓣" class="w-full h-[50px] border border-[#d8d3ca] bg-[#f3f1ec] rounded-sm px-4 text-[14px] outline-none focus:border-[#5578b5] focus:ring-1 focus:ring-[#5578b5] transition-all">
+        </div>
+
+        <div>
+          <label id="label-receiver" class="block text-[14px] text-[#4a4a4a] font-medium mb-2">設計風格/藝術媒介 (Artistic Style)</label>
+          <input type="text" id="input-receiver" placeholder="例：3D 渲染，高奢極簡主義，C4D 建模" class="w-full h-[50px] border border-[#d8d3ca] bg-[#f3f1ec] rounded-sm px-4 text-[14px] outline-none focus:border-[#5578b5] focus:ring-1 focus:ring-[#5578b5] transition-all">
+        </div>
+
+        <div>
+          <label id="label-subject" class="block text-[14px] text-[#4a4a4a] font-medium mb-2">色彩與光影計畫 (Color & Lighting)</label>
+          <input type="text" id="input-subject" placeholder="例：暖金與曜石黑，柔和工作室頂光，帶有些微焦散折射效果" class="w-full h-[50px] border border-[#d8d3ca] bg-[#f3f1ec] rounded-sm px-4 text-[14px] outline-none focus:border-[#5578b5] focus:ring-1 focus:ring-[#5578b5] transition-all">
+        </div>
+
+        <div>
+          <label id="label-purpose" class="block text-[14px] text-[#4a4a4a] font-medium mb-2">畫面結構佈局 (Composition Layout)</label>
+          <input type="text" id="input-purpose" placeholder="例：居中對稱，完美平視視角，下方帶有大面積留白供放置文字" class="w-full h-[50px] border border-[#d8d3ca] bg-[#f3f1ec] rounded-sm px-4 text-[14px] outline-none focus:border-[#5578b5] focus:ring-1 focus:ring-[#5578b5] transition-all">
+        </div>
+
+        <div>
+          <label id="label-background" class="block text-[14px] text-[#4a4a4a] font-medium mb-2">背景與環境場景 (Background & Environment)</label>
+          <textarea id="input-background" rows="3" placeholder="例：淺灰色微塵大理石平台，背景為朦朧景深的熱帶植物陰影" class="w-full border border-[#d8d3ca] bg-[#f3f1ec] rounded-sm p-4 text-[14px] outline-none resize-none focus:border-[#5578b5] focus:ring-1 focus:ring-[#5578b5] transition-all"></textarea>
+        </div>
+
+        <div>
+          <label id="label-action" class="block text-[14px] text-[#4a4a4a] font-medium mb-2">畫面尺寸比例與參數 (Engine Parameters)</label>
+          <input type="text" id="input-action" placeholder="例：--ar 16:9 --v 6.0 --style raw" class="w-full h-[50px] border border-[#d8d3ca] bg-[#f3f1ec] rounded-sm px-4 text-[14px] outline-none focus:border-[#5578b5] focus:ring-1 focus:ring-[#5578b5] transition-all">
+        </div>
+
+      </div>
+    </div>
+
+    <!-- STEP 04 ・ 選擇視覺調性 -->
+    <div class="mb-8">
+      <p class="text-xs tracking-[0.3em] text-[#7a7a7a] font-bold mb-4">
+        STEP 04 ・ 選擇視覺調性 (Tone & Vibes)
+      </p>
+
+      <!-- 語氣選擇按鈕與主動作按鈕 -->
+      <div class="space-y-5">
+        <div id="tone-pills" class="flex flex-wrap gap-2.5">
+          <!-- 由 JS 動態生成 -->
+        </div>
+
+        <!-- 動作按鈕：生成與清除 -->
+        <div class="flex items-center space-x-3 pt-2">
+          <button id="btn-generate" class="h-[48px] px-8 bg-[#5578b5] hover:bg-[#466395] text-white font-medium rounded-sm shadow-md transition-all flex items-center justify-center space-x-2">
+            <span id="btn-text">生成 AI 繪圖提示詞</span>
+          </button>
+          <button id="btn-clear" class="h-[48px] px-8 bg-white border border-[#d8d3ca] hover:bg-gray-50 text-[#4a4a4a] font-medium rounded-sm transition-all">
+            清除重填
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI PROMPT ， 生成結果 -->
+    <div class="mb-8">
+      <div class="bg-white border border-[#d8d3ca] rounded-sm custom-shadow overflow-hidden">
+        
+        <!-- 標題與複製列 -->
+        <div class="flex justify-between items-center px-6 py-4 border-b border-[#efede8]">
+          <h3 class="text-xs tracking-wider text-[#7a7a7a] font-bold">
+            Midjourney / DALL-E 3 生成結果 (PROMPT OUTPUT)
+          </h3>
+          <button id="btn-copy" class="text-xs px-3 py-1 bg-white border border-[#d8d3ca] hover:bg-gray-50 text-gray-600 rounded-sm font-medium transition-all">
+            複製提示詞
+          </button>
+        </div>
+
+        <!-- 顯示區域 -->
+        <div class="p-6">
+          <textarea id="output-content" readonly class="w-full h-[220px] border-0 text-[14px] text-[#2c3e50] leading-7 outline-none resize-none bg-transparent whitespace-pre-wrap" placeholder="選擇您的群組、子類別並填寫參數後，點擊「生成 AI 繪圖提示詞」即可獲得專業視覺詠唱詞"></textarea>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 範本快選 ・ EXAMPLES -->
+    <div>
+      <p class="text-xs tracking-[0.3em] text-[#7a7a7a] font-bold mb-4">
+        範本快選 ・ EXAMPLES
+      </p>
+      <div id="examples-grid" class="flex flex-wrap gap-2.5">
+        <!-- 由 JS 動態生成 -->
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 新增自訂設計範本彈出式視窗 (Modal) -->
+  <div id="custom-template-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm hidden transition-all duration-300">
+    <div class="bg-white border border-[#d7d2c9] w-full max-w-lg rounded-sm shadow-xl overflow-hidden flex flex-col max-h-[90vh]">
+      <!-- 視窗標題 -->
+      <div class="px-6 py-4 border-b border-[#efede8] flex justify-between items-center bg-[#fbfafa]">
+        <h3 class="text-sm font-bold tracking-wider text-[#2c3e50] flex items-center gap-2">
+          <span>✨</span> 新增專屬設計 CAT 鍵
+        </h3>
+        <button id="modal-close" class="text-gray-400 hover:text-gray-600 text-xl font-light">&times;</button>
+      </div>
+
+      <!-- 設定表單 -->
+      <form id="modal-form" class="p-6 overflow-y-auto space-y-4 text-sm">
+        <div class="grid grid-cols-3 gap-3">
+          <div class="col-span-1">
+            <label class="block text-xs text-gray-500 font-bold mb-1.5">圖示 (Emoji)</label>
+            <input type="text" id="modal-icon" value="🖼️" required class="w-full h-[40px] text-center border border-[#d8d3ca] rounded-sm bg-[#f3f1ec] text-lg outline-none">
+          </div>
+          <div class="col-span-2">
+            <label class="block text-xs text-gray-500 font-bold mb-1.5">CAT 主標題</label>
+            <input type="text" id="modal-title" placeholder="例：D7 社群促銷主視覺" required class="w-full h-[40px] px-3 border border-[#d8d3ca] rounded-sm bg-[#f3f1ec] outline-none">
+          </div>
+        </div>
+        
+        <div>
+          <label class="block text-xs text-gray-500 font-bold mb-1.5">CAT 副標題</label>
+          <input type="text" id="modal-subtitle" placeholder="例：社群吸睛、高對比" required class="w-full h-[40px] px-3 border border-[#d8d3ca] rounded-sm bg-[#f3f1ec] outline-none">
+        </div>
+
+        <div class="border-t border-dashed border-[#d8d3ca] pt-4">
+          <p class="text-xs font-bold text-[#5578b5] mb-3">客製化 STEP 03 提示文字 (可直接保留預設)：</p>
+          
+          <div class="space-y-3">
+            <div class="grid grid-cols-2 gap-2">
+              <div>
+                <label class="block text-[11px] text-gray-400 mb-1">欄位 1：主要主體</label>
+                <input type="text" id="modal-label-sender" value="主體物件描述 (Core Subject)" class="w-full h-[36px] px-2 text-xs border border-[#d8d3ca] rounded-sm outline-none">
+              </div>
+              <div>
+                <label class="block text-[11px] text-gray-400 mb-1">對應 Placeholder</label>
+                <input type="text" id="modal-placeholder-sender" placeholder="請輸入提示" class="w-full h-[36px] px-2 text-xs border border-[#d8d3ca] rounded-sm outline-none">
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2">
+              <div>
+                <label class="block text-[11px] text-gray-400 mb-1">欄位 2：設計風格</label>
+                <input type="text" id="modal-label-receiver" value="設計風格/藝術媒介 (Artistic Style)" class="w-full h-[36px] px-2 text-xs border border-[#d8d3ca] rounded-sm outline-none">
+              </div>
+              <div>
+                <label class="block text-[11px] text-gray-400 mb-1">對應 Placeholder</label>
+                <input type="text" id="modal-placeholder-receiver" placeholder="請輸入提示" class="w-full h-[36px] px-2 text-xs border border-[#d8d3ca] rounded-sm outline-none">
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2">
+              <div>
+                <label class="block text-[11px] text-gray-400 mb-1">欄位 3：色彩光影</label>
+                <input type="text" id="modal-label-subject" value="色彩與光影計畫 (Color & Lighting)" class="w-full h-[36px] px-2 text-xs border border-[#d8d3ca] rounded-sm outline-none">
+              </div>
+              <div>
+                <label class="block text-[11px] text-gray-400 mb-1">對應 Placeholder</label>
+                <input type="text" id="modal-placeholder-subject" placeholder="請輸入提示" class="w-full h-[36px] px-2 text-xs border border-[#d8d3ca] rounded-sm outline-none">
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2">
+              <div>
+                <label class="block text-[11px] text-gray-400 mb-1">欄位 4：佈局結構</label>
+                <input type="text" id="modal-label-purpose" value="畫面結構佈局 (Composition Layout)" class="w-full h-[36px] px-2 text-xs border border-[#d8d3ca] rounded-sm outline-none">
+              </div>
+              <div>
+                <label class="block text-[11px] text-gray-400 mb-1">對應 Placeholder</label>
+                <input type="text" id="modal-placeholder-purpose" placeholder="請輸入提示" class="w-full h-[36px] px-2 text-xs border border-[#d8d3ca] rounded-sm outline-none">
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2">
+              <div>
+                <label class="block text-[11px] text-gray-400 mb-1">欄位 5：背景環境</label>
+                <input type="text" id="modal-label-background" value="背景與環境場景 (Background & Environment)" class="w-full h-[36px] px-2 text-xs border border-[#d8d3ca] rounded-sm outline-none">
+              </div>
+              <div>
+                <label class="block text-[11px] text-gray-400 mb-1">對應 Placeholder</label>
+                <input type="text" id="modal-placeholder-background" placeholder="請輸入提示" class="w-full h-[36px] px-2 text-xs border border-[#d8d3ca] rounded-sm outline-none">
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2">
+              <div>
+                <label class="block text-[11px] text-gray-400 mb-1">欄位 6：引擎參數</label>
+                <input type="text" id="modal-label-action" value="畫面尺寸比例與參數 (Engine Parameters)" class="w-full h-[36px] px-2 text-xs border border-[#d8d3ca] rounded-sm outline-none">
+              </div>
+              <div>
+                <label class="block text-[11px] text-gray-400 mb-1">對應 Placeholder</label>
+                <input type="text" id="modal-placeholder-action" placeholder="請輸入提示" class="w-full h-[36px] px-2 text-xs border border-[#d8d3ca] rounded-sm outline-none">
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </form>
+
+      <!-- 按鈕列 -->
+      <div class="px-6 py-4 border-t border-[#efede8] flex items-center justify-end space-x-2 bg-[#fbfafa]">
+        <button id="modal-cancel" class="h-[38px] px-4 border border-[#d8d3ca] hover:bg-gray-50 text-gray-600 rounded-sm text-xs font-medium transition-all">
+          取消
+        </button>
+        <button id="modal-submit" class="h-[38px] px-5 bg-[#5578b5] hover:bg-[#466395] text-white rounded-sm text-xs font-medium transition-all">
+          確認新增
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ==========================================
+    // 資料配置與預設 (照圖片與您的需求劃分為 A, B, C, D 組)
+    // ==========================================
+    const GROUPS = {
+      group_a: { label: 'A 組・品牌行銷', series: '品牌行銷系列', indicator: 'indicator-a', button: 'btn-group-a' },
+      group_b: { label: 'B 組・商品電商', series: '商品電商系列', indicator: 'indicator-b', button: 'btn-group-b' },
+      group_c: { label: 'C 組・內容創作', series: '內容創作系列', indicator: 'indicator-c', button: 'btn-group-c' },
+      group_d: { label: 'D 組・品牌推廣', series: '品牌推廣系列', indicator: 'indicator-d', button: 'btn-group-d' }
+    };
+
+    // 子類別 CAT 按鍵清單
+    const INITIAL_TEMPLATES = [
+      // A 組・品牌行銷
+      { id: 'a1', groupId: 'group_a', title: '官網首屏 Web Hero Banner', subtitle: 'A1 · 網頁首圖大 Banner', icon: '💻', isSystem: true },
+      { id: 'a2', groupId: 'group_a', title: '主視覺 Campaign KV', subtitle: 'A2 · 活動核心品牌KV', icon: '✨', isSystem: true },
+      { id: 'a3', groupId: 'group_a', title: '品牌海報 Brand Poster', subtitle: 'A3 · 藝術化與排版宣傳海報', icon: '🖼️', isSystem: true },
+      { id: 'a4', groupId: 'group_a', title: '雜誌封面 Editorial Cover', subtitle: 'A4 · 時尚實體感排版封面', icon: '📕', isSystem: true },
+      { id: 'a5', groupId: 'group_a', title: '品牌識別板 Brand Identity Board', subtitle: 'A5 · 識別系統/CIS配色板', icon: '📋', isSystem: true },
+      { id: 'a6', groupId: 'group_a', title: '中英雙語版面 Bilingual Layout', subtitle: 'A6 · 多語系時尚文字佈局', icon: '🌐', isSystem: true },
+
+      // B 組・商品電商
+      { id: 'b1', groupId: 'group_b', title: '純白底電商主圖', subtitle: 'B1 · 極簡亞馬遜/蝦皮首圖', icon: '⬜', isSystem: true },
+      { id: 'b2', groupId: 'group_b', title: '生活方式情境圖', subtitle: 'B2 · 溫馨生活居家應用', icon: '🏡', isSystem: true },
+      { id: 'b3', groupId: 'group_b', title: '影棚高質感 hero', subtitle: 'B3 · 聚光燈與商業大片', icon: '📸', isSystem: true },
+      { id: 'b4', groupId: 'group_b', title: '包裝展示圖', subtitle: 'B4 · 實體紙盒/提袋外觀渲染', icon: '📦', isSystem: true },
+      { id: 'b5', groupId: 'group_b', title: '商品卡 UI 疊加', subtitle: 'B5 · 網頁UI與商品結合', icon: '📱', isSystem: true },
+      { id: 'b6', groupId: 'group_b', title: '飲料瓶身標籤設計', subtitle: 'B6 · 弧面標貼與透明玻璃效果', icon: '🍾', isSystem: true },
+
+      // C 組・內容創作
+      { id: 'c1', groupId: 'group_c', title: '便當格資訊圖 Bento Grid', subtitle: 'C1 · 經典科技感多宮格切分', icon: '🍱', isSystem: true },
+      { id: 'c2', groupId: 'group_c', title: '對比資訊圖', subtitle: 'C2 · Before / After 與雙欄對比', icon: '⚖️', isSystem: true },
+      { id: 'c3', groupId: 'group_c', title: '步驟教學圖', subtitle: 'C3 · 1-2-3 直覺流程拆解', icon: '🔢', isSystem: true },
+      { id: 'c4', groupId: 'group_c', title: '創辦人肖像 Founder Portrait', subtitle: 'C4 · 商務專業打光頭像', icon: '👤', isSystem: true },
+      { id: 'c5', groupId: 'group_c', title: 'LINE 貼圖組', subtitle: 'C5 · Q版、手繪、表情包風格', icon: '💬', isSystem: true },
+      { id: 'c6', groupId: 'group_c', title: '穿搭多格拼貼 Lookbook Grid', subtitle: 'C6 · 流行服飾與拼貼展示', icon: '👗', isSystem: true },
+
+      // D 組・品牌推廣
+      { id: 'd1', groupId: 'group_d', title: '社群主圖 Social Media Banner', subtitle: 'D1 · 社群吸睛大尺寸圖面', icon: '📣', isSystem: true },
+      { id: 'd2', groupId: 'group_d', title: '推廣 KV Ad Campaign KV', subtitle: 'D2 · 精準受眾推廣主視覺', icon: '⚡', isSystem: true },
+      { id: 'd3', groupId: 'group_d', title: '推廣海報 Promo Poster', subtitle: 'D3 · 促銷活動大字報宣傳', icon: '📢', isSystem: true },
+      { id: 'd4', groupId: 'group_d', title: '畫冊封面 Brochure Cover', subtitle: 'D4 · 企業簡報與畫冊設計', icon: '📖', isSystem: true },
+      { id: 'd5', groupId: 'group_d', title: '推廣識別板 Promo Identity Board', subtitle: 'D5 · 推廣色調與規範配色板', icon: '🖼️', isSystem: true },
+      { id: 'd6', groupId: 'group_d', title: '雙語推廣版面 Bilingual Promo Layout', subtitle: 'D6 · 雙語美學時尚文字佈局', icon: '🔤', isSystem: true }
+    ];
+
+    // 各個視覺範本的專屬 STEP 03 欄位設定
+    const FIELD_CONFIGS = {
+      a1: {
+        sender: { label: 'Hero Banner 主要產品/主體', placeholder: '例：一部極簡概念電動跑車，流線型車身' },
+        receiver: { label: '主視覺設計風格', placeholder: '例：3D 數位藝術，超寫實渲染，科技未來感' },
+        subject: { label: '色彩計畫與主要燈光', placeholder: '例：霓虹藍與暗影黑，強烈側光與反射光澤' },
+        purpose: { label: '首屏構圖與留白設計', placeholder: '例：跑車置於右側，左側大面積空曠陰影（用於放置網頁文案）' },
+        background: { label: '背景與空間情境', placeholder: '例：科幻感霓虹城市隧道、光滑反射路面' },
+        action: { label: 'MJ 畫面參數設定', placeholder: '例：--ar 16:9 --v 6.0 --style raw' }
+      },
+      a2: {
+        sender: { label: 'Campaign KV 核心元素', placeholder: '例：浮空的發光幾何玻璃雕塑，中心有璀璨光點' },
+        receiver: { label: '藝術風格/媒介', placeholder: '例：現代抽象主義，C4D 奢華渲染，細緻反射' },
+        subject: { label: '色彩計畫與光束', placeholder: '例：漸層極光色、神聖感丁達爾光束（耶穌光）' },
+        purpose: { label: '核心主體構圖與對稱', placeholder: '例：中心對稱構圖，浮空主體，極致張力' },
+        background: { label: '背景環境', placeholder: '例：無邊際虛無空間，漂浮微塵、波光粼粼的微晶體' },
+        action: { label: 'MJ 畫面參數設定', placeholder: '例：--ar 16:9 --personalize --v 6.0' }
+      },
+      a3: {
+        sender: { label: '海報核心主視覺', placeholder: '例：融化的花朵與彩色半透明液體交織' },
+        receiver: { label: '藝術海報設計流派', placeholder: '例：瑞士平面設計風格，包浩斯風格，極簡海報' },
+        subject: { label: '色彩配色方案', placeholder: '例：高飽和度撞色、高對比柔和暖光' },
+        purpose: { label: '排版與空間網格', placeholder: '例：不對稱网格排版，強烈塊狀留白' },
+        background: { label: '海報底層背景', placeholder: '例：具有微粒紋理的米白色宣紙材質 texture' },
+        action: { label: 'MJ 畫面參數設定', placeholder: '例：--ar 3:4 --v 6.0' }
+      },
+      b1: {
+        sender: { label: '電商商品本體', placeholder: '例：純白極簡無線耳機，表面附帶陶瓷烤漆質感' },
+        receiver: { label: '亞馬遜/電商拍照風格', placeholder: '例：高端商業攝影，專業微距拍照' },
+        subject: { label: '影棚燈光與反光', placeholder: '例：無影柔光箱，純白柔光，去除雜亂反光' },
+        purpose: { label: '產品擺放與透視角', placeholder: '例：完美正視微視角，商品置於中心' },
+        background: { label: '電商專用白背景', placeholder: '例：乾淨無暇的純白色背景，底部帶有極淡細柔的自然陰影' },
+        action: { label: 'MJ 畫面參數設定', placeholder: '例：--ar 1:1 --style raw --v 6.0' }
+      },
+      b2: {
+        sender: { label: '商品本體與模特手部', placeholder: '例：一隻優雅的陶瓷馬克杯，杯中冒著裊裊熱氣' },
+        receiver: { label: '溫馨生活寫真風格', placeholder: '例：北歐極簡居家生活照，溫馨日常感，膠片色調' },
+        subject: { label: '溫暖陽光與色調', placeholder: '例：溫暖的朝陽，透過百葉窗在桌面留下斑駁影子' },
+        purpose: { label: '生活感環境構圖', placeholder: '例：黃金分割點構圖，淺景深 bokeh，杯子為焦點' },
+        background: { label: '舒適居家背景', placeholder: '例：原木紋理桌面，背景為模糊處理的溫馨客廳、綠植' },
+        action: { label: 'MJ 畫面參數設定', placeholder: '例：--ar 4:3 --v 6.0' }
+      },
+      c1: {
+        sender: { label: 'Bento Grid 呈現物件', placeholder: '例：最新款掌上遊戲機的拆解零件與特色晶片' },
+        receiver: { label: '科技感宮格設計流派', placeholder: '例：蘋果科技風格 Bento Grid，極簡 3D 模組化排版' },
+        subject: { label: '格線與邊緣發光', placeholder: '例：高科技啞光灰色，微弱的螢光藍 LED 線條包覆各區域' },
+        purpose: { label: '宮格分割與佈局描述', placeholder: '例：不規則多宮格拼貼佈局，每一格展示不同的精密零組件' },
+        background: { label: '暗系磨砂背景', placeholder: '例：磨砂防滑金屬背板，高精細質地' },
+        action: { label: 'MJ 畫面參數設定', placeholder: '例：--ar 16:9 --v 6.0' }
+      },
+      // D組對齊A組功能的完整欄位設定
+      d1: {
+        sender: { label: 'Social Banner 主要產品/主體', placeholder: '例：一台潮流高解析藍牙喇叭，具有流線透明外殼' },
+        receiver: { label: '主視覺設計風格', placeholder: '例：3D 視覺渲染，動態霓虹美學，潮牌街頭感' },
+        subject: { label: '色彩計畫與主要燈光', placeholder: '例：螢光綠與碳纖黑，酷炫背部背光與按鍵反射光澤' },
+        purpose: { label: '首屏構圖與留白設計', placeholder: '例：產品置於中心微偏左，右側留白供置放社群推廣文字' },
+        background: { label: '背景與空間情境', placeholder: '例：霧黑幾何空間、帶有些微音波震動微塵特效' },
+        action: { label: 'MJ 畫面參數設定', placeholder: '例：--ar 16:9 --v 6.0 --style raw' }
+      },
+      d2: {
+        sender: { label: 'Campaign KV 核心元素', placeholder: '例：一款高奢機械腕錶，精密複雜的齒輪咬合結構' },
+        receiver: { label: '藝術風格/媒介', placeholder: '例：高階商業大片風格，C4D 極致金屬質感與玻璃反射' },
+        subject: { label: '色彩計畫與光束', placeholder: '例：玫瑰金與深邃曜石黑，斜切式高質感工作室強光' },
+        purpose: { label: '核心主體構圖與對稱', placeholder: '例：腕錶居中微微傾斜，帶有奢華懸浮感與立體景深' },
+        background: { label: '背景環境', placeholder: '例：淡褐色磨砂石板、背景帶有極軟的漫射光暈' },
+        action: { label: 'MJ 畫面參數設定', placeholder: '例：--ar 16:9 --personalize --v 6.0' }
+      },
+      d3: {
+        sender: { label: '海報核心主視覺', placeholder: '例：鮮豔多汁的熱帶水果切片與極致冰晶四濺' },
+        receiver: { label: '藝術海報設計流派', placeholder: '例：夏季清爽極簡排版海報，高對比視覺衝擊' },
+        subject: { label: '色彩配色方案', placeholder: '例：明亮橙色與蒂芙尼藍撞色、乾淨明朗的日光' },
+        purpose: { label: '排版與空間網格', placeholder: '例：經典三欄海報結構，底部與邊緣預留大量排版空間' },
+        background: { label: '海報底層背景', placeholder: '例：輕微紙質粗糙感的莫蘭迪色系純淨背景' },
+        action: { label: 'MJ 畫面參數設定', placeholder: '例：--ar 3:4 --v 6.0' }
+      }
+    };
+
+    // 其他無配置子類別則默認套用 generic 電商/設計配置
+    const GENERIC_CONFIG = {
+      sender: { label: '主體物件描述 (Core Subject)', placeholder: '例：香氛蠟燭、時尚包包、手錶或創始人肖像' },
+      receiver: { label: '設計風格/藝術媒介 (Artistic Style)', placeholder: '例：商業攝影、3D 渲染、插畫或時尚大片' },
+      subject: { label: '色彩與光影計畫 (Color & Lighting)', placeholder: '例：冷暖對比、夕陽黃金光澤、乾淨自然光' },
+      purpose: { label: '畫面結構佈局 (Composition Layout)', placeholder: '例：居中對稱、極簡留白、三格排版' },
+      background: { label: '背景與環境場景 (Background & Environment)', placeholder: '例：自然石板、沙丘、迷霧森林或極簡無縫背景' },
+      action: { label: '畫面尺寸比例與參數 (Engine Parameters)', placeholder: '例：--ar 1:1 --v 6.0 --style raw' }
+    };
+
+    const TONE_OPTIONS = [
+      { label: '高奢典雅', value: 'High-end luxury brand aesthetic, premium product photography, sophisticated studio lighting, cinematic shadow, award-winning' },
+      { label: '極簡現代', value: 'Minimalist modern style, clean shapes, spacious negative space, hyper-refined, neat layout' },
+      { label: '未來科技', value: 'Cyberpunk futuristic vibes, glowing holographic details, neon accents, dark sleek metallic finishes, octan-render' },
+      { label: '日式清新', value: 'Soft natural daylight, airy pale tones, cozy aesthetic, organic textures, gentle bokeh, minimalist look' },
+      { label: '美式復古', value: 'Vibrant vintage poster style, mid-century retro, grainy analog film, bold illustration' }
+    ];
+
+    const EXAMPLES = [
+      {
+        label: 'A1 · 跑車首屏官網 Banner',
+        cardId: 'a1',
+        sender: '奢華銀色概念超跑',
+        receiver: '3D 產品渲染，頂級汽車攝影，商業雜誌質感',
+        subject: '極富張力的冷色月光與neon紫色，輪胎周圍帶有些微水霧感',
+        purpose: '超跑以俯衝動感姿態放置於畫面偏右，左側大片深藍夜空作為文字預留空間',
+        background: '雨後反光的溼潤水泥賽道，遠處閃爍模糊的霓虹高樓大廈群',
+        action: '--ar 16:9 --style raw --v 6.0'
+      },
+      {
+        label: 'B3 · 香水影棚奢華大片',
+        cardId: 'b3',
+        sender: '粉色晶瑩剔透香水瓶，瓶蓋為切割璀璨的水晶玫瑰',
+        receiver: '高端商業化妝品攝影，微距特寫，C4D 完美光學玻璃渲染',
+        subject: '溫柔的櫻粉色調，晶亮通透。一道柔和的聚光燈(spotlight)精準照射在瓶身',
+        purpose: '香水瓶斜立於水面上，激起一圈精緻的水花與漣漪',
+        background: '無邊際粉色水面背景，水底散落幾片浸溼的粉紅色玫瑰花瓣，優雅的反射效果',
+        action: '--ar 4:3 --v 6.0'
+      },
+      {
+        label: 'C4 · 商務創辦人形象照',
+        cardId: 'c4',
+        sender: '一位 30 歲自信且和藹的亞裔女性創業者，穿著剪裁俐落的黑色商務西裝',
+        receiver: '專業商務人像攝影，哈蘇相機中畫幅質感，超寫實皮膚紋理',
+        subject: '溫柔暖色窗光，半側面輪廓光，完美自然的微凹眼窩陰影',
+        purpose: '半身肖像，胸部以上，雙手自信交疊，微微偏頭微笑，眼神與鏡頭對焦',
+        background: '現代科技感極簡辦公室內部，背景虛化模糊(bokeh)，能隱約看出落地窗與綠色植物',
+        action: '--ar 1:1 --style raw --v 6.0'
+      },
+      {
+        label: 'D1 · 潮流喇叭社群大 Banner',
+        cardId: 'd1',
+        sender: '一台透明發光重低音藍牙喇叭',
+        receiver: '3D 潮流概念渲染，高精細質感，Cyberpunk 氛圍攝影',
+        subject: '酷炫螢光綠與螢光藍雙色，按鍵部分散發柔和LED微光',
+        purpose: '喇叭置於左側三分之二處，右邊預留乾淨的科技感冷灰空間，適合放社群宣傳口號',
+        background: '光滑具反射效果的黑色鏡面地板，背景為朦朧模糊的音波幾何圖形與霓虹色塊',
+        action: '--ar 16:9 --style raw --v 6.0'
+      }
+    ];
+
+    // ==========================================
+    // 應用程式狀態管理
+    // ==========================================
+    let state = {
+      selectedGroup: 'group_a', // A組預設
+      selectedTemplateId: 'a1',  // 預設 A1
+      selectedTone: TONE_OPTIONS[0].value,
+      loading: false,
+      generatedContent: '',
+      templates: [...INITIAL_TEMPLATES]
+    };
+
+    // ==========================================
+    // DOM 元素獲取
+    // ==========================================
+    const cardsGrid = document.getElementById('cards-grid');
+    const selectedTypeBadge = document.getElementById('selected-type-badge');
+    const step2Title = document.getElementById('step2-title');
+    const tonePills = document.getElementById('tone-pills');
+    const btnGenerate = document.getElementById('btn-generate');
+    const btnText = document.getElementById('btn-text');
+    const btnClear = document.getElementById('btn-clear');
+    const btnCopy = document.getElementById('btn-copy');
+    const outputContent = document.getElementById('output-content');
+    const examplesGrid = document.getElementById('examples-grid');
+    const copyHelper = document.getElementById('copy-helper');
+    const toastContainer = document.getElementById('toast-container');
+
+    // 填寫欄位 DOM 元件
+    const inputSender = document.getElementById('input-sender');
+    const inputReceiver = document.getElementById('input-receiver');
+    const inputSubject = document.getElementById('input-subject');
+    const inputPurpose = document.getElementById('input-purpose');
+    const inputBackground = document.getElementById('input-background');
+    const inputAction = document.getElementById('input-action');
+
+    // 填寫欄位標籤 Label DOM 元件
+    const labelSender = document.getElementById('label-sender');
+    const labelReceiver = document.getElementById('label-receiver');
+    const labelSubject = document.getElementById('label-subject');
+    const labelPurpose = document.getElementById('label-purpose');
+    const labelBackground = document.getElementById('label-background');
+    const labelAction = document.getElementById('label-action');
+
+    // Modal 相關元件
+    const modal = document.getElementById('custom-template-modal');
+    const modalClose = document.getElementById('modal-close');
+    const modalCancel = document.getElementById('modal-cancel');
+    const modalSubmit = document.getElementById('modal-submit');
+    const modalForm = document.getElementById('modal-form');
+
+    // ==========================================
+    // 初始化與動態表單同步
+    // ==========================================
+    function init() {
+      setupGroupListeners();
+      renderGroups();
+      
+      // 初始化設定 STEP 02 系列名稱標題
+      if (step2Title && GROUPS[state.selectedGroup]) {
+        step2Title.textContent = `STEP 02 ・ 選擇${GROUPS[state.selectedGroup].series}`;
+      }
+
+      renderCards();
+      renderTonePills();
+      renderExamples();
+      updateFormFields(); // 初始化欄位標籤與 Placeholder
+
+      // 監聽動作按鈕
+      btnGenerate.addEventListener('click', handleGenerate);
+      btnClear.addEventListener('click', handleClear);
+      btnCopy.addEventListener('click', handleCopy);
+
+      // Modal 監聽事件
+      modalClose.addEventListener('click', closeModal);
+      modalCancel.addEventListener('click', closeModal);
+      modalSubmit.addEventListener('click', handleAddCustomTemplate);
+    }
+
+    // 設定四大類別 A、B、C、D 點擊事件
+    function setupGroupListeners() {
+      Object.keys(GROUPS).forEach(groupId => {
+        const btn = document.getElementById(GROUPS[groupId].button);
+        if (btn) {
+          btn.addEventListener('click', () => {
+            selectGroup(groupId);
+          });
+        }
+      });
+    }
+
+    // 切換主群組 (A, B, C, D)
+    function selectGroup(groupId) {
+      state.selectedGroup = groupId;
+      renderGroups();
+      
+      // 自動點擊該群組的第一個子範本，確保狀態正確
+      const groupSubcards = state.templates.filter(t => t.groupId === groupId);
+      if (groupSubcards.length > 0) {
+        state.selectedTemplateId = groupSubcards[0].id;
+      } else {
+        state.selectedTemplateId = '';
+      }
+      
+      // 動態更新 STEP 02 系列名稱
+      if (step2Title && GROUPS[groupId]) {
+        step2Title.textContent = `STEP 02 ・ 選擇${GROUPS[groupId].series}`;
+      }
+      
+      renderCards();
+      updateFormFields();
+      showToast(`已切換至「${GROUPS[groupId].label}」`);
+    }
+
+    // 渲染 A, B, C, D 主類別啟用狀態與底部裝飾條
+    function renderGroups() {
+      Object.keys(GROUPS).forEach(groupId => {
+        const config = GROUPS[groupId];
+        const btn = document.getElementById(config.button);
+        const indicator = document.getElementById(config.indicator);
+        const active = state.selectedGroup === groupId;
+
+        if (active) {
+          btn.className = "group relative flex items-center justify-between p-5 rounded-sm border bg-white transition-all duration-300 border-[#5578b5] ring-1 ring-[#5578b5] shadow-sm text-left";
+          indicator.className = "absolute bottom-0 left-0 w-full h-[3px] bg-[#5578b5] transition-colors";
+        } else {
+          btn.className = "group relative flex items-center justify-between p-5 rounded-sm border bg-white transition-all duration-300 border-[#d7d2c9] hover:border-[#5578b5] hover:shadow-sm text-left";
+          indicator.className = "absolute bottom-0 left-0 w-full h-[3px] bg-transparent transition-colors";
+        }
+      });
+    }
+
+    // 繪製對應群組之子卡片 (第二層)
+    function renderCards() {
+      cardsGrid.innerHTML = '';
+      
+      // 篩選當前選定群組的所有子範本
+      const filtered = state.templates.filter(t => t.groupId === state.selectedGroup);
+
+      filtered.forEach((card) => {
+        const active = state.selectedTemplateId === card.id;
+        const btn = document.createElement('div');
+        
+        btn.className = `
+          group relative p-4 rounded-sm border transition-all duration-300 h-[118px] bg-white cursor-pointer select-none
+          ${active 
+            ? 'border-[#5578b5] ring-1 ring-[#5578b5] shadow-md' 
+            : 'border-[#d7d2c9] hover:border-[#5578b5] hover:-translate-y-0.5'
+          }
+        `;
+
+        // 內部文字佈局
+        btn.innerHTML = `
+          <div class="relative z-10 flex flex-col items-center justify-center h-full text-center">
+            <div class="text-3xl mb-1.5 transform group-hover:scale-105 transition-transform duration-300">
+              ${card.icon}
+            </div>
+            <h3 class="text-[13px] font-bold text-[#1f1f1f] leading-tight mb-0.5 truncate max-w-full">
+              ${card.title}
+            </h3>
+            <p class="text-[10px] text-gray-400 leading-relaxed truncate max-w-full">
+              ${card.subtitle}
+            </p>
+          </div>
+        `;
+
+        // 如果是自訂範本，附帶右上角「刪除」按鈕
+        if (!card.isSystem) {
+          const deleteBtn = document.createElement('button');
+          deleteBtn.className = "absolute top-1.5 right-1.5 z-20 text-xs text-gray-300 hover:text-red-500 hover:scale-110 transition-all p-1 leading-none";
+          deleteBtn.innerHTML = "✕";
+          deleteBtn.title = "刪除此自訂範本";
+          deleteBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); // 阻止氣泡傳播
+            handleDeleteTemplate(card.id);
+          });
+          btn.appendChild(deleteBtn);
+        }
+
+        // 點擊選擇卡片
+        btn.addEventListener('click', () => {
+          state.selectedTemplateId = card.id;
+          renderCards();
+          updateFormFields(); // 動態更新欄位設定
+          showToast(`已設定類型為: ${card.title}`);
+        });
+
+        cardsGrid.appendChild(btn);
+      });
+
+      // 追加「＋自訂設計」卡片 (空白 CAT 鍵)
+      const plusBtn = document.createElement('button');
+      plusBtn.className = "group relative p-4 rounded-sm border border-dashed border-[#d8d3ca] hover:border-[#5578b5] transition-all duration-300 h-[118px] bg-[#fbfafa] hover:bg-white flex flex-col items-center justify-center text-center";
+      plusBtn.innerHTML = `
+        <div class="text-3xl mb-1.5 text-gray-400 group-hover:scale-110 transition-transform">➕</div>
+        <h3 class="text-[13px] font-bold text-[#5578b5]">新增自訂設計</h3>
+        <p class="text-[10px] text-gray-400">建立全新 CAT 分類</p>
+      `;
+      plusBtn.addEventListener('click', openModal);
+      cardsGrid.appendChild(plusBtn);
+
+      // 更新 Badge 顯示
+      const activeCard = state.templates.find(t => t.id === state.selectedTemplateId);
+      if (activeCard && selectedTypeBadge) {
+        selectedTypeBadge.textContent = `已選擇: ${activeCard.title}`;
+        selectedTypeBadge.classList.remove('hidden');
+      } else {
+        selectedTypeBadge.classList.add('hidden');
+      }
+    }
+
+    // 動態更新 STEP 03 的輸入欄位與 Placeholder
+    function updateFormFields() {
+      const activeCardId = state.selectedTemplateId;
+      const config = FIELD_CONFIGS[activeCardId] || GENERIC_CONFIG;
+
+      if (config) {
+        if (labelSender) labelSender.textContent = config.sender?.label || '主體物件描述 (Core Subject)';
+        if (inputSender) inputSender.placeholder = config.sender?.placeholder || '請描述主體';
+
+        if (labelReceiver) labelReceiver.textContent = config.receiver?.label || '設計風格/藝術媒介 (Artistic Style)';
+        if (inputReceiver) inputReceiver.placeholder = config.receiver?.placeholder || '請描述風格';
+
+        if (labelSubject) labelSubject.textContent = config.subject?.label || '色彩與光影計畫 (Color & Lighting)';
+        if (inputSubject) inputSubject.placeholder = config.subject?.placeholder || '請描述色彩光影';
+
+        if (labelPurpose) labelPurpose.textContent = config.purpose?.label || '畫面結構佈局 (Composition Layout)';
+        if (inputPurpose) inputPurpose.placeholder = config.purpose?.placeholder || '請描述佈局';
+
+        if (labelBackground) labelBackground.textContent = config.background?.label || '背景與環境場景 (Background & Environment)';
+        if (inputBackground) inputBackground.placeholder = config.background?.placeholder || '請描述背景環境';
+
+        if (labelAction) labelAction.textContent = config.action?.label || '畫面尺寸比例與參數 (Engine Parameters)';
+        if (inputAction) inputAction.placeholder = config.action?.placeholder || '例：--ar 16:9';
+      }
+    }
+
+    // 繪製語氣選擇 Pills
+    function renderTonePills() {
+      tonePills.innerHTML = '';
+      TONE_OPTIONS.forEach((opt) => {
+        const active = state.selectedTone === opt.value;
+        const btn = document.createElement('button');
+        
+        btn.className = `
+          px-5 py-2.5 rounded-full text-[13px] font-medium transition-all border
+          ${active
+            ? 'bg-[#5578b5] text-white border-[#5578b5] shadow-sm'
+            : 'bg-white text-[#4a4a4a] border-[#d8d3ca] hover:bg-gray-50'
+          }
+        `;
+        btn.textContent = opt.label;
+
+        btn.addEventListener('click', () => {
+          state.selectedTone = opt.value;
+          renderTonePills();
+          showToast(`風格基礎調性切換為: ${opt.label}`);
+        });
+
+        tonePills.appendChild(btn);
+      });
+    }
+
+    // 繪製快選範本 EXAMPLES
+    function renderExamples() {
+      examplesGrid.innerHTML = '';
+      EXAMPLES.forEach((ex) => {
+        const btn = document.createElement('button');
+        btn.className = "px-4 py-2 bg-white hover:bg-gray-50 text-[#4a4a4a] border border-[#d8d3ca] rounded-full text-[12px] font-medium transition-all shadow-sm";
+        btn.textContent = ex.label;
+
+        btn.addEventListener('click', () => {
+          // 找出範本
+          const targetCard = state.templates.find(t => t.id === ex.cardId);
+          if (!targetCard) {
+            showToast('找不到該範本對應的分類', 'error');
+            return;
+          }
+
+          // 導航到對應主類別
+          state.selectedGroup = targetCard.groupId;
+          state.selectedTemplateId = ex.cardId;
+          
+          renderGroups();
+          renderCards();
+          updateFormFields(); // 動態將適配欄位的 Placeholder 修改
+
+          // 填入範本文字
+          inputSender.value = ex.sender;
+          inputReceiver.value = ex.receiver;
+          inputSubject.value = ex.subject;
+          inputPurpose.value = ex.purpose;
+          inputBackground.value = ex.background;
+          inputAction.value = ex.action;
+
+          showToast(`🚀 已導入視覺示範案：「${ex.label}」`);
+        });
+
+        examplesGrid.appendChild(btn);
+      });
+    }
+
+    // ==========================================
+    // 功能：顯示自訂 Toast
+    // ==========================================
+    function showToast(message, type = 'info') {
+      const toast = document.createElement('div');
+      toast.className = `
+        flex items-center space-x-3 px-5 py-4 rounded-sm shadow-md transition-all duration-300 transform translate-y-2 opacity-0
+        bg-white border-l-4 border-l-[#5578b5] border border-[#d7d2c9] max-w-sm pointer-events-auto
+      `;
+
+      let icon = 'ℹ️';
+      if (type === 'success') {
+        icon = '✨';
+        toast.style.borderLeftColor = '#5578b5';
+      } else if (type === 'error') {
+        icon = '⚠️';
+        toast.style.borderLeftColor = '#ef4444';
+      }
+
+      toast.innerHTML = `
+        <div class="text-xl">${icon}</div>
+        <div class="text-[13px] font-medium text-[#4a4a4a] leading-snug">${message}</div>
+      `;
+
+      toastContainer.appendChild(toast);
+
+      setTimeout(() => {
+        toast.classList.remove('opacity-0', 'translate-y-2');
+      }, 50);
+
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-2');
+        setTimeout(() => {
+          toast.remove();
+        }, 300);
+      }, 4000);
+    }
+
+    // ==========================================
+    // 自訂範本視窗處理 (Modal Control)
+    // ==========================================
+    function openModal() {
+      modal.classList.remove('hidden');
+    }
+
+    function closeModal() {
+      modal.classList.add('hidden');
+      modalForm.reset();
+    }
+
+    // 新增自訂模板動作
+    function handleAddCustomTemplate(e) {
+      e.preventDefault();
+
+      const title = document.getElementById('modal-title').value.trim();
+      const subtitle = document.getElementById('modal-subtitle').value.trim();
+      const icon = document.getElementById('modal-icon').value.trim() || '🖼️';
+
+      if (!title || !subtitle) {
+        showToast('請完整填寫自訂 CAT 鍵的主標題與副標題', 'error');
+        return;
+      }
+
+      // 產生唯一 ID
+      const customId = 'custom_' + Date.now();
+
+      // 自訂範本
+      const newTemplate = {
+        id: customId,
+        groupId: state.selectedGroup, // 綁定於目前所選定的主群組 (A, B, C 或 D組)
+        title: title,
+        subtitle: subtitle,
+        icon: icon,
+        isSystem: false
+      };
+
+      // 註冊客製化欄位
+      FIELD_CONFIGS[customId] = {
+        sender: {
+          label: document.getElementById('modal-label-sender').value || '主體物件描述 (Core Subject)',
+          placeholder: document.getElementById('modal-placeholder-sender').value || '請輸入提示'
+        },
+        receiver: {
+          label: document.getElementById('modal-label-receiver').value || '設計風格/藝術媒介 (Artistic Style)',
+          placeholder: document.getElementById('modal-placeholder-receiver').value || '請輸入提示'
+        },
+        subject: {
+          label: document.getElementById('modal-label-subject').value || '色彩與光影計畫 (Color & Lighting)',
+          placeholder: document.getElementById('modal-placeholder-subject').value || '請輸入提示'
+        },
+        purpose: {
+          label: document.getElementById('modal-label-purpose').value || '畫面結構佈局 (Composition Layout)',
+          placeholder: document.getElementById('modal-placeholder-purpose').value || '請輸入提示'
+        },
+        background: {
+          label: document.getElementById('modal-label-background').value || '背景與環境場景 (Background & Environment)',
+          placeholder: document.getElementById('modal-placeholder-background').value || '請輸入提示'
+        },
+        action: {
+          label: document.getElementById('modal-label-action').value || '畫面尺寸比例與參數 (Engine Parameters)',
+          placeholder: document.getElementById('modal-placeholder-action').value || '請輸入提示'
+        }
+      };
+
+      // 更新狀態
+      state.templates.push(newTemplate);
+      state.selectedTemplateId = customId;
+
+      renderCards();
+      updateFormFields();
+      closeModal();
+      showToast(`✨ 自訂 CAT 按鍵「${title}」新增成功！已自動套用。`, 'success');
+    }
+
+    // 刪除自訂範本
+    function handleDeleteTemplate(id) {
+      const target = state.templates.find(t => t.id === id);
+      if (!target) return;
+
+      // 濾除
+      state.templates = state.templates.filter(t => t.id !== id);
+      delete FIELD_CONFIGS[id];
+
+      // 如果當前選中的被刪成了，自動選取同群組中的第一個
+      if (state.selectedTemplateId === id) {
+        const remaining = state.templates.filter(t => t.groupId === state.selectedGroup);
+        state.selectedTemplateId = remaining.length > 0 ? remaining[0].id : '';
+      }
+
+      renderCards();
+      updateFormFields();
+      showToast(`已成功移除「${target.title}」自訂按鍵`);
+    }
+
+    // ==========================================
+    // 生成 Prompt 核心模板與 API 調用
+    // ==========================================
+    function compilePrompt() {
+      const activeCardId = state.selectedTemplateId;
+      const config = FIELD_CONFIGS[activeCardId] || GENERIC_CONFIG;
+      const activeCard = state.templates.find(t => t.id === activeCardId);
+      const selectedType = activeCard?.title || '未定義類型';
+
+      // 英文 Prompt 拼裝
+      const engSender = inputSender.value ? inputSender.value : "a high-end luxury subject";
+      const engReceiver = inputReceiver.value ? `, in ${inputReceiver.value} style` : "";
+      const engSubject = inputSubject.value ? `, with ${inputSubject.value} lighting` : "";
+      const engPurpose = inputPurpose.value ? `, structured with ${inputPurpose.value}` : "";
+      const engBackground = inputBackground.value ? `, background set in ${inputBackground.value}` : "";
+      const engAction = inputAction.value ? ` ${inputAction.value}` : " --ar 1:1 --v 6.0";
+
+      return `[中文提示參考]：\n設計類型：${selectedType}\n畫面元素：${engSender}${engReceiver}${engSubject}${engPurpose}${engBackground}\n\n[AI 繪圖專用國際英文詠唱詞]：\n${engSender}${engReceiver}${engSubject}${engPurpose}${engBackground}, ${state.selectedTone}, ultra detailed, volumetric light, Ray Tracing, 8k resolution${engAction}`;
+    }
+
+    // 調用 Gemini API (具備指數型退避重試機制)
+    async function generateWithGemini(prompt, key) {
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${key}`;
+
+      const payload = {
+        contents: [{ parts: [{ text: `你是一位專門撰寫 Midjourney 與 DALL-E 3 完美英文提示詞的視覺設計詠唱大師。請將這段提示需求進行細化，並直接輸出一段結構流暢、細緻的英文專業繪圖 Prompt。不要解釋，直接輸出：\n${prompt}` }] }]
+      };
+
+      let delay = 1000;
+      for (let i = 0; i < 5; i++) {
+        try {
+          updateLoadingStep(i > 0 ? `正在重試... (第 ${i} 次)` : 'AI 高級詠唱優化中...');
+          const response = await fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
+
+          if (!response.ok) {
+            throw new Error(`HTTP 錯誤! 狀態碼: ${response.status}`);
+          }
+
+          const data = await response.json();
+          const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+          if (text) return text;
+          throw new Error("無效的 API 回傳格式");
+        } catch (error) {
+          if (i === 4) throw error;
+          await new Promise(resolve => setTimeout(resolve, delay));
+          delay *= 2;
+        }
+      }
+    }
+
+    // 介面讀取文字更新
+    function updateLoadingStep(text) {
+      btnText.textContent = text;
+    }
+
+    // ==========================================
+    // 事件處理常式
+    // ==========================================
+    async function handleGenerate() {
+      if (state.loading) return;
+
+      if (!state.selectedTemplateId) {
+        showToast('請先選擇一個設計子類別 CAT 按鍵！', 'error');
+        return;
+      }
+
+      const prompt = compilePrompt();
+
+      // 執行環境金鑰常數 (本地使用時可手動填入)
+      const apiKey = ""; 
+
+      if (!apiKey) {
+        // 本地離線備用機制：自動轉換為專業設計 Prompt 格式
+        state.generatedContent = prompt;
+        outputContent.value = prompt;
+        showToast('📋 已產生高精度 Prompt 提示詞！點擊「複製提示詞」按鈕即可在 Midjourney/DALL-E 直接使用。', 'success');
+        return;
+      }
+
+      try {
+        setLoadingState(true);
+        const resultText = await generateWithGemini(prompt, apiKey);
+
+        state.generatedContent = resultText;
+        outputContent.value = resultText;
+
+        showToast('✨ 專業高美學 AI 繪圖 Prompt 已生成！', 'success');
+      } catch (err) {
+        console.error(err);
+        showToast('AI 生成失敗，請檢查網路連線或金鑰。', 'error');
+      } finally {
+        setLoadingState(false);
+      }
+    }
+
+    function setLoadingState(isLoading) {
+      state.loading = isLoading;
+      if (isLoading) {
+        btnGenerate.disabled = true;
+        btnGenerate.classList.add('bg-blue-400', 'cursor-not-allowed');
+        btnText.textContent = 'AI 優化中...';
+      } else {
+        btnGenerate.disabled = false;
+        btnGenerate.classList.remove('bg-blue-400', 'cursor-not-allowed');
+        btnGenerate.classList.add('bg-[#5578b5]');
+        btnText.textContent = '生成 AI 繪圖提示詞';
+      }
+    }
+
+    // 清除重填
+    function handleClear() {
+      inputSender.value = '';
+      inputReceiver.value = '';
+      inputSubject.value = '';
+      inputPurpose.value = '';
+      inputBackground.value = '';
+      inputAction.value = '';
+      outputContent.value = '';
+      state.generatedContent = '';
+      showToast('欄位已重置清空');
+    }
+
+    // 複製機制
+    function handleCopy() {
+      const textToCopy = outputContent.value || state.generatedContent;
+      if (!textToCopy) {
+        showToast('無可複製的內容，請先填寫並生成！', 'error');
+        return;
+      }
+
+      try {
+        copyHelper.value = textToCopy;
+        copyHelper.select();
+        document.execCommand('copy');
+        showToast('📋 提示詞已完美複製到剪貼簿！', 'success');
+      } catch (err) {
+        showToast('複製失敗，請手動全選複製。', 'error');
+      }
+    }
+
+    // 啟動應用
+    window.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>

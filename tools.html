@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 工具中心</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+    body { font-family: 'Noto Sans TC', sans-serif; background-color: #efede8; }
+    .nav-card {
+      transition: all 0.3s ease;
+      background: white;
+    }
+    .nav-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      border-color: #5578b5;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-6 text-[#2c3e50]">
+
+  <div class="max-w-3xl w-full text-center mb-12">
+    <h1 class="text-3xl font-bold mb-2">AI 智能工具箱</h1>
+    <p class="text-gray-500">請選擇您需要使用的 AI 生成工具</p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-3xl">
+    
+    <!-- AI 文件生成器卡片 -->
+    <a href="AI文件生成器.html" class="nav-card p-8 rounded-2xl border-2 border-transparent custom-shadow block">
+      <div class="text-4xl mb-4">📝</div>
+      <h2 class="text-xl font-bold mb-2">行政文書生成器</h2>
+      <p class="text-sm text-gray-600">自動化生成專業行政信函、文書內容與相關模板。</p>
+    </a>
+
+    <!-- 商業設計卡片 -->
+    <a href="商業設計.html" class="nav-card p-8 rounded-2xl border-2 border-transparent custom-shadow block">
+      <div class="text-4xl mb-4">🎨</div>
+      <h2 class="text-xl font-bold mb-2">商業視覺設計提示詞</h2>
+      <p class="text-sm text-gray-600">為您的商業設計專案生成精確的 AI 繪圖提示詞。</p>
+    </a>
+
+  </div>
+
+  <footer class="mt-16 text-gray-400 text-sm">
+    © 2026 AI 輔助工作流中心
+  </footer>
+
+</body>
+</html>

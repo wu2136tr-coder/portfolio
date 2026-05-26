@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>智寫行政行政文書模板生成器</title>
+  <!-- 引入 Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap');
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+    }
+    /* 自訂柔和扁平陰影，貼近實體精緻文書版面 */
+    .custom-shadow {
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-[#efede8] py-10 px-6 text-[#2c3e50] antialiased">
+
+  <!-- 隱藏複製專用的 Textarea (配合 iframe 與跨瀏覽器安全剪貼簿機制) -->
+  <textarea id="copy-helper" class="absolute -top-[9999px] -left-[9999px] opacity-0" readonly></textarea>
+
+  <!-- 浮動 Toast 通知容器 -->
+  <div id="toast-container" class="fixed top-5 right-5 z-50 flex flex-col gap-3 max-w-sm w-full pointer-events-none"></div>
+
+  <!-- 主要工作容器 -->
+  <div class="max-w-4xl mx-auto">
+    
+    <!-- STEP 01 ・ 選擇文書類型 -->
+    <div class="mb-8">
+      <div class="flex justify-between items-center mb-4">
+        <p class="text-xs tracking-[0.3em] text-[#7a7a7a] font-bold">
+          STEP 01 ・ 選擇文書類型
+        </p>
+        <!-- 隱藏但保留此 ID 元素，防止 JavaScript 報錯並維持最簡潔的排版 -->
+        <span id="selected-type-badge" class="hidden"></span>
+      </div>
+
+      <!-- 模板卡片容器 (細線框白底卡片，將隨資料自動排版成 3 列 15 欄) -->
+      <div id="cards-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+        <!-- 由 JavaScript 動態生成 -->
+      </div>
+    </div>
+
+    <!-- STEP 02 ・ 填寫關鍵資訊 -->
+    <div class="mb-8">
+      <p class="text-xs tracking-[0.3em] text-[#7a7a7a] font-bold mb-4">
+        STEP 02 ・ 填寫關鍵資訊
+      </p>
+
+      <!-- 核心資訊輸入表單 -->
+      <div class="bg-white border border-[#d7d2c9] rounded-sm p-6 custom-shadow space-y-5">
+        
+        <div>
+          <label id="label-sender" class="block text-[14px] text-[#4a4a4a] font-medium mb-2">寄件人身份</label>
+          <input type="text" id="input-sender" placeholder="例：產品部專案經理" class="w-full h-[50px] border border-[#d8d3ca] bg-[#f3f1ec] rounded-sm px-4 text-[14px] outline-none focus:border-[#5578b5] focus:ring-1 focus:ring-[#5578b5] transition-all">
+        </div>
+
+        <div>
+          <label id="label-receiver" class="block text-[14px] text-[#4a4a4a] font-medium mb-2">收件人身份</label>
+          <input type="text" id="input-receiver" placeholder="例：工程部門主管" class="w-full h-[50px] border border-[#d8d3ca] bg-[#f3f1ec] rounded-sm px-4 text-[14px] outline-none focus:border-[#5578b5] focus:ring-1 focus:ring-[#5578b5] transition-all">
+        </div>
+
+        <div>
+          <label id="label-subject" class="block text-[14px] text-[#4a4a4a] font-medium mb-2">信件主旨</label>
+          <input type="text" id="input-subject" placeholder="例：Q3 產品功能確認請求" class="w-full h-[50px] border border-[#d8d3ca] bg-[#f3f1ec] rounded-sm px-4 text-[14px] outline-none focus:border-[#5578b5] focus:ring-1 focus:ring-[#5578b5] transition-all">
+        </div>
+
+        <div>
+          <label id="label-purpose" class="block text-[14px] text-[#4a4a4a] font-medium mb-2">信件目的</label>
+          <input type="text" id="input-purpose" placeholder="例：請求確認三個功能的開發優先順序" class="w-full h-[50px] border border-[#d8d3ca] bg-[#f3f1ec] rounded-sm px-4 text-[14px] outline-none focus:border-[#5578b5] focus:ring-1 focus:ring-[#5578b5] transition-all">
+        </div>
+
+        <div>
+          <label id="label-background" class="block text-[14px] text-[#4a4a4a] font-medium mb-2">背景說明</label>
+          <textarea id="input-background" rows="4" placeholder="例：下週五前需要確認，以便安排 Sprint 規劃" class="w-full border border-[#d8d3ca] bg-[#f3f1ec] rounded-sm p-4 text-[14px] outline-none resize-none focus:border-[#5578b5] focus:ring-1 focus:ring-[#5578b5] transition-all"></textarea>
+        </div>
+
+        <div>
+          <label id="label-action" class="block text-[14px] text-[#4a4a4a] font-medium mb-2">期望對方行動</label>
+          <input type="text" id="input-action" placeholder="例：請於週三前回覆確認" class="w-full h-[50px] border border-[#d8d3ca] bg-[#f3f1ec] rounded-sm px-4 text-[14px] outline-none focus:border-[#5578b5] focus:ring-1 focus:ring-[#5578b5] transition-all">
+        </div>
+
+      </div>
+    </div>
+
+    <!-- STEP 03 ・ 選擇語氣 -->
+    <div class="mb-8">
+      <p class="text-xs tracking-[0.3em] text-[#7a7a7a] font-bold mb-4">
+        STEP 03 ・ 選擇語氣
+      </p>
+
+      <!-- 語氣選擇按鈕與主動作按鈕 -->
+      <div class="space-y-5">
+        <div id="tone-pills" class="flex flex-wrap gap-2.5">
+          <!-- 由 JS 動態生成 -->
+        </div>
+
+        <!-- 動作按鈕：生成與清除 -->
+        <div class="flex items-center space-x-3 pt-2">
+          <button id="btn-generate" class="h-[48px] px-8 bg-[#5578b5] hover:bg-[#466395] text-white font-medium rounded-sm shadow-md transition-all flex items-center justify-center space-x-2">
+            <span id="btn-text">生成 Prompt</span>
+          </button>
+          <button id="btn-clear" class="h-[48px] px-8 bg-white border border-[#d8d3ca] hover:bg-gray-50 text-[#4a4a4a] font-medium rounded-sm transition-all">
+            清除重填
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI PROMPT ， 生成結果 -->
+    <div class="mb-8">
+      <div class="bg-white border border-[#d8d3ca] rounded-sm custom-shadow overflow-hidden">
+        
+        <!-- 標題與複製列 -->
+        <div class="flex justify-between items-center px-6 py-4 border-b border-[#efede8]">
+          <h3 class="text-xs tracking-wider text-[#7a7a7a] font-bold">
+            AI PROMPT ， 生成結果
+          </h3>
+          <button id="btn-copy" class="text-xs px-3 py-1 bg-white border border-[#d8d3ca] hover:bg-gray-50 text-gray-600 rounded-sm font-medium transition-all">
+            複製
+          </button>
+        </div>
+
+        <!-- 顯示區域 -->
+        <div class="p-6">
+          <textarea id="output-content" readonly class="w-full h-[240px] border-0 text-[14px] text-[#2c3e50] leading-8 outline-none resize-none bg-transparent whitespace-pre-wrap" placeholder="選擇文書類型並填寫資訊後，點「生成 Prompt」即可產生可用提示詞"></textarea>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 範本快選 ・ EXAMPLES -->
+    <div>
+      <p class="text-xs tracking-[0.3em] text-[#7a7a7a] font-bold mb-4">
+        範本快選 ・ EXAMPLES
+      </p>
+      <div id="examples-grid" class="flex flex-wrap gap-2.5">
+        <!-- 由 JS 動態生成 -->
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // ==========================================
+    // 資料配置與預設 (包含擴充 3 列 15 欄設計)
+    // ==========================================
+    const CARDS = [
+      { id: 'email', title: '商務 Email', subtitle: '請求、通知、跟進', icon: '✉️' },
+      { id: 'announcement_internal', title: '內部公告', subtitle: '政策變更、活動通知', icon: '📋' },
+      { id: 'agenda', title: '會議議程', subtitle: '討論項目、時間分配', icon: '🗓️' },
+      { id: 'weekly', title: '工作週報', subtitle: '進度、障礙、下週計畫', icon: '📊' },
+      { id: 'sop', title: '操作 SOP', subtitle: '步驟、注意事項、驗證', icon: '📝' },
+      { id: 'proposal', title: '提案簡述', subtitle: '背景、方案、預算', icon: '💡' },
+      { id: 'feedback', title: '績效回饋', subtitle: '優點、改善、建議', icon: '💬' },
+      { id: 'decline', title: '婉拒信函', subtitle: '感謝、婉拒、維繫關係', icon: '🙏' },
+      { id: 'handover', title: '交接文件', subtitle: '任務狀態、聯絡人、注意事項', icon: '🔄' },
+      { id: 'announcement_external', title: '對外公告', subtitle: '新聞稿、官方聲明', icon: '📢' },
+      // 新增 5 個預留擴充欄位 (擴增第 3 列)
+      { id: 'custom_01', title: '預留功能 01', subtitle: '未來自訂功能 CAT', icon: '⚙️' },
+      { id: 'custom_02', title: '預留功能 02', subtitle: '未來自訂功能 CAT', icon: '⚙️' },
+      { id: 'custom_03', title: '預留功能 03', subtitle: '未來自訂功能 CAT', icon: '⚙️' },
+      { id: 'custom_04', title: '預留功能 04', subtitle: '未來自訂功能 CAT', icon: '⚙️' },
+      { id: 'custom_05', title: '預留功能 05', subtitle: '未來自訂功能 CAT', icon: '⚙️' }
+    ];
+
+    const FIELD_CONFIGS = {
+      email: {
+        sender: { label: '寄件人身份', placeholder: '例：產品部專案經理' },
+        receiver: { label: '收件人身份', placeholder: '例：工程部門主管' },
+        subject: { label: '信件主旨', placeholder: '例：Q3 產品功能確認請求' },
+        purpose: { label: '信件目的', placeholder: '例：請求確認三個功能的開發優先順序' },
+        background: { label: '背景說明', placeholder: '例：下週五前需要確認，以便安排 Sprint 規劃' },
+        action: { label: '期望對方行動', placeholder: '例：請於週三前回覆確認' }
+      },
+      announcement_internal: {
+        sender: { label: '發佈單位/主管', placeholder: '例：人力資源部、總經理室' },
+        receiver: { label: '公告對象', placeholder: '例：全體同仁、特定部門' },
+        subject: { label: '公告主題', placeholder: '例：端午節連假出勤與值班排程公告' },
+        purpose: { label: '公告目的', placeholder: '例：說明連假期間的辦公室安全及值班津貼發放辦法' },
+        background: { label: '公告內容背景', placeholder: '例：配合政府人事行政總局公佈之放假時程' },
+        action: { label: '同仁配合事項', placeholder: '例：請各部門值班人員於週五前提交輪值確認表' }
+      },
+      agenda: {
+        sender: { label: '召集人/主持人', placeholder: '例：技術總監、產品協理' },
+        receiver: { label: '與會人員', placeholder: '例：研發團隊、設計師、營運專員' },
+        subject: { label: '會議名稱', placeholder: '例：Q3 新功能發佈前協調會議' },
+        purpose: { label: '會議主要目標', placeholder: '例：確認產品上線時間表與各部門責任分工' },
+        background: { label: '會議背景/前期進度', placeholder: '例：各組已完成功能測試，需跨部門最後對接' },
+        action: { label: '與會準備/會後行動', placeholder: '例：請各組窗口攜帶規格書並準時出席' }
+      },
+      weekly: {
+        sender: { label: '回報人姓名/職稱', placeholder: '例：後端工程師、行銷專員' },
+        receiver: { label: '報告對象', placeholder: '例：研發主管、專案負責人' },
+        subject: { label: '週報區間', placeholder: '例：2026年第20週工作週報' },
+        purpose: { label: '本週完成重點工作', placeholder: '例：完成資料庫效能調優，API 回應速度提升 40%' },
+        background: { label: '目前遇到的障礙與問題', placeholder: '例：第三方金流串接測試環境不穩定，正與對方聯繫中' },
+        action: { label: '下週工作計畫與預期成果', placeholder: '例：進行資料庫轉移測試、優化結帳頁面 UI' }
+      },
+      sop: {
+        sender: { label: '編寫人/單位', placeholder: '例：系統維運組、資安處' },
+        receiver: { label: '執行角色/受眾', placeholder: '例：系統管理員、一線客服人員' },
+        subject: { label: 'SOP 流程名稱', placeholder: '例：生產環境伺服器緊急重啟作業標準程序' },
+        purpose: { label: '適用情境與執行目的', placeholder: '例：在系統 CPU 負載突破 95% 且無回應時，安全進行重啟' },
+        background: { label: '前置準備與必要工具', placeholder: '例：確認具備管理者權限、開啟終端機日誌記錄' },
+        action: { label: '核心操作步驟與驗證方式', placeholder: '例：1. 備份最新日誌 2. 執行重啟命令 3. 檢查監控儀表板狀態' }
+      },
+      proposal: {
+        sender: { label: '提案人/部門', placeholder: '例：市場開發小組、創新研發部' },
+        receiver: { label: '提案審查對象', placeholder: '例：投資決戰委員會、總經理' },
+        subject: { label: '提案項目名稱', placeholder: '例：引入 AI 智能客服系統專案提案' },
+        purpose: { label: '提案核心解決方案', placeholder: '例：建置 24H 自動化 AI 客服，降低 50% 人工客服初篩成本' },
+        background: { label: '現狀痛點與背景分析', placeholder: '例：現有人工客服在深夜時段回覆延遲高，導致 15% 客戶流失率' },
+        action: { label: '所需預算與預期效益', placeholder: '例：第一期預算 30 萬，預計導入後 3 個月內提升客戶滿意度至 92%' }
+      },
+      feedback: {
+        sender: { label: '評估人/主管', placeholder: '例：設計部門主管、專案導師' },
+        receiver: { label: '受評同仁', placeholder: '例：資深 UI/UX 設計師' },
+        subject: { label: '評估期間/項目', placeholder: '例：2026 年上半年度績效考核回饋' },
+        purpose: { label: '同仁本期核心亮點與優點', placeholder: '例：在專案中展現卓越的跨部門溝通能力，準時且高規格完成設計稿' },
+        background: { label: '可改善的空間或具體痛點', placeholder: '例：在時程掌控上偶有壓線情況，建議加強工作任務的優先級管理' },
+        action: { label: '後續發展建議與行動計劃', placeholder: '例：安排參加專案管理培訓課程，並在下期專案嘗試擔任主導設計師' }
+      },
+      decline: {
+        sender: { label: '婉拒方/公司', placeholder: '例：人事室、科技公司人資部' },
+        receiver: { label: '婉拒對象', placeholder: '例：落選求職者、潛在合作商' },
+        subject: { label: '信件主題', placeholder: '例：關於 [職缺名稱] 面試結果通知 / 合作提案回覆' },
+        purpose: { label: '感謝與委婉拒絕原因', placeholder: '例：感謝您撥冗提案，您的資歷優秀，惟本次預算限制名額有限...' },
+        background: { label: '篩選背景與考量', placeholder: '例：本次合作案收到眾多優秀企劃，經團隊綜合評估後選擇更契合現階段目標者' },
+        action: { label: '未來的合作契機/維繫關係', placeholder: '例：我們已將您的企劃案歸檔存查，未來有相關項目將優先與您聯絡' }
+      },
+      handover: {
+        sender: { label: '交接人職稱/姓名', placeholder: '例：資深前端工程師' },
+        receiver: { label: '承接人/監交人', placeholder: '例：承接工程師、研發經理' },
+        subject: { label: '交接職務/專案名稱', placeholder: '例：電商平台前台改版專案交接手冊' },
+        purpose: { label: '目前任務進度與狀態', placeholder: '例：前台切版完成度 95%，剩餘結帳頁面 API 對接與串聯測試' },
+        background: { label: '關鍵聯絡窗口與帳號密碼說明', placeholder: '例：客戶窗口為行銷部 Amy (分機 123)，測試環境金鑰已存於雲端' },
+        action: { label: '未完待辦事項與注意事項', placeholder: '例：下週一前須協助客戶進行測試環境驗收，若遇 Bug 請協同後端同仁排除' }
+      },
+      announcement_external: {
+        sender: { label: '發佈官方單位', placeholder: '例：企業公關部、官方發言人' },
+        receiver: { label: '發佈媒體與社會大眾', placeholder: '例：各大媒體記者、全體用戶、社會大眾' },
+        subject: { label: '聲明/新聞稿主題', placeholder: '例：關於新型雲端資安防護系統升級之官方聲明' },
+        purpose: { label: '核心發佈聲明內容', placeholder: '例：公司成功完成全系統資安架構升級，全面採用零信任防禦機制' },
+        background: { label: '發佈背景與起因', placeholder: '例：為因應近期網路安全挑戰，主動進行硬體升級與預防措施' },
+        action: { label: '大眾應對指引與客服窗口', placeholder: '例：原用戶權益完全不受影響，如有疑問請洽 24 小時免付費客服專線' }
+      },
+      // 為預留功能 CAT 提供與 Email 類似的默認高可執行設定
+      custom_01: {
+        sender: { label: '自訂寄件者/發起方', placeholder: '例：預留擴充身份 A' },
+        receiver: { label: '自訂收件者/受眾', placeholder: '例：預留對手身份 B' },
+        subject: { label: '自訂文書主題/主旨', placeholder: '例：自訂功能 CAT 01 主旨' },
+        purpose: { label: '自訂主要目的', placeholder: '例：自訂功能 CAT 01 目的' },
+        background: { label: '自訂背景與備註', placeholder: '例：自訂功能 CAT 01 背景說明' },
+        action: { label: '自訂期望採取行動', placeholder: '例：自訂功能 CAT 01 期望行動' }
+      },
+      custom_02: {
+        sender: { label: '自訂寄件者/發起方', placeholder: '例：預留擴充身份 A' },
+        receiver: { label: '自訂收件者/受眾', placeholder: '例：預留對手身份 B' },
+        subject: { label: '自訂文書主題/主旨', placeholder: '例：自訂功能 CAT 02 主旨' },
+        purpose: { label: '自訂主要目的', placeholder: '例：自訂功能 CAT 02 目的' },
+        background: { label: '自訂背景與備註', placeholder: '例：自訂功能 CAT 02 背景說明' },
+        action: { label: '自訂期望採取行動', placeholder: '例：自訂功能 CAT 02 期望行動' }
+      },
+      custom_03: {
+        sender: { label: '自訂寄件者/發起方', placeholder: '例：預留擴充身份 A' },
+        receiver: { label: '自訂收件者/受眾', placeholder: '例：預留對手身份 B' },
+        subject: { label: '自訂文書主題/主旨', placeholder: '例：自訂功能 CAT 03 主旨' },
+        purpose: { label: '自訂主要目的', placeholder: '例：自訂功能 CAT 03 目的' },
+        background: { label: '自訂背景與備註', placeholder: '例：自訂功能 CAT 03 背景說明' },
+        action: { label: '自訂期望採取行動', placeholder: '例：自訂功能 CAT 03 期望行動' }
+      },
+      custom_04: {
+        sender: { label: '自訂寄件者/發起方', placeholder: '例：預留擴充身份 A' },
+        receiver: { label: '自訂收件者/受眾', placeholder: '例：預留對手身份 B' },
+        subject: { label: '自訂文書主題/主旨', placeholder: '例：自訂功能 CAT 04 主旨' },
+        purpose: { label: '自訂主要目的', placeholder: '例：自訂功能 CAT 04 目的' },
+        background: { label: '自訂背景與備註', placeholder: '例：自訂功能 CAT 04 背景說明' },
+        action: { label: '自訂期望採取行動', placeholder: '例：自訂功能 CAT 04 期望行動' }
+      },
+      custom_05: {
+        sender: { label: '自訂寄件者/發起方', placeholder: '例：預留擴充身份 A' },
+        receiver: { label: '自訂收件者/受眾', placeholder: '例：預留對手身份 B' },
+        subject: { label: '自訂文書主題/主旨', placeholder: '例：自訂功能 CAT 05 主旨' },
+        purpose: { label: '自訂主要目的', placeholder: '例：自訂功能 CAT 05 目的' },
+        background: { label: '自訂背景與備註', placeholder: '例：自訂功能 CAT 05 背景說明' },
+        action: { label: '自訂期望採取行動', placeholder: '例：自訂功能 CAT 05 期望行動' }
+      }
+    };
+
+    const TONE_OPTIONS = [
+      { label: '正式精準', value: '專業精準、字句嚴謹且得體，適合正式的商務與對外溝通' },
+      { label: '親切有溫度', value: '客氣有禮、富有溫度，強調同理與合作，避免給人冰冷的感覺' },
+      { label: '簡潔俐落', value: '直接精煉、不拖泥帶水，以條列式和結論先行的方式呈現' },
+      { label: '幽默委婉', value: '語氣柔和委婉，能在表達拒絕或要求時，保有彈性與維繫良好關係' },
+      { label: '積極正向', value: '充滿熱情、正能量，強調未來展望與具體價值，極具感染力' }
+    ];
+
+    const EXAMPLES = [
+      {
+        label: '逼近截止日提醒',
+        cardIndex: 0, // 商務 Email
+        sender: '專案經理',
+        receiver: '開發團隊成員',
+        subject: '【急件】專案里程碑截止日提醒',
+        purpose: '請確認各項開發任務是否能在本週五前準時交付',
+        background: '客戶預計於下週一進行線上功能測試驗收',
+        action: '請於今天下午 5 點前回報目前進度與是否有潛在延遲'
+      },
+      {
+        label: '行政部門通知',
+        cardIndex: 1, // 內部公告
+        sender: '人資與行政部',
+        receiver: '全體同仁',
+        subject: '辦公室空調設備年度保養維護通知',
+        purpose: '通知本週六將進行空調停機保養，請同仁配合調整作息',
+        background: '為維護良好的辦公環境與空氣品質，固定辦理年度保養',
+        action: '請於週五下班前將個人桌面機密文件及重要設備收拾妥當'
+      },
+      {
+        label: '工程師週報',
+        cardIndex: 3, // 工作週報
+        sender: '後端工程師',
+        receiver: '技術主管',
+        subject: '個人工作週報 - 第 20 週',
+        purpose: '匯報本週 API 效能優化進度與下週資料庫搬遷計畫',
+        background: '本週完成了快取機制更新，API 平均回應時間下降 30%',
+        action: '請主管撥空審閱 Pull Request 並給予架構建議'
+      },
+      {
+        label: '跨部門會議議程',
+        cardIndex: 2, // 會議議程
+        sender: '產品運營經理',
+        receiver: '行銷、設計與工程團隊',
+        subject: 'Q3 新功能上市準備會議議程',
+        purpose: '討論行銷時程、視覺設計初稿與開發上線時程的對接',
+        background: '產品預計於下個月中旬正式發布',
+        action: '請各部門窗口提前半天填寫議程簡報，並準時出席'
+      },
+      {
+        label: '新兵合作提案',
+        cardIndex: 5, // 提案簡述
+        sender: '市場開發專員',
+        receiver: '外部潛在合作夥伴',
+        subject: '智慧物流跨界合作方案提議',
+        purpose: '提出整合雙方資源的綠色配送合作試點計畫',
+        background: '市場上對於環保永續配送的需求日益增加',
+        action: '期待於下週安排一場 15 分鐘的線上簡短會議進行初步探討'
+      }
+    ];
+
+    // ==========================================
+    // 應用狀態
+    // ==========================================
+    let state = {
+      selectedCard: 0,
+      selectedTone: TONE_OPTIONS[0].value,
+      loading: false,
+      generatedContent: ''
+    };
+
+    // ==========================================
+    // DOM 元素獲取
+    // ==========================================
+    const cardsGrid = document.getElementById('cards-grid');
+    const selectedTypeBadge = document.getElementById('selected-type-badge');
+    const tonePills = document.getElementById('tone-pills');
+    const btnGenerate = document.getElementById('btn-generate');
+    const btnText = document.getElementById('btn-text');
+    const btnClear = document.getElementById('btn-clear');
+    const btnCopy = document.getElementById('btn-copy');
+    const outputContent = document.getElementById('output-content');
+    const examplesGrid = document.getElementById('examples-grid');
+    const copyHelper = document.getElementById('copy-helper');
+    const toastContainer = document.getElementById('toast-container');
+
+    // 填寫欄位 DOM 元件
+    const inputSender = document.getElementById('input-sender');
+    const inputReceiver = document.getElementById('input-receiver');
+    const inputSubject = document.getElementById('input-subject');
+    const inputPurpose = document.getElementById('input-purpose');
+    const inputBackground = document.getElementById('input-background');
+    const inputAction = document.getElementById('input-action');
+
+    // 填寫欄位標籤 Label DOM 元件
+    const labelSender = document.getElementById('label-sender');
+    const labelReceiver = document.getElementById('label-receiver');
+    const labelSubject = document.getElementById('label-subject');
+    const labelPurpose = document.getElementById('label-purpose');
+    const labelBackground = document.getElementById('label-background');
+    const labelAction = document.getElementById('label-action');
+
+    // ==========================================
+    // 初始化與動態表單同步
+    // ==========================================
+    function init() {
+      renderCards();
+      renderTonePills();
+      renderExamples();
+      updateFormFields(); // 初始化欄位標籤與 Placeholder
+
+      // 監聽動作按鈕
+      btnGenerate.addEventListener('click', handleGenerate);
+      btnClear.addEventListener('click', handleClear);
+      btnCopy.addEventListener('click', handleCopy);
+    }
+
+    // 動態更新 STEP 02 的輸入欄位與 Placeholder
+    function updateFormFields() {
+      const activeCardId = CARDS[state.selectedCard].id;
+      const config = FIELD_CONFIGS[activeCardId];
+
+      if (config) {
+        if (labelSender) labelSender.textContent = config.sender.label;
+        if (inputSender) inputSender.placeholder = config.sender.placeholder;
+
+        if (labelReceiver) labelReceiver.textContent = config.receiver.label;
+        if (inputReceiver) inputReceiver.placeholder = config.receiver.placeholder;
+
+        if (labelSubject) labelSubject.textContent = config.subject.label;
+        if (inputSubject) inputSubject.placeholder = config.subject.placeholder;
+
+        if (labelPurpose) labelPurpose.textContent = config.purpose.label;
+        if (inputPurpose) inputPurpose.placeholder = config.purpose.placeholder;
+
+        if (labelBackground) labelBackground.textContent = config.background.label;
+        if (inputBackground) inputBackground.placeholder = config.background.placeholder;
+
+        if (labelAction) labelAction.textContent = config.action.label;
+        if (inputAction) inputAction.placeholder = config.action.placeholder;
+      }
+    }
+
+    // 繪製卡片
+    function renderCards() {
+      cardsGrid.innerHTML = '';
+      CARDS.forEach((card, index) => {
+        const active = state.selectedCard === index;
+        const btn = document.createElement('button');
+        
+        btn.className = `
+          group relative text-center p-4 rounded-sm border transition-all duration-300 h-[118px] bg-white
+          ${active 
+            ? 'border-[#5578b5] ring-1 ring-[#5578b5] shadow-md' 
+            : 'border-[#d7d2c9] hover:border-[#5578b5] hover:-translate-y-0.5'
+          }
+        `;
+
+        btn.innerHTML = `
+          <div class="relative z-10 flex flex-col items-center justify-center h-full text-center">
+            <div class="text-3xl mb-2 transform group-hover:scale-105 transition-transform duration-300">
+              ${card.icon}
+            </div>
+            <h3 class="text-[15px] font-bold text-[#1f1f1f] leading-tight mb-1">
+              ${card.title}
+            </h3>
+            <p class="text-[11px] text-gray-400 leading-relaxed">
+              ${card.subtitle}
+            </p>
+          </div>
+        `;
+
+        btn.addEventListener('click', () => {
+          state.selectedCard = index;
+          if (selectedTypeBadge) {
+            selectedTypeBadge.textContent = `已選擇: ${card.title}`;
+          }
+          renderCards();
+          updateFormFields(); // 動態更新欄位設定
+          showToast(`已設定類型為: ${card.title}`);
+        });
+
+        cardsGrid.appendChild(btn);
+      });
+    }
+
+    // 繪製語氣選擇 Pills
+    function renderTonePills() {
+      tonePills.innerHTML = '';
+      TONE_OPTIONS.forEach((opt) => {
+        const active = state.selectedTone === opt.value;
+        const btn = document.createElement('button');
+        
+        btn.className = `
+          px-5 py-2.5 rounded-full text-[13px] font-medium transition-all border
+          ${active
+            ? 'bg-[#5578b5] text-white border-[#5578b5] shadow-sm'
+            : 'bg-white text-[#4a4a4a] border-[#d8d3ca] hover:bg-gray-50'
+          }
+        `;
+        btn.textContent = opt.label;
+
+        btn.addEventListener('click', () => {
+          state.selectedTone = opt.value;
+          renderTonePills();
+          showToast(`語氣切換為: ${opt.label}`);
+        });
+
+        tonePills.appendChild(btn);
+      });
+    }
+
+    // 繪製快選範本 EXAMPLES
+    function renderExamples() {
+      examplesGrid.innerHTML = '';
+      EXAMPLES.forEach((ex) => {
+        const btn = document.createElement('button');
+        btn.className = "px-4 py-2 bg-white hover:bg-gray-50 text-[#4a4a4a] border border-[#d8d3ca] rounded-full text-[12px] font-medium transition-all shadow-sm";
+        btn.textContent = ex.label;
+
+        btn.addEventListener('click', () => {
+          // 填入所有狀態
+          state.selectedCard = ex.cardIndex;
+          
+          if (selectedTypeBadge) {
+            selectedTypeBadge.textContent = `已選擇: ${CARDS[ex.cardIndex].title}`;
+          }
+          renderCards();
+          updateFormFields(); // 動態將適配欄位的 Placeholder 修改
+
+          // 填入範本文字
+          inputSender.value = ex.sender;
+          inputReceiver.value = ex.receiver;
+          inputSubject.value = ex.subject;
+          inputPurpose.value = ex.purpose;
+          inputBackground.value = ex.background;
+          inputAction.value = ex.action;
+
+          showToast(`🚀 已成功導入範本：「${ex.label}」`);
+        });
+
+        examplesGrid.appendChild(btn);
+      });
+    }
+
+    // ==========================================
+    // 功能：顯示自訂 Toast
+    // ==========================================
+    function showToast(message, type = 'info') {
+      const toast = document.createElement('div');
+      toast.className = `
+        flex items-center space-x-3 px-5 py-4 rounded-sm shadow-md transition-all duration-300 transform translate-y-2 opacity-0
+        bg-white border-l-4 border-l-[#5578b5] border border-[#d7d2c9] max-w-sm pointer-events-auto
+      `;
+
+      let icon = 'ℹ️';
+      if (type === 'success') {
+        icon = '✨';
+        toast.style.borderLeftColor = '#5578b5';
+      } else if (type === 'error') {
+        icon = '⚠️';
+        toast.style.borderLeftColor = '#ef4444';
+      }
+
+      toast.innerHTML = `
+        <div class="text-xl">${icon}</div>
+        <div class="text-[13px] font-medium text-[#4a4a4a] leading-snug">${message}</div>
+      `;
+
+      toastContainer.appendChild(toast);
+
+      setTimeout(() => {
+        toast.classList.remove('opacity-0', 'translate-y-2');
+      }, 50);
+
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-2');
+        setTimeout(() => {
+          toast.remove();
+        }, 300);
+      }, 4000);
+    }
+
+    // ==========================================
+    // 生成 Prompt 核心模板與 API 調用
+    // ==========================================
+    function compilePrompt() {
+      const activeCardId = CARDS[state.selectedCard].id;
+      const config = FIELD_CONFIGS[activeCardId];
+      const selectedType = CARDS[state.selectedCard]?.title;
+
+      return `你是一位頂尖的專業商務文書 AI 寫作助理。請根據以下提供的前提與關鍵資訊，為我撰寫一份結構極佳、符合業界頂級水準的正式文書。
+
+【文書設定】
+- 文書類型：${selectedType}
+- 寫作語氣要求：${state.selectedTone}
+
+【關鍵欄位資訊】
+- ${config.sender.label}：${inputSender.value || '（請根據上下文或常規格式推斷合適身分）'}
+- ${config.receiver.label}：${inputReceiver.value || '（請根據上下文或常規格式推斷合適身分）'}
+- ${config.subject.label}：${inputSubject.value || '（請根據上下文或常規格式自動擬定合適主題）'}
+- ${config.purpose.label}：${inputPurpose.value || '（請協助生成核心訴求）'}
+- ${config.background.label}：${inputBackground.value || '（無額外背景，請以通用專業背景進行合理解釋）'}
+- ${config.action.label}：${inputAction.value || '（請以委婉禮貌的方式主動提醒對方下一步行動）'}
+
+【寫作指南】
+1. 請產出完整且可以直接使用的正式內容。
+2. 格式必須精緻（適度使用空白行、條列式重點、清晰的抬頭與敬語）。
+3. 內容中若有需要使用者自行手動修改的具體資訊，請使用 [括號標記]（例如：[10月15日前] 或 [會議室 A]）。
+4. 不要包含任何多餘的解釋或前言，直接提供正式文書的正文。`;
+    }
+
+    // 調用 Gemini API (具備指數型退避重試機制)
+    async function generateWithGemini(prompt, key) {
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${key}`;
+
+      const payload = {
+        contents: [{ parts: [{ text: prompt }] }],
+        systemInstruction: {
+          parts: [{ text: "你是一位專精於繁體中文商業行政文書、電子郵件、公告以及 SOP 撰寫的資深秘書。你的文字風格洗鍊、優雅、精準，能根據不同的讀者與場景調整語意輕重。" }]
+        }
+      };
+
+      let delay = 1000;
+      for (let i = 0; i < 5; i++) {
+        try {
+          updateLoadingStep(i > 0 ? `正在重試... (第 ${i} 次)` : 'AI 思考與排版中...');
+          const response = await fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
+
+          if (!response.ok) {
+            throw new Error(`HTTP 錯誤! 狀態碼: ${response.status}`);
+          }
+
+          const data = await response.json();
+          const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+          if (text) return text;
+          throw new Error("無效的 API 回傳格式");
+        } catch (error) {
+          if (i === 4) throw error;
+          await new Promise(resolve => setTimeout(resolve, delay));
+          delay *= 2;
+        }
+      }
+    }
+
+    function updateLoadingStep(text) {
+      btnText.textContent = text;
+    }
+
+    // ==========================================
+    // 事件處理常式
+    // ==========================================
+    async function handleGenerate() {
+      if (state.loading) return;
+
+      const prompt = compilePrompt();
+
+      // 執行環境金鑰常數（下載於本地使用時，您可以填寫在此引號中：const apiKey = "您的Gemini金鑰";）
+      const apiKey = ""; 
+
+      if (!apiKey) {
+        // 本地離線備用機制：當沒有 API 金鑰時，自動轉成高效率的「智能 Prompt 產生器」
+        state.generatedContent = prompt;
+        outputContent.value = prompt;
+        showToast('📋 已在下方產生 Prompt 提示詞！您可以直接複製並貼到 ChatGPT/Gemini 中使用。', 'success');
+        return;
+      }
+
+      try {
+        setLoadingState(true);
+        // 呼叫 Gemini 2.5 API 直接生成文書
+        const resultText = await generateWithGemini(prompt, apiKey);
+
+        state.generatedContent = resultText;
+        outputContent.value = resultText;
+
+        showToast('✨ 專業商務文件已生成完畢！', 'success');
+      } catch (err) {
+        console.error(err);
+        showToast('AI 生成失敗，請檢查您的網路連線或金鑰設定。', 'error');
+      } finally {
+        setLoadingState(false);
+      }
+    }
+
+    function setLoadingState(isLoading) {
+      state.loading = isLoading;
+      if (isLoading) {
+        btnGenerate.disabled = true;
+        btnGenerate.classList.add('bg-blue-400', 'cursor-not-allowed');
+        btnText.textContent = 'AI 生成中...';
+      } else {
+        btnGenerate.disabled = false;
+        btnGenerate.classList.remove('bg-blue-400', 'cursor-not-allowed');
+        btnGenerate.classList.add('bg-[#5578b5]');
+        btnText.textContent = '生成 Prompt';
+      }
+    }
+
+    // 清除重填
+    function handleClear() {
+      inputSender.value = '';
+      inputReceiver.value = '';
+      inputSubject.value = '';
+      inputPurpose.value = '';
+      inputBackground.value = '';
+      inputAction.value = '';
+      outputContent.value = '';
+      state.generatedContent = '';
+      showToast('欄位已重置清空');
+    }
+
+    // 複製機制
+    function handleCopy() {
+      const textToCopy = outputContent.value || state.generatedContent;
+      if (!textToCopy) {
+        showToast('無可複製的內容，請先輸入並生成！', 'error');
+        return;
+      }
+
+      try {
+        copyHelper.value = textToCopy;
+        copyHelper.select();
+        document.execCommand('copy');
+        showToast('📋 已複製內容到剪貼簿！', 'success');
+      } catch (err) {
+        showToast('複製失敗，請手動全選複製。', 'error');
+      }
+    }
+
+    // 啟動應用
+    window.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>
