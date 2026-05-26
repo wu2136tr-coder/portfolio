@@ -59,12 +59,14 @@
 
         <!-- 1. 首頁/個人定位 (Hero Section) -->
         <section id="hero" class="flex flex-col md:flex-row items-center gap-8 md:gap-12 pt-4">
-            <!-- 頭像區 (使用精緻的專業插畫風 placeholder) -->
+            <!-- 頭像區 (指向實際照片，若加載失敗則自動顯示後備大頭貼) -->
             <div class="w-40 h-40 md:w-48 md:h-48 rounded-full border-4 border-beige-200 overflow-hidden flex-shrink-0 bg-white relative beige-glow">
-                <div class="absolute inset-0 bg-gradient-to-tr from-beige-100 to-transparent"></div>
-                <svg class="w-full h-full text-stone-300 p-2" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                </svg>
+                <img 
+                    src="woman001.jpg" 
+                    alt="吳慧華的專業形象照" 
+                    class="w-full h-full object-cover"
+                    onerror="this.onerror=null; this.src='https://api.dicebear.com/7.x/initials/svg?seed=吳慧華';"
+                >
             </div>
             <!-- 文字定位 -->
             <div class="text-center md:text-left space-y-4">
@@ -185,7 +187,7 @@
                     </div>
                     <div class="p-5 flex-grow flex flex-col justify-between">
                         <div>
-                            <h3 class="text-base font-bold text-beige-900 mb-2">企業財務報告與成本分析模組</h3>
+                            <h3 class="text-base font-bold text-beige-900 mb-2">企業財務報告與成本 analysis 模組</h3>
                             <p class="text-xs text-stone-500 leading-relaxed">
                                 針對中大型製造商或跨國企業，建構完整的損益表、資產負債表及多維度成本分析模型，助主管進行精準決策。
                             </p>
