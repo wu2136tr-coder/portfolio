@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>吳慧華 | 融合 AI 科技的專業主辦會計</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Noto Sans TC -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Noto Sans TC', 'sans-serif'],
+                    },
+                    colors: {
+                        beige: {
+                            50: '#FAF8F5',   // 主背景米白
+                            100: '#F5F0E6',  // 次級米白/卡其
+                            200: '#EADCC9',  // 邊框與裝飾線
+                            800: '#5C5246',  // 深茶色文字
+                            900: '#3D352B',  // 最深字體色
+                        },
+                        accent: '#B88E56',    // 優雅金色
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        .beige-glow {
+            box-shadow: 0 4px 20px -2px rgba(184, 142, 86, 0.08);
+        }
+    </style>
+</head>
+<body class="bg-beige-50 text-stone-800 font-sans antialiased min-h-screen selection:bg-accent/20">
+
+    <!-- 導覽列 (桌面版置頂，手機版便於觸控) -->
+    <header class="sticky top-0 z-50 bg-beige-50/80 backdrop-blur-md border-b border-beige-200">
+        <div class="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="#" class="text-xl font-bold text-beige-900 tracking-wider">吳慧華 <span class="text-accent text-sm font-medium">Hui-Hua</span></a>
+            <nav class="flex gap-6 text-sm font-medium text-stone-600">
+                <a href="#about" class="hover:text-accent transition-colors">關於我</a>
+                <a href="#skills" class="hover:text-accent transition-colors">專業技能</a>
+                <a href="#portfolio" class="hover:text-accent transition-colors">實績作品</a>
+                <a href="#contact" class="hover:text-accent transition-colors">聯絡我</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-6 py-12 md:py-20 space-y-24">
+
+        <!-- 1. 首頁/個人定位 (Hero Section) -->
+        <section id="hero" class="flex flex-col md:flex-row items-center gap-8 md:gap-12 pt-4">
+            <!-- 頭像區 (使用精緻的專業插畫風 placeholder) -->
+            <div class="w-40 h-40 md:w-48 md:h-48 rounded-full border-4 border-beige-200 overflow-hidden flex-shrink-0 bg-white relative beige-glow">
+                <div class="absolute inset-0 bg-gradient-to-tr from-beige-100 to-transparent"></div>
+                <svg class="w-full h-full text-stone-300 p-2" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+            </div>
+            <!-- 文字定位 -->
+            <div class="text-center md:text-left space-y-4">
+                <span class="inline-block px-3 py-1 bg-beige-100 text-accent text-xs font-semibold rounded-full tracking-wider uppercase">Senior Accountant & AI Pioneer</span>
+                <h1 class="text-3xl md:text-5xl font-black text-beige-900 leading-tight">吳慧華</h1>
+                <p class="text-lg md:text-xl text-stone-600 leading-relaxed font-light">
+                    「融合傳統實務與 <span class="text-accent font-medium">AI 科技</span>的專業主辦會計」
+                </p>
+                <div class="flex flex-wrap justify-center md:justify-start gap-3 pt-2">
+                    <span class="text-xs px-3 py-1.5 bg-stone-100 text-stone-600 rounded-lg"><i class="fa-solid fa-calculator mr-1"></i>20+ 年財會經驗</span>
+                    <span class="text-xs px-3 py-1.5 bg-stone-100 text-stone-600 rounded-lg"><i class="fa-solid fa-microchip mr-1"></i>AI 辦公大師</span>
+                    <span class="text-xs px-3 py-1.5 bg-stone-100 text-stone-600 rounded-lg"><i class="fa-solid fa-map-pin mr-1"></i>桃園八德</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. 關於我 (About Me) -->
+        <section id="about" class="space-y-6">
+            <div class="border-l-4 border-accent pl-4">
+                <h2 class="text-2xl font-bold text-beige-900 tracking-wide">關於我</h2>
+                <p class="text-xs text-stone-400 uppercase tracking-widest mt-0.5">My Philosophy & Background</p>
+            </div>
+            <div class="bg-white p-6 md:p-8 rounded-2xl border border-beige-200 beige-glow space-y-6">
+                <p class="text-stone-700 leading-relaxed text-justify">
+                    您好，我是<strong>吳慧華</strong>。出社會以來我一直深耕於會計與財務領域。我深信，豐富的資歷不代表裹足不前。在資訊與新科技不斷爆發的時代，我們更應該主動吸收新知、擁抱變化，才不會被時代的洪流所淘汰。
+                </p>
+                <p class="text-stone-700 leading-relaxed text-justify">
+                    為此，我於近期主動參加了職訓局舉辦的<strong>「數位辦公與AI應用培訓班」（400小時）</strong>，深度掌握如何透過 AI 工具解決工作難題、簡化繁瑣的財務與文書流程。我的個性溫和、好相處與極強的學習適應力，讓我能以最短時間熟悉工作，為企業帶來兼具「穩定精準」與「高效數位化」的雙重價值。
+                </p>
+                <!-- 榮譽/認證徽章區 -->
+                <div class="pt-4 border-t border-beige-100">
+                    <h4 class="text-xs font-bold text-stone-400 uppercase tracking-wider mb-3">AI 科技官方專業認證</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-amber-50 text-accent text-xs px-3 py-1.5 rounded-lg font-medium border border-accent/20"><i class="fa-solid fa-graduation-cap mr-1"></i>Gemini 教育家</span>
+                        <span class="bg-amber-50 text-accent text-xs px-3 py-1.5 rounded-lg font-medium border border-accent/20"><i class="fa-solid fa-certificate mr-1"></i>Gemini 大學生認證</span>
+                        <span class="bg-amber-50 text-accent text-xs px-3 py-1.5 rounded-lg font-medium border border-accent/20"><i class="fa-solid fa-id-card-clip mr-1"></i>Gemini 教職員認證</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. 三大精選技能 (3 Skills) -->
+        <section id="skills" class="space-y-6">
+            <div class="border-l-4 border-accent pl-4">
+                <h2 class="text-2xl font-bold text-beige-900 tracking-wide">專業技能</h2>
+                <p class="text-xs text-stone-400 uppercase tracking-widest mt-0.5">Core Competencies</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- 技能一 -->
+                <div class="bg-white p-6 rounded-2xl border border-beige-200 beige-glow hover:border-accent/40 transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-beige-100 flex items-center justify-center text-accent mb-4 text-xl">
+                            <i class="fa-solid fa-wallet"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-beige-900 mb-2">專業財務會計與稅務</h3>
+                        <p class="text-sm text-stone-500 leading-relaxed">
+                            精通各項費用審核、憑證與傳票製作。專精於應付帳款流程、各類財務報表編製與分析、營業稅等各項稅務申報與外帳查核。
+                        </p>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-stone-50 text-xs text-accent font-semibold">
+                        會計丙級檢定合格
+                    </div>
+                </div>
+
+                <!-- 技能二 -->
+                <div class="bg-white p-6 rounded-2xl border border-beige-200 beige-glow hover:border-accent/40 transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-beige-100 flex items-center justify-center text-accent mb-4 text-xl">
+                            <i class="fa-solid fa-network-wired"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-beige-900 mb-2">主流 ERP 系統操作</h3>
+                        <p class="text-sm text-stone-500 leading-relaxed">
+                            熟練掌握「正航 ERP」、「凌越 ERP」與「鼎新 Workflow ERP」等跨系統帳務處理，能高效對接不同企業的 ERP 系統進行無縫帳務建置。
+                        </p>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-stone-50 text-xs text-accent font-semibold">
+                        鼎新 Workflow 訓練合格
+                    </div>
+                </div>
+
+                <!-- 技能三 -->
+                <div class="bg-white p-6 rounded-2xl border border-beige-200 beige-glow hover:border-accent/40 transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-beige-100 flex items-center justify-center text-accent mb-4 text-xl">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-beige-900 mb-2">AI 數位辦公自動化</h3>
+                        <p class="text-sm text-stone-500 leading-relaxed">
+                            運用 Excel/Word/PPT、Gemini AI 與自動化工具，縮短手工登帳與報表產製時間。將 AI 技術應用於日常數據排版與對帳，成效卓著。
+                        </p>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-stone-50 text-xs text-accent font-semibold space-y-1">
+                        <div class="flex items-center gap-1">
+                            <i class="fa-solid fa-award"></i>
+                            <span>MOS 360 (Word, Excel, PPT) 國際認證</span>
+                        </div>
+                        <div class="flex items-center gap-1">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                            <span>Gemini 多項教育與應用認證</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. 三個作品占位區 (3 Portfolios) -->
+        <section id="portfolio" class="space-y-6">
+            <div class="border-l-4 border-accent pl-4">
+                <h2 class="text-2xl font-bold text-beige-900 tracking-wide">實績與專案作品</h2>
+                <p class="text-xs text-stone-400 uppercase tracking-widest mt-0.5">Project Showcases</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- 作品一 -->
+                <div class="bg-white rounded-2xl overflow-hidden border border-beige-200 beige-glow group flex flex-col h-full">
+                    <div class="h-40 bg-gradient-to-br from-beige-100 to-amber-50 flex items-center justify-center p-6 border-b border-beige-200 relative">
+                        <i class="fa-solid fa-chart-line text-5xl text-accent/50 group-hover:scale-110 transition-transform duration-300"></i>
+                        <span class="absolute top-3 left-3 bg-white/80 backdrop-blur-sm text-[10px] px-2 py-0.5 rounded-md text-stone-500">財務分析</span>
+                    </div>
+                    <div class="p-5 flex-grow flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-base font-bold text-beige-900 mb-2">企業財務報告與成本分析模組</h3>
+                            <p class="text-xs text-stone-500 leading-relaxed">
+                                針對中大型製造商或跨國企業，建構完整的損益表、資產負債表及多維度成本分析模型，助主管進行精準決策。
+                            </p>
+                        </div>
+                        <div class="mt-4 flex flex-wrap gap-1.5">
+                            <span class="text-[10px] px-2 py-0.5 bg-stone-100 text-stone-600 rounded">Excel</span>
+                            <span class="text-[10px] px-2 py-0.5 bg-stone-100 text-stone-600 rounded">外帳結算</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 作品二 -->
+                <div class="bg-white rounded-2xl overflow-hidden border border-beige-200 beige-glow group flex flex-col h-full">
+                    <div class="h-40 bg-gradient-to-br from-beige-100 to-amber-50 flex items-center justify-center p-6 border-b border-beige-200 relative">
+                        <i class="fa-solid fa-rotate text-5xl text-accent/50 group-hover:rotate-45 transition-transform duration-300"></i>
+                        <span class="absolute top-3 left-3 bg-white/80 backdrop-blur-sm text-[10px] px-2 py-0.5 rounded-md text-stone-500">系統整合</span>
+                    </div>
+                    <div class="p-5 flex-grow flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-base font-bold text-beige-900 mb-2">ERP 系統帳務流暢化專案</h3>
+                            <p class="text-xs text-stone-500 leading-relaxed">
+                                簡化手動收發、紀錄交易等傳統原始憑證流程，將其與鼎新/正航 ERP 完美介接，大幅減低傳票入帳錯誤率。
+                            </p>
+                        </div>
+                        <div class="mt-4 flex flex-wrap gap-1.5">
+                            <span class="text-[10px] px-2 py-0.5 bg-stone-100 text-stone-600 rounded">ERP 流程優化</span>
+                            <span class="text-[10px] px-2 py-0.5 bg-stone-100 text-stone-600 rounded">內部控制</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 作品三 -->
+                <div class="bg-white rounded-2xl overflow-hidden border border-beige-200 beige-glow group flex flex-col h-full">
+                    <div class="h-40 bg-gradient-to-br from-beige-100 to-amber-50 flex items-center justify-center p-6 border-b border-beige-200 relative">
+                        <i class="fa-solid fa-wand-magic-sparkles text-5xl text-accent/50 group-hover:scale-110 transition-transform duration-300"></i>
+                        <span class="absolute top-3 left-3 bg-white/80 backdrop-blur-sm text-[10px] px-2 py-0.5 rounded-md text-stone-500">數位 AI</span>
+                    </div>
+                    <div class="p-5 flex-grow flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-base font-bold text-beige-900 mb-2">AI 輔助自動化對帳工作流</h3>
+                            <p class="text-xs text-stone-500 leading-relaxed">
+                                結合 Gemini 等先進生成式 AI，自動分類、審查雜項發票與費用，並能快速彙整多通路交易帳務，使常規工作時間減半。
+                            </p>
+                        </div>
+                        <div class="mt-4 flex flex-wrap gap-1.5">
+                            <span class="text-[10px] px-2 py-0.5 bg-stone-100 text-stone-600 rounded">Gemini</span>
+                            <span class="text-[10px] px-2 py-0.5 bg-stone-100 text-stone-600 rounded">數位辦公</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. 聯絡方式 (Contact Info) -->
+        <section id="contact" class="space-y-6 pb-12">
+            <div class="border-l-4 border-accent pl-4">
+                <h2 class="text-2xl font-bold text-beige-900 tracking-wide">聯絡我</h2>
+                <p class="text-xs text-stone-400 uppercase tracking-widest mt-0.5">Let's Connect</p>
+            </div>
+            <div class="bg-[#FAF7F2] rounded-3xl p-6 md:p-10 border border-beige-200 beige-glow">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="space-y-4">
+                        <h3 class="text-xl font-bold text-beige-900">期待與您展開合作</h3>
+                        <p class="text-stone-600 text-sm leading-relaxed">
+                            不論您是需要資深穩定的主辦會計來理清複雜帳務，或是希望引進現代 AI 技術來提升您的財務辦公效率，我都非常樂意與您進一步詳談。
+                        </p>
+                        <div class="pt-4 flex items-center gap-2 text-stone-500">
+                            <span class="text-xs bg-beige-200/50 px-3 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i>最快將在 24 小時內回覆</span>
+                        </div>
+                    </div>
+                    <!-- 聯絡資訊卡片 -->
+                    <div class="bg-white rounded-2xl p-6 border border-beige-100 space-y-4 shadow-sm">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full bg-beige-100 flex items-center justify-center text-accent">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-stone-400">行動電話</p>
+                                <a href="tel:0926330450" class="text-stone-700 font-bold hover:text-accent transition-colors">0926-330-450</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full bg-beige-100 flex items-center justify-center text-accent">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div class="flex-grow">
+                                <p class="text-xs text-stone-400">電子郵件</p>
+                                <a href="mailto:wu2136tr@gmail.com" class="text-stone-700 font-bold hover:text-accent transition-colors break-all">wu2136tr@gmail.com</a>
+                            </div>
+                            <!-- 複製信箱按鈕 -->
+                            <button onclick="copyToClipboard('wu2136tr@gmail.com')" class="text-xs px-2.5 py-1.5 bg-stone-50 hover:bg-beige-100 text-stone-500 rounded-lg border border-stone-200 transition-colors">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full bg-beige-100 flex items-center justify-center text-accent">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-stone-400">通訊地址</p>
+                                <p class="text-stone-700 font-bold">桃園市八德區永豐路456號</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 底部頁尾 -->
+    <footer class="bg-beige-100/50 border-t border-beige-200 text-stone-500 text-xs py-8">
+        <div class="max-w-4xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+            <p>© 2026 吳慧華 Wu Hui Hua. All rights reserved.</p>
+            <p>融合財務智慧與數位創新的新一代主辦會計</p>
+        </div>
+    </footer>
+
+    <!-- 提示框元件 (取代 alert) -->
+    <div id="toast" class="fixed bottom-6 right-6 bg-stone-900 text-stone-100 text-sm px-4 py-3 rounded-xl shadow-lg transform translate-y-20 opacity-0 transition-all duration-300 flex items-center gap-2">
+        <i class="fa-solid fa-circle-check text-accent"></i>
+        <span id="toast-msg">複製成功！</span>
+    </div>
+
+    <script>
+        // 剪貼簿複製函數
+        function copyToClipboard(text) {
+            const tempInput = document.createElement('textarea');
+            tempInput.value = text;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+
+            showToast("電子郵件複製成功！");
+        }
+
+        // 顯示自訂提示訊息
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const msgSpan = document.getElementById('toast-msg');
+            msgSpan.textContent = message;
+            
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 2500);
+        }
+    </script>
+</body>
+</html>
