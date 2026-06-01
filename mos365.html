@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>吳慧華 | MOS 365 國際認證證書展示</title>
+    
+    <!-- SEO & Open Graph Meta Tags -->
+    <meta name="description" content="展示吳慧華所持有的 Microsoft Office Specialist: Microsoft 365 Apps 專業大師證照，提供官方防偽代碼校驗與高解析圖片線上審閱。">
+    <meta name="keywords" content="吳慧華, MOS 365, 證照驗證, Excel Expert, Word Expert, PowerPoint, 財務會計">
+    <meta property="og:title" content="吳慧華 | MOS 365 國際專業認證中心">
+    <meta property="og:description" content="專業主辦會計與 AI 數位辦公技術，線上公開微軟 MOS 365 Apps 專家級國際防偽證書。">
+    <meta property="og:type" content="website">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Noto Sans TC -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght=300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Noto Sans TC', 'sans-serif'],
+                    },
+                    colors: {
+                        beige: {
+                            50: '#FAF8F5',   // 主背景米白
+                            100: '#F5F0E6',  // 次級米白/卡其
+                            200: '#EADCC9',  // 邊框與裝飾線
+                            800: '#5C5246',  // 深茶色文字
+                            900: '#3D352B',  // 最深字體色
+                        },
+                        accent: '#B88E56',    // 優雅金色
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        .beige-glow {
+            box-shadow: 0 4px 20px -2px rgba(184, 142, 86, 0.08);
+        }
+        /* 隱藏捲軸但保持可滾動，利於放大後的證照拖曳預覽 */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-beige-50 text-stone-800 font-sans antialiased min-h-screen selection:bg-accent/20 flex flex-col justify-between">
+
+    <!-- 導覽列 -->
+    <header class="sticky top-0 z-50 bg-beige-50/80 backdrop-blur-md border-b border-beige-200">
+        <div class="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="index.html" class="text-xl font-bold text-beige-900 tracking-wider">吳慧華 <span class="text-accent text-sm font-medium">Hui-Hua</span></a>
+            <nav class="flex gap-6 text-sm font-medium text-stone-600">
+                <a href="index.html" class="hover:text-accent transition-colors flex items-center gap-1.5">
+                    <i class="fa-solid fa-arrow-left"></i> 返回首頁
+                </a>
+                <a href="index.html#skills" class="hover:text-accent transition-colors">專業技能</a>
+                <a href="index.html#contact" class="hover:text-accent transition-colors">聯絡我</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-6 py-12 md:py-16 space-y-12 flex-grow">
+        
+        <!-- 頁面標題 -->
+        <div class="text-center space-y-3">
+            <div class="inline-flex items-center gap-2 px-3 py-1 bg-beige-100 text-accent text-xs font-semibold rounded-full tracking-wider uppercase">
+                <i class="fa-solid fa-shield-halved"></i> Official Certification Center
+            </div>
+            <h1 class="text-3xl md:text-4xl font-black text-beige-900 tracking-wider">MOS 365 國際認證專區</h1>
+            <p class="text-stone-600 text-sm max-w-xl mx-auto leading-relaxed">
+                以下展示由微軟官方 (Microsoft) 與 Certiport 發行之 <strong>Microsoft Office Specialist: Microsoft 365 Apps</strong> 系列專業級與專家級證書。
+                點擊圖片可啟動<strong>高解析度縮放燈箱</strong>，並可直接連結至官方系統進行線上覆核。
+            </p>
+        </div>
+
+        <!-- 證書卡片 Grid 佈局 -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <!-- Excel 證照 -->
+            <div class="bg-white rounded-2xl overflow-hidden border border-beige-200 beige-glow flex flex-col justify-between p-5 hover:border-accent/40 transition-all duration-300">
+                <div class="space-y-4">
+                    <!-- 標章 -->
+                    <div class="flex justify-between items-center border-b border-stone-100 pb-3">
+                        <span class="inline-block px-2.5 py-1 bg-green-50 text-green-700 text-xs font-bold rounded-md">Excel Expert</span>
+                        <span class="text-xs text-stone-400">Microsoft 365</span>
+                    </div>
+                    <!-- 點擊觸發燈箱縮放 -->
+                    <div onclick="openLightbox('https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/excel.png', 'https://verify.certiport.com', 'Excel Expert 國際證照')" class="block border border-beige-50 rounded-xl overflow-hidden group hover:shadow-md transition-shadow cursor-zoom-in">
+                        <div class="relative overflow-hidden bg-stone-50 aspect-[4/3] flex items-center justify-center">
+                            <img src="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/excel.png" alt="Excel Expert 365 證照圖片" class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300" onerror="this.onerror=null; this.src='https://placehold.co/600x420/f5f0e6/b88e56?text=Excel+Expert+365+Certificate';">
+                            <div class="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                <span class="bg-white/90 backdrop-blur-sm text-stone-800 text-[10px] px-2.5 py-1.5 rounded-md shadow-sm">
+                                    <i class="fa-solid fa-magnifying-glass-plus mr-1 text-accent"></i>點擊放大預覽
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 文字描述 -->
+                    <div class="space-y-1">
+                        <h3 class="text-sm font-bold text-beige-900 leading-snug">MOS: Excel Expert</h3>
+                        <p class="text-[11px] text-stone-500 font-medium">Microsoft 365 Apps</p>
+                        <p class="text-xs text-stone-600 leading-relaxed pt-1">
+                            精通多維度函數分析、財務模組建模、樞紐分析交叉篩選、動態圖表設計及大規模會計數據對帳自動化。
+                        </p>
+                    </div>
+                </div>
+                <!-- 驗證資訊 -->
+                <div class="mt-4 pt-3 border-t border-stone-100 space-y-1">
+                    <p class="text-[10px] text-stone-400">防偽校驗碼：<strong class="text-stone-700 font-bold select-all font-mono">Mn54-s4Lm</strong></p>
+                    <p class="text-[10px] text-stone-400">取得日期：May 15, 2026</p>
+                </div>
+            </div>
+
+            <!-- Word 證照 -->
+            <div class="bg-white rounded-2xl overflow-hidden border border-beige-200 beige-glow flex flex-col justify-between p-5 hover:border-accent/40 transition-all duration-300">
+                <div class="space-y-4">
+                    <!-- 標章 -->
+                    <div class="flex justify-between items-center border-b border-stone-100 pb-3">
+                        <span class="inline-block px-2.5 py-1 bg-blue-50 text-blue-700 text-xs font-bold rounded-md">Word Expert</span>
+                        <span class="text-xs text-stone-400">Microsoft 365</span>
+                    </div>
+                    <!-- 點擊觸發燈箱縮放 -->
+                    <div onclick="openLightbox('https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/word.png', 'https://verify.certiport.com', 'Word Expert 國際證照')" class="block border border-beige-50 rounded-xl overflow-hidden group hover:shadow-md transition-shadow cursor-zoom-in">
+                        <div class="relative overflow-hidden bg-stone-50 aspect-[4/3] flex items-center justify-center">
+                            <img src="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/word.png" alt="Word Expert 365 證照圖片" class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300" onerror="this.onerror=null; this.src='https://placehold.co/600x420/f5f0e6/b88e56?text=Word+Expert+365+Certificate';">
+                            <div class="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                <span class="bg-white/90 backdrop-blur-sm text-stone-800 text-[10px] px-2.5 py-1.5 rounded-md shadow-sm">
+                                    <i class="fa-solid fa-magnifying-glass-plus mr-1 text-accent"></i>點擊放大預覽
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 文字描述 -->
+                    <div class="space-y-1">
+                        <h3 class="text-sm font-bold text-beige-900 leading-snug">MOS: Word Expert</h3>
+                        <p class="text-[11px] text-stone-500 font-medium">Microsoft 365 Apps</p>
+                        <p class="text-xs text-stone-600 leading-relaxed pt-1">
+                            精通大型長篇公文編排、企業內部控制制度 (SOP) 手冊編寫、高級樣式配置與目錄交叉參照自動化。
+                        </p>
+                    </div>
+                </div>
+                <!-- 驗證資訊 -->
+                <div class="mt-4 pt-3 border-t border-stone-100 space-y-1">
+                    <p class="text-[10px] text-stone-400">防偽校驗碼：<strong class="text-stone-700 font-bold select-all font-mono">wYeXw-2FET</strong></p>
+                    <p class="text-[10px] text-stone-400">取得日期：May 15, 2026</p>
+                </div>
+            </div>
+
+            <!-- PowerPoint 證照 -->
+            <div class="bg-white rounded-2xl overflow-hidden border border-beige-200 beige-glow flex flex-col justify-between p-5 hover:border-accent/40 transition-all duration-300">
+                <div class="space-y-4">
+                    <!-- 標章 -->
+                    <div class="flex justify-between items-center border-b border-stone-100 pb-3">
+                        <span class="inline-block px-2.5 py-1 bg-orange-50 text-orange-700 text-xs font-bold rounded-md">PowerPoint Associate</span>
+                        <span class="text-xs text-stone-400">Microsoft 365</span>
+                    </div>
+                    <!-- 點擊觸發燈箱縮放 -->
+                    <div onclick="openLightbox('https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/ppt.png', 'https://verify.certiport.com', 'PowerPoint Associate 國際證照')" class="block border border-beige-50 rounded-xl overflow-hidden group hover:shadow-md transition-shadow cursor-zoom-in">
+                        <div class="relative overflow-hidden bg-stone-50 aspect-[4/3] flex items-center justify-center">
+                            <img src="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/ppt.png" alt="PowerPoint 365 證照圖片" class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300" onerror="this.onerror=null; this.src='https://placehold.co/600x420/f5f0e6/b88e56?text=PowerPoint+365+Certificate';">
+                            <div class="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                <span class="bg-white/90 backdrop-blur-sm text-stone-800 text-[10px] px-2.5 py-1.5 rounded-md shadow-sm">
+                                    <i class="fa-solid fa-magnifying-glass-plus mr-1 text-accent"></i>點擊放大預覽
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 文字描述 -->
+                    <div class="space-y-1">
+                        <h3 class="text-sm font-bold text-beige-900 leading-snug">MOS: PowerPoint</h3>
+                        <p class="text-[11px] text-stone-500 font-medium">Microsoft 365 Apps</p>
+                        <p class="text-xs text-stone-600 leading-relaxed pt-1">
+                            精通商業簡報設計、母片格式規劃、高階轉場動畫與多媒體投影片建置，助企業進行財務簡報與營運分析。
+                        </p>
+                    </div>
+                </div>
+                <!-- 驗證資訊 -->
+                <div class="mt-4 pt-3 border-t border-stone-100 space-y-1">
+                    <p class="text-[10px] text-stone-400">防偽校驗碼：<strong class="text-stone-700 font-bold select-all font-mono">4uHb-Xaqa</strong></p>
+                    <p class="text-[10px] text-stone-400">取得日期：May 15, 2026</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 返回主頁按鈕 -->
+        <div class="text-center pt-4">
+            <a href="index.html" class="inline-flex items-center gap-2 px-6 py-3 bg-accent hover:bg-beige-900 text-white font-medium text-xs rounded-xl transition-colors shadow-sm cursor-pointer">
+                <i class="fa-solid fa-home text-[10px]"></i>
+                <span>返回個人主頁</span>
+            </a>
+        </div>
+
+    </main>
+
+    <!-- 高端互動燈箱視窗 (Lightbox Modal) -->
+    <div id="lightbox-overlay" class="fixed inset-0 z-[100] bg-black/90 backdrop-blur-md hidden items-center justify-center p-4 md:p-8 transition-opacity duration-300" onclick="closeLightbox()">
+        <!-- 頂部控制按鈕區 -->
+        <div class="absolute top-4 right-4 flex items-center gap-4 z-50">
+            <!-- 縮放指示徽章 -->
+            <span class="text-white/60 text-xs font-light bg-black/40 px-3 py-1.5 rounded-full backdrop-blur-sm pointer-events-none select-none hidden md:inline-flex items-center gap-1.5">
+                <i class="fa-solid fa-magnifying-glass"></i> 點擊圖片可切換 150% 放大/還原
+            </span>
+            <!-- 關閉按鈕 -->
+            <button onclick="closeLightbox()" class="text-white/80 hover:text-white bg-black/40 hover:bg-black/60 w-10 h-10 rounded-full flex items-center justify-center transition-all text-xl cursor-pointer">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <!-- 圖片滾動包覆容器 (用於放大時支援滾動檢視) -->
+        <div class="w-full h-full max-w-5xl max-h-[80vh] overflow-auto flex items-center justify-center no-scrollbar p-2" onclick="closeLightbox()">
+            <img id="lightbox-img" src="" alt="放大證書預覽" class="max-w-full max-h-[75vh] object-contain rounded-lg shadow-2xl transition-transform duration-300 cursor-zoom-in origin-center" onclick="toggleZoom(event)">
+        </div>
+
+        <!-- 底部詳情與導航列 -->
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 w-11/12 max-w-lg bg-stone-900/90 backdrop-blur-md border border-stone-800 p-4 rounded-2xl shadow-xl flex flex-col md:flex-row items-center justify-between gap-4 z-50" onclick="event.stopPropagation()">
+            <div class="text-center md:text-left">
+                <h4 id="lightbox-title" class="text-white text-sm font-bold">證照名稱</h4>
+                <p class="text-stone-400 text-[10px] mt-0.5">防偽防盜拷證書高解析度審查</p>
+            </div>
+            <a id="lightbox-verify-btn" href="#" target="_blank" class="w-full md:w-auto text-center px-4 py-2 bg-accent hover:bg-white text-white hover:text-stone-900 font-bold text-xs rounded-xl transition-all shadow-sm flex items-center justify-center gap-1.5">
+                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                <span>開啟 Certiport 官方驗證</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- 底部頁尾 -->
+    <footer class="bg-beige-100/50 border-t border-beige-200 text-stone-500 text-xs py-8 w-full mt-12">
+        <div class="max-w-4xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+            <p>© 2026 吳慧華 Wu Hui Hua. All rights reserved.</p>
+            <p>微軟官方認證 MOS 365 專家檔案館</p>
+        </div>
+    </footer>
+
+    <script>
+        let isZoomed = false;
+
+        // 開啟高階燈箱
+        function openLightbox(imgSrc, verifyUrl, title) {
+            const overlay = document.getElementById('lightbox-overlay');
+            const img = document.getElementById('lightbox-img');
+            const titleEl = document.getElementById('lightbox-title');
+            const verifyBtn = document.getElementById('lightbox-verify-btn');
+
+            // 初始化與塞入數據
+            img.src = imgSrc;
+            titleEl.textContent = title;
+            verifyBtn.href = verifyUrl;
+
+            // 確保每次開啟都是原始尺寸狀態
+            resetZoom();
+
+            // 顯現 overlay
+            overlay.classList.remove('hidden');
+            overlay.classList.add('flex', 'opacity-0');
+            setTimeout(() => {
+                overlay.classList.add('opacity-100');
+            }, 10);
+
+            // 阻止底層網頁滾動
+            document.body.style.overflow = 'hidden';
+        }
+
+        // 關閉高階燈箱
+        function closeLightbox() {
+            const overlay = document.getElementById('lightbox-overlay');
+            overlay.classList.add('opacity-0');
+            setTimeout(() => {
+                overlay.classList.remove('flex', 'opacity-100');
+                overlay.classList.add('hidden');
+                document.getElementById('lightbox-img').src = ''; // 清空 src 減少記憶體佔用
+            }, 300);
+
+            // 恢復底層滾動
+            document.body.style.overflow = '';
+        }
+
+        // 縮放切換
+        function toggleZoom(event) {
+            event.stopPropagation(); // 阻止氣泡事件觸發 overlay 的關閉
+            const img = document.getElementById('lightbox-img');
+            isZoomed = !isZoomed;
+
+            if (isZoomed) {
+                img.classList.remove('scale-100', 'cursor-zoom-in');
+                img.classList.add('scale-150', 'cursor-zoom-out');
+            } else {
+                img.classList.remove('scale-150', 'cursor-zoom-out');
+                img.classList.add('scale-100', 'cursor-zoom-in');
+            }
+        }
+
+        // 還原縮放尺寸
+        function resetZoom() {
+            const img = document.getElementById('lightbox-img');
+            isZoomed = false;
+            img.classList.remove('scale-150', 'cursor-zoom-out');
+            img.classList.add('scale-100', 'cursor-zoom-in');
+        }
+
+        // 監聽鍵盤 ESC 鍵以關閉視窗
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+    </script>
+
+</body>
+</html>

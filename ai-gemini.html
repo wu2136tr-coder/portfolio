@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>吳慧華 | AI Gemini 專業認證展示</title>
+    
+    <!-- SEO & Open Graph Meta Tags -->
+    <meta name="description" content="展示吳慧華所持有的 Google Gemini 官方專業系列證照，包含教育家、大學生及教職員認證，展現卓越的 AI 辦公自動化實力。">
+    <meta name="keywords" content="吳慧華, Gemini 認證, AI 辦公自動化, 提示詞工程, 數位轉型, 財務會計">
+    <meta property="og:title" content="吳慧華 | AI Gemini 專業認證中心">
+    <meta property="og:description" content="20年財會底蘊結合 Google 前沿 AI 認證，線上展示 Google Gemini 官方授權之專業能力憑證。">
+    <meta property="og:type" content="website">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Noto Sans TC -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght=300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Noto Sans TC', 'sans-serif'],
+                    },
+                    colors: {
+                        beige: {
+                            50: '#FAF8F5',   // 主背景米白
+                            100: '#F5F0E6',  // 次級米白/卡其
+                            200: '#EADCC9',  // 邊框與裝飾線
+                            800: '#5C5246',  // 深茶色文字
+                            900: '#3D352B',  // 最深字體色
+                        },
+                        accent: '#B88E56',    // 優雅金色
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        .beige-glow {
+            box-shadow: 0 4px 20px -2px rgba(184, 142, 86, 0.08);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-beige-50 text-stone-800 font-sans antialiased min-h-screen selection:bg-accent/20 flex flex-col justify-between">
+
+    <!-- 導覽列 -->
+    <header class="sticky top-0 z-50 bg-beige-50/80 backdrop-blur-md border-b border-beige-200">
+        <div class="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="index.html" class="text-xl font-bold text-beige-900 tracking-wider">吳慧華 <span class="text-accent text-sm font-medium">Hui-Hua</span></a>
+            <nav class="flex gap-6 text-sm font-medium text-stone-600">
+                <a href="index.html" class="hover:text-accent transition-colors flex items-center gap-1.5">
+                    <i class="fa-solid fa-arrow-left"></i> 返回首頁
+                </a>
+                <a href="index.html#skills" class="hover:text-accent transition-colors">專業技能</a>
+                <a href="index.html#contact" class="hover:text-accent transition-colors">聯絡我</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-6 py-12 md:py-16 space-y-12 flex-grow">
+        
+        <!-- 頁面標題 -->
+        <div class="text-center space-y-3">
+            <div class="inline-flex items-center gap-2 px-3 py-1 bg-beige-100 text-accent text-xs font-semibold rounded-full tracking-wider uppercase">
+                <i class="fa-solid fa-brain"></i> Google Gemini AI Academy
+            </div>
+            <h1 class="text-3xl md:text-4xl font-black text-beige-900 tracking-wider">AI Gemini 專業認證專區</h1>
+            <p class="text-stone-600 text-sm max-w-xl mx-auto leading-relaxed">
+                以下展示由 Google 官方認證核發之 <strong>Gemini 智慧辦公與應用</strong> 系列專業證照。
+                點擊圖片可啟動<strong>高解析度縮放燈箱</strong>，並可直接連結至官方系統進行查驗。
+            </p>
+        </div>
+
+        <!-- 證書卡片 Grid 佈局 -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <!-- Gemini 教育家認證 -->
+            <div class="bg-white rounded-2xl overflow-hidden border border-beige-200 beige-glow flex flex-col justify-between p-5 hover:border-accent/40 transition-all duration-300">
+                <div class="space-y-4">
+                    <!-- 標章 -->
+                    <div class="flex justify-between items-center border-b border-stone-100 pb-3">
+                        <span class="inline-block px-2.5 py-1 bg-blue-50 text-blue-700 text-xs font-bold rounded-md">Gemini 教育家</span>
+                        <span class="text-xs text-stone-400">Google Workspace</span>
+                    </div>
+                    <!-- 點擊觸發燈箱縮放 -->
+                    <div onclick="openLightbox('https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/pics/gemini%20educator.png', 'https://skillshop.exceedlms.com', 'Gemini 教育家官方認證')" class="block border border-beige-50 rounded-xl overflow-hidden group hover:shadow-md transition-shadow cursor-zoom-in">
+                        <div class="relative overflow-hidden bg-stone-50 aspect-[4/3] flex items-center justify-center">
+                            <img src="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/pics/gemini%20educator.png" alt="Gemini 教育家認證證照圖片" class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300" onerror="this.onerror=null; this.src='https://placehold.co/600x420/f5f0e6/b88e56?text=Gemini+Educator+Certificate';">
+                            <div class="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                <span class="bg-white/90 backdrop-blur-sm text-stone-800 text-[10px] px-2.5 py-1.5 rounded-md shadow-sm">
+                                    <i class="fa-solid fa-magnifying-glass-plus mr-1 text-accent"></i>點擊放大預覽
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 文字描述 -->
+                    <div class="space-y-1">
+                        <h3 class="text-sm font-bold text-beige-900 leading-snug">Gemini Educator Certificate</h3>
+                        <p class="text-[11px] text-stone-500 font-medium">Google Professional Skillshop</p>
+                        <p class="text-xs text-stone-600 leading-relaxed pt-1">
+                            具備將 Gemini 深度融合至日常行政、專案規劃與知識萃取之能力。能設計高效 AI 工作流、協助團隊建立 AI 導向之教案與協同流程。
+                        </p>
+                    </div>
+                </div>
+                <!-- 驗證資訊 -->
+                <div class="mt-4 pt-3 border-t border-stone-100 space-y-1">
+                    <p class="text-[10px] text-stone-400">防偽校驗碼：<strong class="text-stone-700 font-bold select-all font-mono">GEM-ED-8821</strong></p>
+                    <p class="text-[10px] text-stone-400">取得日期：May 20, 2026</p>
+                </div>
+            </div>
+
+            <!-- Gemini 大學生認證 -->
+            <div class="bg-white rounded-2xl overflow-hidden border border-beige-200 beige-glow flex flex-col justify-between p-5 hover:border-accent/40 transition-all duration-300">
+                <div class="space-y-4">
+                    <!-- 標章 -->
+                    <div class="flex justify-between items-center border-b border-stone-100 pb-3">
+                        <span class="inline-block px-2.5 py-1 bg-purple-50 text-purple-700 text-xs font-bold rounded-md">Gemini 大學生認證</span>
+                        <span class="text-xs text-stone-400">Google Skillshop</span>
+                    </div>
+                    <!-- 點擊觸發燈箱縮放 -->
+                    <div onclick="openLightbox('https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/pics/gemini%20student.png', 'https://skillshop.exceedlms.com', 'Gemini 大學生官方認證')" class="block border border-beige-50 rounded-xl overflow-hidden group hover:shadow-md transition-shadow cursor-zoom-in">
+                        <div class="relative overflow-hidden bg-stone-50 aspect-[4/3] flex items-center justify-center">
+                            <img src="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/pics/gemini%20student.png" alt="Gemini 大學生認證證照圖片" class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300" onerror="this.onerror=null; this.src='https://placehold.co/600x420/f5f0e6/b88e56?text=Gemini+College+Student+Certificate';">
+                            <div class="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                <span class="bg-white/90 backdrop-blur-sm text-stone-800 text-[10px] px-2.5 py-1.5 rounded-md shadow-sm">
+                                    <i class="fa-solid fa-magnifying-glass-plus mr-1 text-accent"></i>點擊放大預覽
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 文字描述 -->
+                    <div class="space-y-1">
+                        <h3 class="text-sm font-bold text-beige-900 leading-snug">Gemini for College Students</h3>
+                        <p class="text-[11px] text-stone-500 font-medium">Google Professional Skillshop</p>
+                        <p class="text-xs text-stone-600 leading-relaxed pt-1">
+                            精通高階 AI 資訊彙整、多模態資料速讀、進階 Prompts（提示詞工程）語境配置，實現論文架構梳理、數據研究與快速簡報生成。
+                        </p>
+                    </div>
+                </div>
+                <!-- 驗證資訊 -->
+                <div class="mt-4 pt-3 border-t border-stone-100 space-y-1">
+                    <p class="text-[10px] text-stone-400">防偽校驗碼：<strong class="text-stone-700 font-bold select-all font-mono">GEM-ST-3305</strong></p>
+                    <p class="text-[10px] text-stone-400">取得日期：May 20, 2026</p>
+                </div>
+            </div>
+
+            <!-- Gemini 教職員認證 -->
+            <div class="bg-white rounded-2xl overflow-hidden border border-beige-200 beige-glow flex flex-col justify-between p-5 hover:border-accent/40 transition-all duration-300">
+                <div class="space-y-4">
+                    <!-- 標章 -->
+                    <div class="flex justify-between items-center border-b border-stone-100 pb-3">
+                        <span class="inline-block px-2.5 py-1 bg-indigo-50 text-indigo-700 text-xs font-bold rounded-md">Gemini 教職員認證</span>
+                        <span class="text-xs text-stone-400">Google Workspace</span>
+                    </div>
+                    <!-- 點擊觸發燈箱縮放 -->
+                    <div onclick="openLightbox('https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/pics/gemini%20faculty.png', 'https://skillshop.exceedlms.com', 'Gemini 教職員官方認證')" class="block border border-beige-50 rounded-xl overflow-hidden group hover:shadow-md transition-shadow cursor-zoom-in">
+                        <div class="relative overflow-hidden bg-stone-50 aspect-[4/3] flex items-center justify-center">
+                            <img src="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/pics/gemini%20faculty.png" alt="Gemini 教職員認證證照圖片" class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300" onerror="this.onerror=null; this.src='https://placehold.co/600x420/f5f0e6/b88e56?text=Gemini+Faculty+and+Staff+Certificate';">
+                            <div class="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                <span class="bg-white/90 backdrop-blur-sm text-stone-800 text-[10px] px-2.5 py-1.5 rounded-md shadow-sm">
+                                    <i class="fa-solid fa-magnifying-glass-plus mr-1 text-accent"></i>點擊放大預覽
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 文字描述 -->
+                    <div class="space-y-1">
+                        <h3 class="text-sm font-bold text-beige-900 leading-snug">Gemini for Faculty & Staff</h3>
+                        <p class="text-[11px] text-stone-500 font-medium">Google Professional Skillshop</p>
+                        <p class="text-xs text-stone-600 leading-relaxed pt-1">
+                            著重於機關行政流程優化、智慧文案擬稿、大型會議紀錄大綱產出。能整合 Google 多款雲端工具加速公務溝通，極大化日常行政效能。
+                        </p>
+                    </div>
+                </div>
+                <!-- 驗證資訊 -->
+                <div class="mt-4 pt-3 border-t border-stone-100 space-y-1">
+                    <p class="text-[10px] text-stone-400">防偽校驗碼：<strong class="text-stone-700 font-bold select-all font-mono">GEM-FA-4158</strong></p>
+                    <p class="text-[10px] text-stone-400">取得日期：May 20, 2026</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 返回主頁按鈕 -->
+        <div class="text-center pt-4">
+            <a href="index.html" class="inline-flex items-center gap-2 px-6 py-3 bg-accent hover:bg-beige-900 text-white font-medium text-xs rounded-xl transition-colors shadow-sm cursor-pointer">
+                <i class="fa-solid fa-home text-[10px]"></i>
+                <span>返回個人主頁</span>
+            </a>
+        </div>
+
+    </main>
+
+    <!-- 高端互動燈箱視窗 (Lightbox Modal) -->
+    <div id="lightbox-overlay" class="fixed inset-0 z-[100] bg-black/90 backdrop-blur-md hidden items-center justify-center p-4 md:p-8 transition-opacity duration-300" onclick="closeLightbox()">
+        <!-- 頂部控制按鈕區 -->
+        <div class="absolute top-4 right-4 flex items-center gap-4 z-50">
+            <!-- 縮放指示徽章 -->
+            <span class="text-white/60 text-xs font-light bg-black/40 px-3 py-1.5 rounded-full backdrop-blur-sm pointer-events-none select-none hidden md:inline-flex items-center gap-1.5">
+                <i class="fa-solid fa-magnifying-glass"></i> 點擊圖片可切換 150% 放大/還原
+            </span>
+            <!-- 關閉按鈕 -->
+            <button onclick="closeLightbox()" class="text-white/80 hover:text-white bg-black/40 hover:bg-black/60 w-10 h-10 rounded-full flex items-center justify-center transition-all text-xl cursor-pointer">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <!-- 圖片滾動包覆容器 (用於放大時支援滾動檢視) -->
+        <div class="w-full h-full max-w-5xl max-h-[80vh] overflow-auto flex items-center justify-center no-scrollbar p-2" onclick="closeLightbox()">
+            <img id="lightbox-img" src="" alt="放大證書預覽" class="max-w-full max-h-[75vh] object-contain rounded-lg shadow-2xl transition-transform duration-300 cursor-zoom-in origin-center" onclick="toggleZoom(event)">
+        </div>
+
+        <!-- 底部詳情與導航列 -->
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 w-11/12 max-w-lg bg-stone-900/90 backdrop-blur-md border border-stone-800 p-4 rounded-2xl shadow-xl flex flex-col md:flex-row items-center justify-between gap-4 z-50" onclick="event.stopPropagation()">
+            <div class="text-center md:text-left">
+                <h4 id="lightbox-title" class="text-white text-sm font-bold">證照名稱</h4>
+                <p class="text-stone-400 text-[10px] mt-0.5">防偽防盜拷證書高解析度審查</p>
+            </div>
+            <a id="lightbox-verify-btn" href="#" target="_blank" class="w-full md:w-auto text-center px-4 py-2 bg-accent hover:bg-white text-white hover:text-stone-900 font-bold text-xs rounded-xl transition-all shadow-sm flex items-center justify-center gap-1.5">
+                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                <span>開啟 Google Skillshop 驗證</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- 底部頁尾 -->
+    <footer class="bg-beige-100/50 border-t border-beige-200 text-stone-500 text-xs py-8 w-full mt-12">
+        <div class="max-w-4xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+            <p>© 2026 吳慧華 Wu Hui Hua. All rights reserved.</p>
+            <p>Google 官方認證 Gemini 專家數位檔案館</p>
+        </div>
+    </footer>
+
+    <script>
+        let isZoomed = false;
+
+        // 開啟高階燈箱
+        function openLightbox(imgSrc, verifyUrl, title) {
+            const overlay = document.getElementById('lightbox-overlay');
+            const img = document.getElementById('lightbox-img');
+            const titleEl = document.getElementById('lightbox-title');
+            const verifyBtn = document.getElementById('lightbox-verify-btn');
+
+            // 初始化與塞入數據
+            img.src = imgSrc;
+            titleEl.textContent = title;
+            verifyBtn.href = verifyUrl;
+
+            // 確保每次開啟都是原始尺寸狀態
+            resetZoom();
+
+            // 顯現 overlay
+            overlay.classList.remove('hidden');
+            overlay.classList.add('flex', 'opacity-0');
+            setTimeout(() => {
+                overlay.classList.add('opacity-100');
+            }, 10);
+
+            // 阻止底層網頁滾動
+            document.body.style.overflow = 'hidden';
+        }
+
+        // 關閉高階燈箱
+        function closeLightbox() {
+            const overlay = document.getElementById('lightbox-overlay');
+            overlay.classList.add('opacity-0');
+            setTimeout(() => {
+                overlay.classList.remove('flex', 'opacity-100');
+                overlay.classList.add('hidden');
+                document.getElementById('lightbox-img').src = ''; // 清空 src 減少記憶體佔用
+            }, 300);
+
+            // 恢復底層滾動
+            document.body.style.overflow = '';
+        }
+
+        // 縮放切換
+        function toggleZoom(event) {
+            event.stopPropagation(); // 阻止氣泡事件觸發 overlay 的關閉
+            const img = document.getElementById('lightbox-img');
+            isZoomed = !isZoomed;
+
+            if (isZoomed) {
+                img.classList.remove('scale-100', 'cursor-zoom-in');
+                img.classList.add('scale-150', 'cursor-zoom-out');
+            } else {
+                img.classList.remove('scale-150', 'cursor-zoom-out');
+                img.classList.add('scale-100', 'cursor-zoom-in');
+            }
+        }
+
+        // 還原縮放尺寸
+        function resetZoom() {
+            const img = document.getElementById('lightbox-img');
+            isZoomed = false;
+            img.classList.remove('scale-150', 'cursor-zoom-out');
+            img.classList.add('scale-100', 'cursor-zoom-in');
+        }
+
+        // 監聽鍵盤 ESC 鍵以關閉視窗
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+    </script>
+
+</body>
+</html>
