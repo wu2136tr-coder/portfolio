@@ -104,59 +104,29 @@
                 <h2 class="text-2xl font-bold text-beige-900 tracking-wide">專業技能</h2>
                 <p class="text-xs text-stone-400 uppercase tracking-widest mt-0.5">Core Competencies</p>
             </div>
-            <!-- 三欄網格 layout -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
-                
-                <!-- 欄位一：堆疊「專業財務會計與稅務」與「MOS 365 官方認證檢視」 -->
-                <div class="flex flex-col gap-6">
-                    <!-- 技能一 (會計與稅務，附新建立的財務稅務證照 CTA 按鈕) -->
-                    <div class="bg-white p-6 rounded-2xl border border-beige-200 beige-glow hover:border-accent/40 transition-all duration-300 flex flex-col justify-between min-h-[340px]">
-                        <div>
-                            <div class="w-12 h-12 rounded-xl bg-beige-100 flex items-center justify-center text-accent mb-4 text-xl">
-                                <i class="fa-solid fa-wallet"></i>
-                            </div>
-                            <h3 class="text-lg font-bold text-beige-900 mb-2">專業財務會計與稅務</h3>
-                            <p class="text-sm text-stone-500 leading-relaxed">
-                                精通各項費用審核、憑證與傳票製作。專精於應付帳款流程、各類財務報表編製與分析、營業稅等各項稅務申報與外帳查核。
-                            </p>
+            
+            <!-- 三欄等高核心技能網格 -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+                <!-- 技能一：專業財務會計與稅務 -->
+                <div class="bg-white p-6 rounded-2xl border border-beige-200 beige-glow hover:border-accent/40 transition-all duration-300 flex flex-col justify-between min-h-[340px]">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-beige-100 flex items-center justify-center text-accent mb-4 text-xl">
+                            <i class="fa-solid fa-wallet"></i>
                         </div>
-                        <!-- 已更新為開啟財務與稅務證照彈窗按鈕 -->
-                        <div class="mt-4 pt-4 border-t border-stone-100">
-                            <button onclick="openFinanceModal(event)" class="w-full py-2.5 bg-accent hover:bg-beige-900 text-white font-medium text-xs rounded-xl flex items-center justify-center gap-1.5 transition-colors shadow-sm text-center cursor-pointer">
-                                <span>開啟財務與稅務證照</span>
-                                <i class="fa-solid fa-magnifying-glass text-[10px]"></i>
-                            </button>
-                        </div>
+                        <h3 class="text-lg font-bold text-beige-900 mb-2">專業財務會計與稅務</h3>
+                        <p class="text-sm text-stone-500 leading-relaxed">
+                            精通各項費用審核、憑證與傳票製作。專精於應付帳款流程、各類財務報表編製與分析、營業稅等各項稅務申報與外帳查核。
+                        </p>
                     </div>
-
-                    <!-- MOS 365 官方認證檢視 -->
-                    <div class="bg-white rounded-2xl overflow-hidden border border-beige-200 hover:border-accent beige-glow group flex flex-col transition-all duration-300 hover:-translate-y-1">
-                        <div class="h-40 bg-gradient-to-br from-beige-100 to-amber-50 flex items-center justify-center p-6 border-b border-beige-200 relative">
-                            <i class="fa-solid fa-file-contract text-5xl text-accent/50 group-hover:scale-110 transition-transform duration-300"></i>
-                            <span class="absolute top-3 left-3 bg-white/80 backdrop-blur-sm text-[10px] px-2 py-0.5 rounded-md text-stone-500">外部連結</span>
-                        </div>
-                        <div class="p-5 flex-grow flex flex-col justify-between">
-                            <div class="space-y-2">
-                                <h3 class="text-base font-bold text-beige-900">MOS 365 官方認證檢視</h3>
-                                <p class="text-xs text-stone-500 leading-relaxed">
-                                    連結至官方認證平台，查閱完整 Microsoft Office Specialist 365 認證資訊與證書明細。
-                                </p>
-                            </div>
-                            <div class="mt-5 space-y-3">
-                                <div class="flex flex-wrap gap-1.5">
-                                    <span class="text-[10px] px-2 py-0.5 bg-stone-100 text-stone-600 rounded">Microsoft</span>
-                                    <span class="text-[10px] px-2 py-0.5 bg-stone-100 text-stone-600 rounded">Official</span>
-                                </div>
-                                <button onclick="openCertModal()" class="w-full py-2.5 bg-accent hover:bg-beige-900 text-white font-medium text-xs rounded-xl flex items-center justify-center gap-1.5 transition-colors shadow-sm text-center cursor-pointer">
-                                    <span>開啟MOS 365 認證</span>
-                                    <i class="fa-solid fa-magnifying-glass text-[10px]"></i>
-                                </button>
-                            </div>
-                        </div>
+                    <div class="mt-4 pt-4 border-t border-stone-50 text-xs text-accent font-semibold">
+                        <button onclick="openFinanceModal(event)" class="w-full py-2.5 bg-accent hover:bg-beige-900 text-white font-medium text-xs rounded-xl flex items-center justify-center gap-1.5 transition-colors shadow-sm text-center cursor-pointer">
+                            <span>開啟財務與稅務證照</span>
+                            <i class="fa-solid fa-magnifying-glass text-[10px]"></i>
+                        </button>
                     </div>
                 </div>
 
-                <!-- 技能二 (ERP 系統) -->
+                <!-- 技能二：主流 ERP 系統操作 -->
                 <div class="bg-white p-6 rounded-2xl border border-beige-200 beige-glow hover:border-accent/40 transition-all duration-300 flex flex-col justify-between min-h-[340px]">
                     <div>
                         <div class="w-12 h-12 rounded-xl bg-beige-100 flex items-center justify-center text-accent mb-4 text-xl">
@@ -175,7 +145,7 @@
                     </div>
                 </div>
 
-                <!-- 技能三 (AI 數位辦公) -->
+                <!-- 技能三：AI 數位辦公自動化 -->
                 <div class="bg-white p-6 rounded-2xl border border-beige-200 beige-glow hover:border-accent/40 transition-all duration-300 flex flex-col justify-between min-h-[340px]">
                     <div>
                         <div class="w-12 h-12 rounded-xl bg-beige-100 flex items-center justify-center text-accent mb-4 text-xl">
@@ -191,6 +161,61 @@
                             <span>開啟Gemini 多項教育與應用認證</span>
                             <i class="fa-solid fa-magnifying-glass text-[10px]"></i>
                         </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 專業認證與外部檢視 (兩欄網格，居中對齊，完美與上方技能呼應) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+                <!-- MOS 365 官方認證檢視 -->
+                <div class="bg-white rounded-2xl overflow-hidden border border-beige-200 hover:border-accent beige-glow group flex flex-col transition-all duration-300 hover:-translate-y-1">
+                    <div class="h-40 bg-gradient-to-br from-beige-100 to-amber-50 flex items-center justify-center p-6 border-b border-beige-200 relative">
+                        <i class="fa-solid fa-file-contract text-5xl text-accent/50 group-hover:scale-110 transition-transform duration-300"></i>
+                        <span class="absolute top-3 left-3 bg-white/80 backdrop-blur-sm text-[10px] px-2 py-0.5 rounded-md text-stone-500">外部連結</span>
+                    </div>
+                    <div class="p-5 flex-grow flex flex-col justify-between">
+                        <div class="space-y-2">
+                            <h3 class="text-base font-bold text-beige-900">MOS 365 官方認證檢視</h3>
+                            <p class="text-xs text-stone-500 leading-relaxed">
+                                連結至官方認證平台，查閱完整 Microsoft Office Specialist 365 認證資訊與證書明細。
+                            </p>
+                        </div>
+                        <div class="mt-5 space-y-3">
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="text-[10px] px-2 py-0.5 bg-stone-100 text-stone-600 rounded">Microsoft</span>
+                                <span class="text-[10px] px-2 py-0.5 bg-stone-100 text-stone-600 rounded">Official</span>
+                            </div>
+                            <button onclick="openCertModal()" class="w-full py-2.5 bg-accent hover:bg-beige-900 text-white font-medium text-xs rounded-xl flex items-center justify-center gap-1.5 transition-colors shadow-sm text-center cursor-pointer">
+                                <span>開啟MOS 365 認證</span>
+                                <i class="fa-solid fa-magnifying-glass text-[10px]"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 其他多元專業證照 (食品安全 & AutoCAD) -->
+                <div class="bg-white rounded-2xl overflow-hidden border border-beige-200 hover:border-accent beige-glow group flex flex-col transition-all duration-300 hover:-translate-y-1">
+                    <div class="h-40 bg-gradient-to-br from-beige-100 to-amber-50 flex items-center justify-center p-6 border-b border-beige-200 relative">
+                        <i class="fa-solid fa-compass-drafting text-5xl text-accent/50 group-hover:scale-110 transition-transform duration-300"></i>
+                        <span class="absolute top-3 left-3 bg-white/80 backdrop-blur-sm text-[10px] px-2 py-0.5 rounded-md text-stone-500">跨域認證</span>
+                    </div>
+                    <div class="p-5 flex-grow flex flex-col justify-between">
+                        <div class="space-y-2">
+                            <h3 class="text-base font-bold text-beige-900">其他多元專業證照</h3>
+                            <p class="text-xs text-stone-500 leading-relaxed">
+                                整合「食品安全管制系統(HACCP)」與「AutoCAD專業電腦繪圖」檢定，展示跨領域與多元工程技術的優秀適應力。
+                            </p>
+                        </div>
+                        <div class="mt-5 space-y-3">
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="text-[10px] px-2 py-0.5 bg-stone-100 text-stone-600 rounded">HACCP</span>
+                                <span class="text-[10px] px-2 py-0.5 bg-stone-100 text-stone-600 rounded">AutoCAD</span>
+                            </div>
+                            <button onclick="openOtherModal()" class="w-full py-2.5 bg-accent hover:bg-beige-900 text-white font-medium text-xs rounded-xl flex items-center justify-center gap-1.5 transition-colors shadow-sm text-center cursor-pointer">
+                                <span>開啟其他證照</span>
+                                <i class="fa-solid fa-magnifying-glass text-[10px]"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -213,7 +238,7 @@
                         <div>
                             <h3 class="text-base font-bold text-beige-900 mb-2">企業財務報告與成本分析模組</h3>
                             <p class="text-xs text-stone-500 leading-relaxed">
-                                針對中大型製造商或跨國企業，建構完整的損益表、資產負債表及多維度成本分析模型，助主管進行精準決策。
+                                針對中大型製造商 or 跨國企業，建構完整的損益表、資產負債表及多維度成本分析模型，助主管進行精準決策。
                             </p>
                         </div>
                         <div class="mt-5 space-y-3">
@@ -282,44 +307,44 @@
 
     </main>
 
-    
-    <!-- 1. 財務與稅務證照互動彈出視窗 (Modal Overlay) -->
+    <!-- 1. 財務與稅務證照互動彈出視窗 (Finance Modal) -->
     <div id="finance-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm hidden transition-all duration-300">
         <div class="bg-white border border-beige-200 w-full max-w-4xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
             <!-- 視窗標題 -->
             <div class="px-6 py-4 border-b border-beige-100 flex justify-between items-center bg-beige-50">
                 <h3 class="text-base md:text-lg font-bold text-beige-900 flex items-center gap-2">
-                    <i class="fa-solid fa-file-invoice-dollar text-accent"></i>
-                    <span>財務、稅務與商業數據分析專業證書</span>
+                    <i class="fa-solid fa-wallet text-accent"></i>
+                    <span>專業財務與稅務證照</span>
                 </h3>
                 <button onclick="closeFinanceModal()" class="text-stone-400 hover:text-stone-600 text-2xl font-light leading-none">&times;</button>
             </div>
             
-            <!-- 證照展示區 -->
+            <!-- 證照展示區 (3欄版面) -->
             <div class="p-6 overflow-y-auto flex-grow space-y-6">
                 <p class="text-xs text-stone-500 text-center">點擊證書圖片，可在新分頁開啟高解析度原圖檢視。</p>
+                
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <!-- EAS 證照 -->
                     <div class="space-y-3 text-center">
-                        <span class="inline-block px-2.5 py-1 bg-emerald-50 text-emerald-800 text-xs font-semibold rounded-md">企業會計準則 (EAS)</span>
+                        <span class="inline-block px-2.5 py-1 bg-amber-50 text-amber-800 text-xs font-semibold rounded-md">會計準則 (EAS)</span>
                         <a href="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/pics/eas.png" target="_blank" class="block border border-beige-200 rounded-xl overflow-hidden hover:border-accent hover:shadow-md transition-all p-1 bg-white">
-                            <img src="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/pics/eas.png" alt="EAS Certificate" class="w-full h-auto object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x420/f5f0e6/b88e56?text=EAS+Certificate';">
+                            <img src="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/pics/eas.png" alt="會計準則 EAS 證照" class="w-full h-auto object-cover mx-auto" onerror="this.onerror=null; this.src='https://placehold.co/600x420/f5f0e6/b88e56?text=EAS+Certificate';">
                         </a>
                     </div>
                     
-                    <!-- 稅務申報 證照 -->
+                    <!-- 稅務申報證照 -->
                     <div class="space-y-3 text-center">
-                        <span class="inline-block px-2.5 py-1 bg-blue-50 text-blue-800 text-xs font-semibold rounded-md">稅務申報實務</span>
+                        <span class="inline-block px-2.5 py-1 bg-emerald-50 text-emerald-800 text-xs font-semibold rounded-md">稅務申報實務</span>
                         <a href="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/pics/tax.png" target="_blank" class="block border border-beige-200 rounded-xl overflow-hidden hover:border-accent hover:shadow-md transition-all p-1 bg-white">
-                            <img src="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/pics/tax.png" alt="Tax Certificate" class="w-full h-auto object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x420/f5f0e6/b88e56?text=Tax+Certificate';">
+                            <img src="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/pics/tax.png" alt="稅務申報證照" class="w-full h-auto object-cover mx-auto" onerror="this.onerror=null; this.src='https://placehold.co/600x420/f5f0e6/b88e56?text=Tax+Certificate';">
                         </a>
                     </div>
                     
-                    <!-- Power BI 證照 -->
+                    <!-- Power BI 數據視覺化證照 -->
                     <div class="space-y-3 text-center">
-                        <span class="inline-block px-2.5 py-1 bg-yellow-50 text-yellow-800 text-xs font-semibold rounded-md">Power BI 商業數據分析</span>
+                        <span class="inline-block px-2.5 py-1 bg-blue-50 text-blue-800 text-xs font-semibold rounded-md">Power BI 財務分析</span>
                         <a href="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/pics/power-bi.png" target="_blank" class="block border border-beige-200 rounded-xl overflow-hidden hover:border-accent hover:shadow-md transition-all p-1 bg-white">
-                            <img src="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/pics/power-bi.png" alt="Power BI Certificate" class="w-full h-auto object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x420/f5f0e6/b88e56?text=Power+BI+Certificate';">
+                            <img src="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/pics/power-bi.png" alt="Power BI 數據視覺化證照" class="w-full h-auto object-cover mx-auto" onerror="this.onerror=null; this.src='https://placehold.co/600x420/f5f0e6/b88e56?text=Power+BI+Certificate';">
                         </a>
                     </div>
                 </div>
@@ -335,7 +360,7 @@
         </div>
     </div>
 
-    <!-- 2. MOS 365 證照互動彈出視窗 (Modal Overlay) -->
+    <!-- 2. MOS 365 證照互動彈出視窗 (MOS Modal Overlay) -->
     <div id="cert-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm hidden transition-all duration-300">
         <div class="bg-white border border-beige-200 w-full max-w-4xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
             <!-- 視窗標題 -->
@@ -387,7 +412,7 @@
         </div>
     </div>
 
-    <!-- 3. Gemini 證照互動彈出視窗 (Modal Overlay) -->
+    <!-- 3. Gemini 證照互動彈出視窗 (Gemini Modal Overlay) -->
     <div id="gemini-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm hidden transition-all duration-300">
         <div class="bg-white border border-beige-200 w-full max-w-4xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
             <!-- 視窗標題 -->
@@ -440,7 +465,7 @@
         </div>
     </div>
 
-    <!-- 4. 鼎新 Workflow 認證互動彈出視窗 -->
+    <!-- 4. 鼎新 Workflow 認證互動彈出視窗 (ERP Modal) -->
     <div id="erp-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm hidden transition-all duration-300">
         <div class="bg-white border border-beige-200 w-full max-w-4xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
             <!-- 視窗標題 -->
@@ -493,6 +518,59 @@
         </div>
     </div>
 
+    <!-- 5. 其他多元證照互動彈出視窗 (Other Modal - HACCP & AutoCAD) -->
+    <div id="other-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm hidden transition-all duration-300">
+        <div class="bg-white border border-beige-200 w-full max-w-4xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+            <!-- 視窗標題 -->
+            <div class="px-6 py-4 border-b border-beige-100 flex justify-between items-center bg-beige-50">
+                <h3 class="text-base md:text-lg font-bold text-beige-900 flex items-center gap-2">
+                    <i class="fa-solid fa-compass-drafting text-accent"></i>
+                    <span>跨領域專業證照 (食品安全管制系統 & AutoCAD)</span>
+                </h3>
+                <button onclick="closeOtherModal()" class="text-stone-400 hover:text-stone-600 text-2xl font-light leading-none">&times;</button>
+            </div>
+            
+            <!-- 證照展示區 (3欄版面) -->
+            <div class="p-6 overflow-y-auto flex-grow space-y-6">
+                <p class="text-xs text-stone-500 text-center">點擊證書圖片，可在新分頁開啟高解析度原圖檢視。</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- 食品安全管制系統 A -->
+                    <div class="space-y-3 text-center">
+                        <span class="inline-block px-2.5 py-1 bg-green-50 text-green-800 text-xs font-semibold rounded-md">食品安全管制系統 A</span>
+                        <a href="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/pics/food-safe-1.png" target="_blank" class="block border border-beige-200 rounded-xl overflow-hidden hover:border-accent hover:shadow-md transition-all p-1 bg-white">
+                            <img src="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/pics/food-safe-1.png" alt="食品安全管制系統訓練合格證書 A" class="w-full h-auto object-cover mx-auto" onerror="this.onerror=null; this.src='https://placehold.co/600x420/f5f0e6/b88e56?text=Food+Safe+A+Certificate';">
+                        </a>
+                    </div>
+
+                    <!-- 食品安全管制系統 B -->
+                    <div class="space-y-3 text-center">
+                        <span class="inline-block px-2.5 py-1 bg-green-50 text-green-800 text-xs font-semibold rounded-md">食品安全管制系統 B</span>
+                        <a href="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/pics/food-safe-2.png" target="_blank" class="block border border-beige-200 rounded-xl overflow-hidden hover:border-accent hover:shadow-md transition-all p-1 bg-white">
+                            <img src="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/pics/food-safe-2.png" alt="食品安全管制系統訓練合格證書 B" class="w-full h-auto object-cover mx-auto" onerror="this.onerror=null; this.src='https://placehold.co/600x420/f5f0e6/b88e56?text=Food+Safe+B+Certificate';">
+                        </a>
+                    </div>
+                    
+                    <!-- AutoCAD -->
+                    <div class="space-y-3 text-center">
+                        <span class="inline-block px-2.5 py-1 bg-blue-50 text-blue-800 text-xs font-semibold rounded-md">AutoCAD 專業工程繪圖</span>
+                        <a href="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/autocad.png" target="_blank" class="block border border-beige-200 rounded-xl overflow-hidden hover:border-accent hover:shadow-md transition-all p-1 bg-white">
+                            <img src="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/autocad.png" alt="AutoCAD 專業認證證書" class="w-full h-auto object-cover mx-auto" onerror="this.onerror=null; this.src='https://placehold.co/600x420/f5f0e6/b88e56?text=AutoCAD+Certificate';">
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 正中間位置的 CTA 功能鍵 -->
+                <div class="flex justify-center pt-6">
+                    <button onclick="scrollToHomeFromModal('other-modal')" class="px-8 py-3 bg-accent hover:bg-beige-900 text-white font-bold rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all flex items-center gap-2 text-xs md:text-sm cursor-pointer">
+                        <i class="fa-solid fa-house"></i>
+                        <span>點此關閉並返回首頁</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- 底部頁尾 -->
     <footer class="bg-beige-100/50 border-t border-beige-200 text-stone-500 text-xs py-8">
         <div class="max-w-4xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
@@ -508,11 +586,9 @@
     </div>
 
     <script>
-        // 財務與稅務證照視窗控制
+        // 1. 財務與稅務證照視窗控制
         function openFinanceModal(event) {
-            if (event) {
-                event.preventDefault();
-            }
+            if (event) event.preventDefault();
             const modal = document.getElementById('finance-modal');
             modal.classList.remove('hidden');
             document.body.style.overflow = 'hidden'; 
@@ -524,7 +600,7 @@
             document.body.style.overflow = ''; 
         }
 
-        // MOS 365 證照視窗控制
+        // 2. MOS 365 證照視窗控制
         function openCertModal() {
             const modal = document.getElementById('cert-modal');
             modal.classList.remove('hidden');
@@ -537,11 +613,9 @@
             document.body.style.overflow = ''; 
         }
 
-        // Gemini 證照視窗控制
+        // 3. Gemini 證照視窗控制
         function openGeminiModal(event) {
-            if (event) {
-                event.preventDefault();
-            }
+            if (event) event.preventDefault();
             const modal = document.getElementById('gemini-modal');
             modal.classList.remove('hidden');
             document.body.style.overflow = 'hidden'; 
@@ -553,7 +627,7 @@
             document.body.style.overflow = ''; 
         }
 
-        // 鼎新 ERP 視窗控制
+        // 4. 鼎新 ERP 視窗控制
         function openERPModal(event) {
             if (event) event.preventDefault();
             const modal = document.getElementById('erp-modal');
@@ -563,6 +637,19 @@
 
         function closeERPModal() {
             const modal = document.getElementById('erp-modal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        // 5. 其他多元證照視窗控制
+        function openOtherModal() {
+            const modal = document.getElementById('other-modal');
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeOtherModal() {
+            const modal = document.getElementById('other-modal');
             modal.classList.add('hidden');
             document.body.style.overflow = '';
         }
@@ -590,7 +677,7 @@
             const certModal = document.getElementById('cert-modal');
             const geminiModal = document.getElementById('gemini-modal');
             const erpModal = document.getElementById('erp-modal');
-            
+            const otherModal = document.getElementById('other-modal');
             if (e.target === financeModal) {
                 closeFinanceModal();
             }
@@ -602,6 +689,9 @@
             }
             if (e.target === erpModal) {
                 closeERPModal();
+            }
+            if (e.target === otherModal) {
+                closeOtherModal();
             }
         });
 
