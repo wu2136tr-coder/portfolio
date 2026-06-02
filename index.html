@@ -125,7 +125,7 @@
                         </div>
                     </div>
 
-                    <!-- MOS 365 官方認證檢視 (配色與財務分析完全相同) -->
+                    <!-- MOS 365 官方認證檢視 -->
                     <div class="bg-white rounded-2xl overflow-hidden border border-beige-200 hover:border-accent beige-glow group flex flex-col transition-all duration-300 hover:-translate-y-1">
                         <div class="h-40 bg-gradient-to-br from-beige-100 to-amber-50 flex items-center justify-center p-6 border-b border-beige-200 relative">
                             <i class="fa-solid fa-file-contract text-5xl text-accent/50 group-hover:scale-110 transition-transform duration-300"></i>
@@ -182,7 +182,6 @@
                             運用 Excel/Word/PPT、Gemini AI 與自動化工具，縮短手工登帳與報表產製時間。將 AI 技術應用於日常數據排版與對帳，成效卓著。
                         </p>
                     </div>
-                    <!-- 僅保留高階開啟按鈕 -->
                     <div class="mt-4 pt-4 border-t border-stone-50 text-xs text-accent font-semibold">
                         <button onclick="openGeminiModal(event)" class="w-full py-2.5 bg-accent hover:bg-beige-900 text-white font-medium text-xs rounded-xl flex items-center justify-center gap-1.5 transition-colors shadow-sm text-center cursor-pointer">
                             <span>開啟Gemini 多項教育與應用認證</span>
@@ -213,9 +212,16 @@
                                 針對中大型製造商或跨國企業，建構完整的損益表、資產負債表及多維度成本 analysis模型，助主管進行精準決策。
                             </p>
                         </div>
-                        <div class="mt-4 flex flex-wrap gap-1.5">
-                            <span class="text-[10px] px-2 py-0.5 bg-stone-100 text-stone-600 rounded">Excel</span>
-                            <span class="text-[10px] px-2 py-0.5 bg-stone-100 text-stone-600 rounded">外帳結算</span>
+                        <div class="mt-5 space-y-3">
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="text-[10px] px-2 py-0.5 bg-stone-100 text-stone-600 rounded">Excel</span>
+                                <span class="text-[10px] px-2 py-0.5 bg-stone-100 text-stone-600 rounded">外帳結算</span>
+                            </div>
+                            <!-- 新增：財務分析與報表外部跳轉按鈕 -->
+                            <a href="financial-analysis.html" class="w-full py-2.5 bg-accent hover:bg-beige-900 text-white font-medium text-xs rounded-xl flex items-center justify-center gap-1.5 transition-colors shadow-sm cursor-pointer">
+                                <span>開啟財務分析與報表</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -284,7 +290,7 @@
                 <button onclick="closeCertModal()" class="text-stone-400 hover:text-stone-600 text-2xl font-light leading-none">&times;</button>
             </div>
             
-            <!-- 證照展示區 (載入實體圖片 word.png, excel.png, ppt.png) -->
+            <!-- 證照展示區 -->
             <div class="p-6 overflow-y-auto flex-grow space-y-6">
                 <p class="text-xs text-stone-500 text-center">點擊證書圖片，可在新分頁開啟高清大圖檢視驗證。</p>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -313,7 +319,7 @@
                     </div>
                 </div>
 
-                <!-- 正中間位置的 CTA 功能鍵 (下方無任何資訊) -->
+                <!-- 正中間位置的 CTA 功能鍵 -->
                 <div class="flex justify-center pt-6">
                     <button onclick="scrollToHomeFromModal('cert-modal')" class="px-8 py-3 bg-accent hover:bg-beige-900 text-white font-bold rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all flex items-center gap-2 text-xs md:text-sm cursor-pointer">
                         <i class="fa-solid fa-house"></i>
@@ -336,7 +342,7 @@
                 <button onclick="closeGeminiModal()" class="text-stone-400 hover:text-stone-600 text-2xl font-light leading-none">&times;</button>
             </div>
             
-            <!-- 證照展示區 (調用實體圖片網址) -->
+            <!-- 證照展示區 -->
             <div class="p-6 overflow-y-auto flex-grow space-y-6">
                 <p class="text-xs text-stone-500 text-center">點擊證書圖片，可在新分頁開啟高解析度原圖檢視。</p>
                 
@@ -366,7 +372,7 @@
                     </div>
                 </div>
 
-                <!-- 正中間位置的 CTA 功能鍵 (下方無任何資訊) -->
+                <!-- 正中間位置的 CTA 功能鍵 -->
                 <div class="flex justify-center pt-6">
                     <button onclick="scrollToHomeFromModal('gemini-modal')" class="px-8 py-3 bg-accent hover:bg-beige-900 text-white font-bold rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all flex items-center gap-2 text-xs md:text-sm cursor-pointer">
                         <i class="fa-solid fa-house"></i>
