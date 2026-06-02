@@ -164,7 +164,10 @@
                         </p>
                     </div>
                     <div class="mt-4 pt-4 border-t border-stone-50 text-xs text-accent font-semibold">
-                        鼎新 Workflow 訓練合格
+                        <button onclick="openERPModal(event)" class="w-full py-2.5 bg-accent hover:bg-beige-900 text-white font-medium text-xs rounded-xl flex items-center justify-center gap-1.5 transition-colors shadow-sm text-center cursor-pointer">
+                            <span>開啟鼎新 Workflow 認證</span>
+                            <i class="fa-solid fa-magnifying-glass text-[10px]"></i>
+                        </button>
                     </div>
                 </div>
 
@@ -374,6 +377,26 @@
         </div>
     </div>
 
+    <!-- 鼎新 Workflow 認證互動彈出視窗 -->
+    <div id="erp-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm hidden transition-all duration-300">
+        <div class="bg-white border border-beige-200 w-full max-w-xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+            <div class="px-6 py-4 border-b border-beige-100 flex justify-between items-center bg-beige-50">
+                <h3 class="text-base md:text-lg font-bold text-beige-900 flex items-center gap-2">
+                    <i class="fa-solid fa-certificate text-accent"></i>
+                    <span>鼎新 Workflow ERP 認證</span>
+                </h3>
+                <button onclick="closeERPModal()" class="text-stone-400 hover:text-stone-600 text-2xl font-light leading-none">&times;</button>
+            </div>
+            <div class="p-8 text-center space-y-4">
+                <i class="fa-solid fa-check-double text-5xl text-accent"></i>
+                <p class="text-stone-700">鼎新 Workflow ERP 專業職能訓練合格證明。</p>
+                <div class="pt-4">
+                    <button onclick="closeERPModal()" class="px-6 py-2 bg-accent hover:bg-beige-900 text-white text-sm font-bold rounded-lg transition-all">關閉視窗</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- 底部頁尾 -->
     <footer class="bg-beige-100/50 border-t border-beige-200 text-stone-500 text-xs py-8">
         <div class="max-w-4xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
@@ -418,6 +441,20 @@
             document.body.style.overflow = ''; 
         }
 
+        // 鼎新 ERP 視窗控制
+        function openERPModal(event) {
+            if (event) event.preventDefault();
+            const modal = document.getElementById('erp-modal');
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeERPModal() {
+            const modal = document.getElementById('erp-modal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
         // 點擊 CTA 鈕回首頁功能
         function scrollToHomeFromModal(modalId) {
             // 1. 關閉彈窗
@@ -439,11 +476,15 @@
         window.addEventListener('click', function(e) {
             const certModal = document.getElementById('cert-modal');
             const geminiModal = document.getElementById('gemini-modal');
+            const erpModal = document.getElementById('erp-modal');
             if (e.target === certModal) {
                 closeCertModal();
             }
             if (e.target === geminiModal) {
                 closeGeminiModal();
+            }
+            if (e.target === erpModal) {
+                closeERPModal();
             }
         });
 
