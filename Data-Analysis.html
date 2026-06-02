@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>數據分析入口網 | 吳慧華</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Noto Sans TC -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght=300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Noto Sans TC', 'sans-serif'],
+                    },
+                    colors: {
+                        beige: {
+                            50: '#FAF8F5',   // 主背景米白
+                            100: '#F5F0E6',  // 次級米白/卡其
+                            200: '#EADCC9',  // 邊框與裝飾線
+                            800: '#5C5246',  // 深茶色文字
+                            900: '#3D352B',  // 最深字體色
+                        },
+                        accent: '#B88E56',    // 優雅金色
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .beige-glow {
+            box-shadow: 0 4px 30px -2px rgba(184, 142, 86, 0.06);
+        }
+        /* 隱藏捲軸但保有捲動功能 */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-beige-50 text-stone-800 font-sans antialiased min-h-screen flex flex-col justify-between selection:bg-accent/20">
+
+    <!-- 頂部導覽列 -->
+    <header class="bg-white/80 backdrop-blur-md border-b border-beige-200 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <span class="w-3 h-3 rounded-full bg-accent animate-pulse"></span>
+                <span class="text-lg font-bold text-beige-900 tracking-wider">吳慧華 Hui-Hua</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <span class="text-xs px-2.5 py-1 bg-beige-100 text-accent font-semibold rounded-full tracking-wider">BUSINESS INTELLIGENCE HUB</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主內容區 -->
+    <main class="max-w-6xl mx-auto px-6 py-10 flex-grow w-full space-y-8">
+        
+        <!-- 標題區 -->
+        <div class="text-center md:text-left">
+            <p class="text-xs font-bold text-accent tracking-widest uppercase mb-2">Portfolio Gateway & Live Sandbox</p>
+            <h1 class="text-3xl md:text-4xl font-black text-beige-900 leading-tight tracking-wide">
+                多維度銷售數據與客群結構分析系統
+            </h1>
+            <p class="text-stone-500 mt-2 max-w-3xl text-sm md:text-base font-light">
+                本入口網用於串接核心數據分析檔案。為便於在 Canvas 或無對應軟體環境下即時確認，下方已整合<strong>高仿真互動式預覽沙盒</strong>，可動態切換、檢索與篩選底層數據。
+            </p>
+        </div>
+
+        <!-- 雙按鈕對接區 (CAT 鈕) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <!-- 區去產品行銷分析 Excel -->
+            <div class="bg-white p-6 rounded-2xl border border-beige-200 beige-glow hover:border-accent/40 transition-all duration-300 flex flex-col justify-between group">
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="w-10 h-10 rounded-xl bg-beige-100 flex items-center justify-center text-accent text-lg group-hover:scale-105 transition-transform duration-300">
+                            <i class="fa-solid fa-file-excel"></i>
+                        </div>
+                        <span class="text-[10px] uppercase tracking-wider font-semibold px-2 py-0.5 rounded bg-green-50 text-green-700 border border-green-200">Excel 活頁簿資料來源</span>
+                    </div>
+                    <h2 class="text-lg font-bold text-beige-900 mb-1">區去產品行銷分析</h2>
+                    <p class="text-xs text-stone-500 leading-relaxed min-h-[48px]">
+                        完整追蹤北、中、南三大銷售地理分區數據，內建月度樞紐彙總與季節性銷售權重模型。
+                    </p>
+                </div>
+                <div class="mt-4 pt-4 border-t border-stone-50">
+                    <button id="btn-tab-excel" onclick="switchSandboxSystem('excel'); document.getElementById('sandbox-section').scrollIntoView({ behavior: 'smooth' })" class="w-full py-2.5 bg-accent hover:bg-beige-900 text-white font-bold text-xs rounded-lg flex items-center justify-center gap-1.5 transition-all shadow-sm">
+                        <i class="fa-solid fa-file-excel mr-1"></i> Excel 數據庫
+                    </button>
+                </div>
+            </div>
+
+            <!-- 產品結構分析 Power BI -->
+            <div class="bg-white p-6 rounded-2xl border border-beige-200 beige-glow hover:border-accent/40 transition-all duration-300 flex flex-col justify-between group">
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center text-accent text-lg group-hover:scale-105 transition-transform duration-300">
+                            <i class="fa-solid fa-chart-pie"></i>
+                        </div>
+                        <span class="text-[10px] uppercase tracking-wider font-semibold px-2 py-0.5 rounded bg-yellow-50 text-amber-700 border border-amber-200">Power BI 儀表板</span>
+                    </div>
+                    <h2 class="text-lg font-bold text-beige-900 mb-1">產品結構分析</h2>
+                    <p class="text-xs text-stone-500 leading-relaxed min-h-[48px]">
+                        多維度動態看板，交叉剖析客群屬性、採購週期、與高貢獻度產品分類組合。
+                    </p>
+                </div>
+                <div class="mt-4 pt-4 border-t border-stone-50">
+                    <button id="btn-tab-powerbi" onclick="switchSandboxSystem('powerbi'); document.getElementById('sandbox-section').scrollIntoView({ behavior: 'smooth' })" class="w-full py-2.5 bg-beige-900 hover:bg-accent text-white font-bold text-xs rounded-lg flex items-center justify-center gap-1.5 transition-all shadow-sm">
+                        <i class="fa-solid fa-chart-column mr-1"></i> Power BI 模擬看板
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 即時預覽控制中心 (Sandbox Container) -->
+        <section id="sandbox-section" class="bg-white rounded-2xl border border-beige-200 overflow-hidden beige-glow transition-all duration-300">
+            
+            <!-- 預覽沙盒標頭 (移除重複的多餘切換頁籤，回歸乾淨大氣版面) -->
+            <div class="bg-beige-100/60 px-6 py-4 border-b border-beige-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div class="flex items-center gap-2">
+                    <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
+                    <div>
+                        <h3 class="text-base font-bold text-beige-900">Sandbox 即時數據預覽機</h3>
+                        <p class="text-[10px] text-stone-400">免安裝軟體，直接於 Canvas / 本機瀏覽器動態互動</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========================================== -->
+            <!-- 區塊一：EXCEL 預覽主體 -->
+            <!-- ========================================== -->
+            <div id="sandbox-excel-container" class="p-6 space-y-6">
+                <!-- Excel 子分頁頁籤 -->
+                <div class="flex flex-wrap gap-2 pb-4 border-b border-stone-100">
+                    <button onclick="switchExcelSheet('pivot')" id="sheet-pivot" class="excel-sheet-btn px-3 py-1.5 text-xs font-bold rounded-lg bg-beige-900 text-white transition-all">
+                        📊 樞紐分析彙總
+                    </button>
+                    <button onclick="switchExcelSheet('north')" id="sheet-north" class="excel-sheet-btn px-3 py-1.5 text-xs font-bold rounded-lg bg-beige-100 text-stone-600 hover:bg-beige-200 transition-all">
+                        📍 北區明細
+                    </button>
+                    <button onclick="switchExcelSheet('mid')" id="sheet-mid" class="excel-sheet-btn px-3 py-1.5 text-xs font-bold rounded-lg bg-beige-100 text-stone-600 hover:bg-beige-200 transition-all">
+                        📍 中區明細
+                    </button>
+                    <button onclick="switchExcelSheet('south')" id="sheet-south" class="excel-sheet-btn px-3 py-1.5 text-xs font-bold rounded-lg bg-beige-100 text-stone-600 hover:bg-beige-200 transition-all">
+                        📍 南區明細
+                    </button>
+                </div>
+
+                <!-- 搜尋與過濾列 -->
+                <div class="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between">
+                    <div class="relative flex-1 max-w-md">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-stone-400">
+                            <i class="fa-solid fa-magnifying-glass text-xs"></i>
+                        </span>
+                        <input type="text" id="excel-search-input" oninput="filterExcelTable()" placeholder="快速檢索產品或資料行..." class="w-full pl-9 pr-4 py-1.5 text-xs bg-stone-50 border border-stone-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-accent/50 focus:border-accent">
+                    </div>
+                    <span class="text-[11px] text-stone-400 self-end sm:self-center" id="excel-row-count">顯示 12 筆數據記錄</span>
+                </div>
+
+                <!-- 實際動態資料表格 -->
+                <div class="overflow-x-auto border border-stone-200 rounded-xl">
+                    <table class="w-full text-xs text-left border-collapse" id="excel-data-table">
+                        <!-- 由 JavaScript 動態生成渲染 -->
+                    </table>
+                </div>
+            </div>
+
+            <!-- ========================================== -->
+            <!-- 區塊二：POWER BI 預覽主體 -->
+            <!-- ========================================== -->
+            <div id="sandbox-powerbi-container" class="hidden p-6 bg-stone-50/50 space-y-6">
+                
+                <!-- Power BI 頂部控制面板 -->
+                <div class="bg-white p-4 rounded-xl border border-beige-200/60 flex flex-wrap gap-4 items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded bg-yellow-400"></span>
+                        <span class="text-xs font-extrabold text-stone-700 tracking-wider">篩選交叉分析器 (Slicers)</span>
+                    </div>
+                    <!-- 篩選下拉/按鈕組 -->
+                    <div class="flex flex-wrap gap-3 text-xs">
+                        <!-- 客群類型 -->
+                        <div class="flex items-center gap-1.5">
+                            <span class="text-stone-400 text-[10px]">客群類別:</span>
+                            <select id="pbi-filter-client" onchange="updatePowerBICharts()" class="bg-stone-50 border border-stone-200 rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-accent">
+                                <option value="all">全部客群 (All)</option>
+                                <option value="corp">企業大宗客戶 (Enterprise)</option>
+                                <option value="retail">一般終端散客 (Retail)</option>
+                                <option value="vip">特約 VIP 會員 (VIP)</option>
+                            </select>
+                        </div>
+                        <!-- 產品群組 -->
+                        <div class="flex items-center gap-1.5">
+                            <span class="text-stone-400 text-[10px]">產品類別:</span>
+                            <select id="pbi-filter-product" onchange="updatePowerBICharts()" class="bg-stone-50 border border-stone-200 rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-accent">
+                                <option value="all">所有類別 (All)</option>
+                                <option value="luxury">經典禮盒線 (Premium)</option>
+                                <option value="snack">精緻休閒食品 (Snacks)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KPI 卡片指標列 -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div class="bg-white p-4 rounded-xl border border-stone-150 shadow-sm">
+                        <p class="text-[10px] text-stone-400 font-bold uppercase tracking-wider">年度總銷售額 (估算)</p>
+                        <h4 id="kpi-revenue" class="text-xl font-black text-beige-900 mt-1">$4,821,600</h4>
+                        <span class="text-[9px] text-emerald-600 font-semibold"><i class="fa-solid fa-caret-up"></i> +12.4% vs 去年同期</span>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-stone-150 shadow-sm">
+                        <p class="text-[10px] text-stone-400 font-bold uppercase tracking-wider">主打產品市佔佔比</p>
+                        <h4 id="kpi-market" class="text-xl font-black text-accent mt-1">42.8%</h4>
+                        <span class="text-[9px] text-stone-400 font-medium">在各地理分區表現平穩</span>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-stone-150 shadow-sm">
+                        <p class="text-[10px] text-stone-400 font-bold uppercase tracking-wider">活躍交易客戶數</p>
+                        <h4 id="kpi-users" class="text-xl font-black text-stone-800 mt-1">1,420 戶</h4>
+                        <span class="text-[9px] text-emerald-600 font-semibold"><i class="fa-solid fa-caret-up"></i> 月複合增長 2.1%</span>
+                    </div>
+                </div>
+
+                <!-- 視覺化圖表大版面 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <!-- 圖表 1: 地區貢獻比例 (SVG Doughnut Chart) -->
+                    <div class="bg-white p-5 rounded-xl border border-stone-200 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold text-stone-700 block mb-4">地區銷量佔比動態分析</span>
+                            <div class="flex justify-center items-center py-4">
+                                <div class="relative w-40 h-40">
+                                    <!-- 動態環狀圖 SVG -->
+                                    <svg viewBox="0 0 36 36" class="w-full h-full transform -rotate-90">
+                                        <!-- 北部地區 42% (9663/23030) -->
+                                        <circle cx="18" cy="18" r="15.915" fill="transparent" stroke="#B88E56" stroke-width="4" stroke-dasharray="42 58" stroke-dashoffset="0" id="svg-part-north"></circle>
+                                        <!-- 南部地區 34% (7865/23030) -->
+                                        <circle cx="18" cy="18" r="15.915" fill="transparent" stroke="#EADCC9" stroke-width="4" stroke-dasharray="34 66" stroke-dashoffset="-42" id="svg-part-south"></circle>
+                                        <!-- 中部地區 24% (5502/23030) -->
+                                        <circle cx="18" cy="18" r="15.915" fill="transparent" stroke="#3D352B" stroke-width="4" stroke-dasharray="24 76" stroke-dashoffset="-76" id="svg-part-mid"></circle>
+                                    </svg>
+                                    <!-- 中央說明 -->
+                                    <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                        <span class="text-[10px] text-stone-400">核心引擎</span>
+                                        <span class="text-sm font-bold text-stone-800">Power BI</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 圖例說明 -->
+                        <div class="grid grid-cols-3 gap-2 text-center text-[10px] pt-4 border-t border-stone-50">
+                            <div>
+                                <span class="inline-block w-2 h-2 rounded bg-accent mr-1"></span>
+                                <span class="text-stone-500">北區: </span><span id="lg-north" class="font-bold">42%</span>
+                            </div>
+                            <div>
+                                <span class="inline-block w-2 h-2 rounded bg-beige-200 mr-1"></span>
+                                <span class="text-stone-500">南區: </span><span id="lg-south" class="font-bold">34%</span>
+                            </div>
+                            <div>
+                                <span class="inline-block w-2 h-2 rounded bg-beige-900 mr-1"></span>
+                                <span class="text-stone-500">中區: </span><span id="lg-mid" class="font-bold">24%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 圖表 2: 年度銷量走勢 (SVG Bar Chart) -->
+                    <div class="bg-white p-5 rounded-xl border border-stone-200 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold text-stone-700 block mb-4">月度出貨趨勢追蹤 (指標)</span>
+                            <div class="h-40 flex items-end justify-between gap-2 pt-4 px-2 border-b border-stone-200">
+                                <!-- 一月 -->
+                                <div class="flex-1 flex flex-col items-center h-full justify-end group">
+                                    <div id="bar-1" class="w-full bg-accent hover:bg-beige-900 transition-all rounded-t" style="height: 65%;"></div>
+                                    <span class="text-[9px] text-stone-400 mt-1">1M</span>
+                                </div>
+                                <!-- 二月 -->
+                                <div class="flex-1 flex flex-col items-center h-full justify-end group">
+                                    <div id="bar-2" class="w-full bg-accent hover:bg-beige-900 transition-all rounded-t" style="height: 58%;"></div>
+                                    <span class="text-[9px] text-stone-400 mt-1">2M</span>
+                                </div>
+                                <!-- 三月 -->
+                                <div class="flex-1 flex flex-col items-center h-full justify-end group">
+                                    <div id="bar-3" class="w-full bg-accent hover:bg-beige-900 transition-all rounded-t" style="height: 55%;"></div>
+                                    <span class="text-[9px] text-stone-400 mt-1">3M</span>
+                                </div>
+                                <!-- 四月 -->
+                                <div class="flex-1 flex flex-col items-center h-full justify-end group">
+                                    <div id="bar-4" class="w-full bg-accent hover:bg-beige-900 transition-all rounded-t" style="height: 62%;"></div>
+                                    <span class="text-[9px] text-stone-400 mt-1">4M</span>
+                                </div>
+                                <!-- 五月 -->
+                                <div class="flex-1 flex flex-col items-center h-full justify-end group">
+                                    <div id="bar-5" class="w-full bg-accent hover:bg-beige-900 transition-all rounded-t" style="height: 40%;"></div>
+                                    <span class="text-[9px] text-stone-400 mt-1">5M</span>
+                                </div>
+                                <!-- 六、七、八... -->
+                                <div class="flex-1 flex flex-col items-center h-full justify-end group">
+                                    <div id="bar-6" class="w-full bg-accent hover:bg-beige-900 transition-all rounded-t" style="height: 60%;"></div>
+                                    <span class="text-[9px] text-stone-400 mt-1">6M</span>
+                                </div>
+                                <div class="flex-1 flex flex-col items-center h-full justify-end group">
+                                    <div id="bar-7" class="w-full bg-accent hover:bg-beige-900 transition-all rounded-t" style="height: 52%;"></div>
+                                    <span class="text-[9px] text-stone-400 mt-1">7M</span>
+                                </div>
+                                <div class="flex-1 flex flex-col items-center h-full justify-end group">
+                                    <div id="bar-8" class="w-full bg-accent hover:bg-beige-900 transition-all rounded-t" style="height: 56%;"></div>
+                                    <span class="text-[9px] text-stone-400 mt-1">8M</span>
+                                </div>
+                                <div class="flex-1 flex flex-col items-center h-full justify-end group">
+                                    <div id="bar-9" class="w-full bg-accent hover:bg-beige-900 transition-all rounded-t" style="height: 55%;"></div>
+                                    <span class="text-[9px] text-stone-400 mt-1">9M</span>
+                                </div>
+                                <div class="flex-1 flex flex-col items-center h-full justify-end group">
+                                    <div id="bar-10" class="w-full bg-accent hover:bg-beige-900 transition-all rounded-t" style="height: 59%;"></div>
+                                    <span class="text-[9px] text-stone-400 mt-1">10M</span>
+                                </div>
+                                <div class="flex-1 flex flex-col items-center h-full justify-end group">
+                                    <div id="bar-11" class="w-full bg-accent hover:bg-beige-900 transition-all rounded-t" style="height: 57%;"></div>
+                                    <span class="text-[9px] text-stone-400 mt-1">11M</span>
+                                </div>
+                                <div class="flex-1 flex flex-col items-center h-full justify-end group">
+                                    <div id="bar-12" class="w-full bg-accent hover:bg-beige-900 transition-all rounded-t" style="height: 63%;"></div>
+                                    <span class="text-[9px] text-stone-400 mt-1">12M</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-[10px] text-stone-400 pt-3 text-center">
+                            <span>點選上方篩選器，可動態調整看版走勢模擬</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- 返回首頁行動呼籲區 -->
+        <div class="flex justify-center pt-8 pb-4">
+            <a href="index.html" class="px-10 py-3.5 bg-accent hover:bg-beige-900 text-white font-bold text-xs rounded-xl shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-2 tracking-wider group">
+                <i class="fa-solid fa-house group-hover:scale-110 transition-transform duration-300"></i>
+                <span>返回首頁</span>
+            </a>
+        </div>
+
+    </main>
+
+    <!-- 頁尾 -->
+    <footer class="bg-beige-100/40 border-t border-beige-200 text-stone-500 text-[11px] md:text-xs py-8 w-full">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p>© 2026 吳慧華 Wu Hui-Hua. 專案資產專屬維護。</p>
+            <div class="flex gap-4 text-stone-400">
+                <span>靜態離線預覽模式</span>
+                <span>•</span>
+                <span>無涉外資料傳輸</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========================================== -->
+    <!-- 數據引擎核心 JavaScript -->
+    <!-- ========================================== -->
+    <script>
+        // 上傳的實際 CSV 原始數據
+        const csvDatabase = {
+            pivot: [
+                ["月份", "中部地區", "北部地區", "南部地區", "總計"],
+                ["一月", "625", "833", "645", "2,103"],
+                ["二月", "502", "858", "627", "1,987"],
+                ["三月", "384", "839", "685", "1,908"],
+                ["四月", "505", "887", "640", "2,032"],
+                ["五月", "-", "677", "719", "1,396"],
+                ["六月", "555", "824", "575", "1,954"],
+                ["七月", "522", "734", "585", "1,841"],
+                ["八月", "457", "815", "654", "1,926"],
+                ["九月", "524", "778", "614", "1,916"],
+                ["十月", "516", "834", "629", "1,979"],
+                ["十一月", "432", "745", "750", "1,927"],
+                ["十二月", "480", "839", "742", "2,061"],
+                ["總計", "5,502", "9,663", "7,865", "23,030"]
+            ],
+            north: [
+                ["產品名稱", "一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+                ["四季如春", "64", "35", "65", "64", "37", "58", "34", "30", "52", "43", "57", "60"],
+                ["阿爾卑斯", "42", "33", "58", "63", "22", "40", "21", "65", "48", "55", "48", "53"],
+                ["秋楓典藏", "59", "20", "27", "60", "56", "40", "31", "32", "37", "58", "20", "33"],
+                ["甜苦雙味", "27", "33", "48", "64", "43", "32", "56", "67", "60", "57", "65", "65"],
+                ["經典櫻桃", "64", "68", "67", "39", "22", "22", "23", "43", "50", "43", "26", "25"],
+                ["夢幻摩卡", "20", "55", "37", "22", "22", "54", "26", "55", "46", "67", "59", "45"],
+                ["絕品榛果", "43", "32", "38", "40", "45", "20", "60", "41", "39", "30", "29", "51"]
+            ],
+            mid: [
+                ["產品名稱", "一月", "二月", "三月", "四月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+                ["島國風味", "19", "57", "27", "48", "42", "50", "57", "62", "44", "13", "63"],
+                ["極致風尚", "51", "44", "33", "13", "65", "42", "24", "52", "43", "31", "50"],
+                ["珍愛情人", "49", "30", "32", "66", "54", "33", "32", "35", "67", "33", "59"],
+                ["奶油天堂", "63", "68", "54", "52", "22", "53", "12", "11", "58", "42", "26"],
+                ["鎮店之寶", "46", "65", "40", "57", "26", "63", "64", "62", "59", "29", "55"],
+                ["傳統花生", "46", "23", "12", "41", "18", "16", "48", "65", "59", "24", "28"],
+                ["香醇甜心", "69", "39", "28", "38", "63", "51", "31", "26", "10", "35", "22"]
+            ],
+            south: [
+                ["產品名稱", "一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+                ["驚奇杏仁", "49", "42", "38", "35", "61", "56", "47", "67", "63", "65", "53", "69"],
+                ["島國風味", "41", "21", "32", "39", "51", "20", "25", "55", "59", "42", "69", "68"],
+                ["鎮店之寶", "30", "61", "41", "69", "54", "23", "48", "32", "65", "44", "54", "68"],
+                ["秋楓典藏", "67", "48", "22", "48", "55", "24", "35", "41", "22", "36", "66", "57"],
+                ["傳統花生", "51", "63", "61", "37", "60", "24", "38", "29", "23", "32", "67", "67"],
+                ["羅曼蒂克", "33", "28", "25", "33", "41", "41", "35", "63", "50", "66", "34", "24"],
+                ["珍愛情人", "45", "27", "39", "57", "58", "37", "34", "61", "38", "51", "25", "30"]
+            ]
+        };
+
+        let currentSystem = 'excel'; // 'excel' | 'powerbi'
+        let currentExcelSheet = 'pivot';
+
+        // 初始化
+        window.onload = function() {
+            renderExcelSheet(currentExcelSheet);
+        };
+
+        // 切換主分析系統 (連動雙按鈕的活躍色彩)
+        function switchSandboxSystem(system) {
+            currentSystem = system;
+            const btnExcel = document.getElementById('btn-tab-excel');
+            const btnPbi = document.getElementById('btn-tab-powerbi');
+            const containerExcel = document.getElementById('sandbox-excel-container');
+            const containerPbi = document.getElementById('sandbox-powerbi-container');
+
+            if (system === 'excel') {
+                if (btnExcel) {
+                    btnExcel.className = "w-full py-2.5 bg-accent hover:bg-beige-900 text-white font-bold text-xs rounded-lg flex items-center justify-center gap-1.5 transition-all shadow-sm";
+                }
+                if (btnPbi) {
+                    btnPbi.className = "w-full py-2.5 bg-beige-900 hover:bg-accent text-white font-bold text-xs rounded-lg flex items-center justify-center gap-1.5 transition-all shadow-sm";
+                }
+                containerExcel.classList.remove('hidden');
+                containerPbi.classList.add('hidden');
+            } else {
+                if (btnPbi) {
+                    btnPbi.className = "w-full py-2.5 bg-accent hover:bg-beige-900 text-white font-bold text-xs rounded-lg flex items-center justify-center gap-1.5 transition-all shadow-sm";
+                }
+                if (btnExcel) {
+                    btnExcel.className = "w-full py-2.5 bg-beige-900 hover:bg-accent text-white font-bold text-xs rounded-lg flex items-center justify-center gap-1.5 transition-all shadow-sm";
+                }
+                containerPbi.classList.remove('hidden');
+                containerExcel.classList.add('hidden');
+                updatePowerBICharts(); // 初始化 Power BI 圖表
+            }
+        }
+
+        // 切換 Excel 工作表分頁
+        function switchExcelSheet(sheetId) {
+            currentExcelSheet = sheetId;
+            document.querySelectorAll('.excel-sheet-btn').forEach(btn => {
+                btn.className = "excel-sheet-btn px-3 py-1.5 text-xs font-bold rounded-lg bg-beige-100 text-stone-600 hover:bg-beige-200 transition-all";
+            });
+            
+            const activeBtn = document.getElementById(`sheet-${sheetId}`);
+            if (activeBtn) {
+                activeBtn.className = "excel-sheet-btn px-3 py-1.5 text-xs font-bold rounded-lg bg-beige-900 text-white transition-all";
+            }
+
+            document.getElementById('excel-search-input').value = ''; // 清空搜尋
+            renderExcelSheet(sheetId);
+        }
+
+        // 渲染 Excel 表格
+        function renderExcelSheet(sheetId, filterText = '') {
+            const data = csvDatabase[sheetId];
+            const table = document.getElementById('excel-data-table');
+            table.innerHTML = '';
+
+            if (!data || data.length === 0) return;
+
+            const headerRow = data[0];
+            const bodyRows = data.slice(1);
+
+            // 過濾數據
+            const filteredBodyRows = bodyRows.filter(row => {
+                if (!filterText) return true;
+                return row.some(cell => cell.toLowerCase().includes(filterText.toLowerCase()));
+            });
+
+            // 建立表頭
+            const thead = document.createElement('thead');
+            const trHead = document.createElement('tr');
+            trHead.className = "bg-beige-50/50 border-b border-stone-200 text-stone-600 font-bold";
+            headerRow.forEach((col, idx) => {
+                const th = document.createElement('th');
+                th.className = `py-3 px-4 ${idx === 0 ? 'text-left font-bold text-stone-800' : 'text-right'}`;
+                th.textContent = col;
+                trHead.appendChild(th);
+            });
+            thead.appendChild(trHead);
+            table.appendChild(thead);
+
+            // 建立主體
+            const tbody = document.createElement('tbody');
+            tbody.className = "divide-y divide-stone-100 text-stone-700";
+            
+            filteredBodyRows.forEach((row, rowIdx) => {
+                const tr = document.createElement('tr');
+                // 對總計行作特殊染色
+                const isTotalRow = row[0] === '總計' || row[0] === '總計 (年度)';
+                if (isTotalRow) {
+                    tr.className = "bg-beige-100/30 font-bold text-beige-900";
+                } else {
+                    tr.className = "hover:bg-beige-50/40 transition-colors";
+                }
+
+                row.forEach((cell, cellIdx) => {
+                    const td = document.createElement('td');
+                    td.className = `py-2.5 px-4 ${cellIdx === 0 ? 'text-left font-medium' : 'text-right'}`;
+                    td.textContent = cell;
+                    tr.appendChild(td);
+                });
+                tbody.appendChild(tr);
+            });
+            table.appendChild(tbody);
+
+            // 數量更新
+            document.getElementById('excel-row-count').textContent = `顯示 ${filteredBodyRows.length} 筆資料記錄`;
+        }
+
+        // 搜尋篩選 Excel 數據
+        function filterExcelTable() {
+            const query = document.getElementById('excel-search-input').value;
+            renderExcelSheet(currentExcelSheet, query);
+        }
+
+        // ==========================================
+        // Power BI 仿真與連動引擎
+        // ==========================================
+        function updatePowerBICharts() {
+            const client = document.getElementById('pbi-filter-client').value;
+            const product = document.getElementById('pbi-filter-product').value;
+
+            // 根據選擇模擬產生對應的統計數據
+            let revenue = 4821600;
+            let market = 42.8;
+            let users = 1420;
+            let northRatio = 42;
+            let southRatio = 34;
+            let midRatio = 24;
+
+            // 各單月出貨高度比例調整（動態呈現連動感）
+            let barScale = 1.0;
+
+            // 篩選交叉演算法
+            if (client === 'corp') {
+                revenue = 2892960;
+                market = 51.2;
+                users = 310;
+                northRatio = 50;
+                southRatio = 28;
+                midRatio = 22;
+                barScale = 0.6;
+            } else if (client === 'retail') {
+                revenue = 1446480;
+                market = 31.5;
+                users = 1050;
+                northRatio = 35;
+                southRatio = 38;
+                midRatio = 27;
+                barScale = 0.35;
+            } else if (client === 'vip') {
+                revenue = 482160;
+                market = 58.0;
+                users = 60;
+                northRatio = 40;
+                southRatio = 40;
+                midRatio = 20;
+                barScale = 0.15;
+            }
+
+            if (product === 'luxury') {
+                revenue = Math.round(revenue * 0.7);
+                market = parseFloat((market * 1.1).toFixed(1));
+                barScale = barScale * 0.7;
+            } else if (product === 'snack') {
+                revenue = Math.round(revenue * 0.3);
+                market = parseFloat((market * 0.8).toFixed(1));
+                barScale = barScale * 0.3;
+            }
+
+            // 更新關鍵指標卡卡片 (KPI)
+            document.getElementById('kpi-revenue').textContent = `$${revenue.toLocaleString()}`;
+            document.getElementById('kpi-market').textContent = `${market}%`;
+            document.getElementById('kpi-users').textContent = `${users} 戶`;
+
+            // 更新地區圓餅佔比圖 (Doughnut Chart SVG DashArray)
+            const northCircle = document.getElementById('svg-part-north');
+            const southCircle = document.getElementById('svg-part-south');
+            const midCircle = document.getElementById('svg-part-mid');
+
+            if (northCircle) northCircle.setAttribute('stroke-dasharray', `${northRatio} ${100 - northRatio}`);
+            if (southCircle) {
+                southCircle.setAttribute('stroke-dasharray', `${southRatio} ${100 - southRatio}`);
+                southCircle.setAttribute('stroke-dashoffset', `-${northRatio}`);
+            }
+            if (midCircle) {
+                midCircle.setAttribute('stroke-dasharray', `${midRatio} ${100 - midRatio}`);
+                midCircle.setAttribute('stroke-dashoffset', `-${northRatio + southRatio}`);
+            }
+
+            // 更新圖例數據
+            const lgNorth = document.getElementById('lg-north');
+            const lgSouth = document.getElementById('lg-south');
+            const lgMid = document.getElementById('lg-mid');
+            if (lgNorth) lgNorth.textContent = `${northRatio}%`;
+            if (lgSouth) lgSouth.textContent = `${southRatio}%`;
+            if (lgMid) lgMid.textContent = `${midRatio}%`;
+
+            // 更新出貨柱狀走勢圖高度 (Dynamic height updates)
+            const baseHeights = [65, 58, 55, 62, 40, 60, 52, 56, 55, 59, 57, 63];
+            baseHeights.forEach((height, idx) => {
+                const bar = document.getElementById(`bar-${idx + 1}`);
+                if (bar) {
+                    let adjustedHeight = Math.min(Math.round(height * (barScale / (client === 'all' && product === 'all' ? 1.0 : barScale * 1.2)) * 10) / 10, 95);
+                    // 避免高度變為0而無法看見
+                    if (adjustedHeight < 5) adjustedHeight = 5;
+                    bar.style.height = `${adjustedHeight}%`;
+                }
+            });
+        }
+    </script>
+</body>
+</html>
