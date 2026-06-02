@@ -7,7 +7,7 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Noto Sans TC -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght=300;400;500;700;900&display=swap" rel="stylesheet">
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
@@ -50,7 +50,6 @@
                 <a href="#about" class="hover:text-accent transition-colors">關於我</a>
                 <a href="#skills" class="hover:text-accent transition-colors">專業技能</a>
                 <a href="#portfolio" class="hover:text-accent transition-colors">實績作品</a>
-                <a href="#contact" class="hover:text-accent transition-colors">聯絡我</a>
             </nav>
         </div>
     </header>
@@ -108,31 +107,62 @@
             </div>
         </section>
 
-        <!-- 3. 三大精選技能 (3 Skills) -->
+        <!-- 3. 專業技能 (Skills Section) -->
         <section id="skills" class="space-y-6">
             <div class="border-l-4 border-accent pl-4">
                 <h2 class="text-2xl font-bold text-beige-900 tracking-wide">專業技能</h2>
                 <p class="text-xs text-stone-400 uppercase tracking-widest mt-0.5">Core Competencies</p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- 技能一 -->
-                <div class="bg-white p-6 rounded-2xl border border-beige-200 beige-glow hover:border-accent/40 transition-all duration-300 flex flex-col justify-between">
-                    <div>
-                        <div class="w-12 h-12 rounded-xl bg-beige-100 flex items-center justify-center text-accent mb-4 text-xl">
-                            <i class="fa-solid fa-wallet"></i>
+            <!-- 三欄網格 layout，第一欄內部使用 flex-col 堆疊 -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+                
+                <!-- 欄位一：堆疊「專業財務會計與稅務」與「MOS 365 官方認證檢視」 -->
+                <div class="flex flex-col gap-6">
+                    <!-- 技能一 -->
+                    <div class="bg-white p-6 rounded-2xl border border-beige-200 beige-glow hover:border-accent/40 transition-all duration-300 flex flex-col justify-between min-h-[340px]">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-beige-100 flex items-center justify-center text-accent mb-4 text-xl">
+                                <i class="fa-solid fa-wallet"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-beige-900 mb-2">專業財務會計與稅務</h3>
+                            <p class="text-sm text-stone-500 leading-relaxed">
+                                精通各項費用審核、憑證與傳票製作。專精於應付帳款流程、各類財務報表編製與分析、營業稅等各項稅務申報與外帳查核。
+                            </p>
                         </div>
-                        <h3 class="text-lg font-bold text-beige-900 mb-2">專業財務會計與稅務</h3>
-                        <p class="text-sm text-stone-500 leading-relaxed">
-                            精通各項費用審核、憑證與傳票製作。專精於應付帳款流程、各類財務報表編製與分析、營業稅等各項稅務申報與外帳查核。
-                        </p>
+                        <div class="mt-4 pt-4 border-t border-stone-50 text-xs text-accent font-semibold">
+                            會計丙級檢定合格
+                        </div>
                     </div>
-                    <div class="mt-4 pt-4 border-t border-stone-50 text-xs text-accent font-semibold">
-                        會計丙級檢定合格
+
+                    <!-- 搬移過來的：MOS 365 官方認證檢視 (配色與財務分析完全相同) -->
+                    <div class="bg-white rounded-2xl overflow-hidden border border-beige-200 hover:border-accent beige-glow group flex flex-col transition-all duration-300 hover:-translate-y-1">
+                        <div class="h-40 bg-gradient-to-br from-beige-100 to-amber-50 flex items-center justify-center p-6 border-b border-beige-200 relative">
+                            <i class="fa-solid fa-file-contract text-5xl text-accent/50 group-hover:scale-110 transition-transform duration-300"></i>
+                            <span class="absolute top-3 left-3 bg-white/80 backdrop-blur-sm text-[10px] px-2 py-0.5 rounded-md text-stone-500">外部連結</span>
+                        </div>
+                        <div class="p-5 flex-grow flex flex-col justify-between">
+                            <div class="space-y-2">
+                                <h3 class="text-base font-bold text-beige-900">MOS 365 官方認證檢視</h3>
+                                <p class="text-xs text-stone-500 leading-relaxed">
+                                    連結至官方認證平台，查閱完整 Microsoft Office Specialist 365 認證資訊與證書明細。
+                                </p>
+                            </div>
+                            <div class="mt-5 space-y-3">
+                                <div class="flex flex-wrap gap-1.5">
+                                    <span class="text-[10px] px-2 py-0.5 bg-stone-100 text-stone-600 rounded">Microsoft</span>
+                                    <span class="text-[10px] px-2 py-0.5 bg-stone-100 text-stone-600 rounded">Official</span>
+                                </div>
+                                <a href="https://wu2136tr-coder.github.io/portfolio/mos365.html" target="_blank" class="w-full py-2.5 bg-accent hover:bg-beige-900 text-white font-medium text-xs rounded-xl flex items-center justify-center gap-1.5 transition-colors shadow-sm text-center">
+                                    <span>前往官方認證頁面</span>
+                                    <i class="fa-solid fa-external-link text-[10px]"></i>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- 技能二 -->
-                <div class="bg-white p-6 rounded-2xl border border-beige-200 beige-glow hover:border-accent/40 transition-all duration-300 flex flex-col justify-between">
+                <div class="bg-white p-6 rounded-2xl border border-beige-200 beige-glow hover:border-accent/40 transition-all duration-300 flex flex-col justify-between min-h-[340px]">
                     <div>
                         <div class="w-12 h-12 rounded-xl bg-beige-100 flex items-center justify-center text-accent mb-4 text-xl">
                             <i class="fa-solid fa-network-wired"></i>
@@ -148,7 +178,7 @@
                 </div>
 
                 <!-- 技能三 -->
-                <div class="bg-white p-6 rounded-2xl border border-beige-200 beige-glow hover:border-accent/40 transition-all duration-300 flex flex-col justify-between">
+                <div class="bg-white p-6 rounded-2xl border border-beige-200 beige-glow hover:border-accent/40 transition-all duration-300 flex flex-col justify-between min-h-[340px]">
                     <div>
                         <div class="w-12 h-12 rounded-xl bg-beige-100 flex items-center justify-center text-accent mb-4 text-xl">
                             <i class="fa-solid fa-bolt"></i>
@@ -159,11 +189,6 @@
                         </p>
                     </div>
                     <div class="mt-4 pt-4 border-t border-stone-50 text-xs text-accent font-semibold space-y-2">
-                        <!-- 可點擊顯示證照之按鈕 -->
-                        <button onclick="openCertModal()" class="flex items-center gap-1.5 hover:text-accent transition-colors text-left group/btn cursor-pointer">
-                            <i class="fa-solid fa-award text-accent group-hover/btn:scale-110 transition-transform"></i>
-                            <span class="underline decoration-dotted font-bold">MOS 365 國際認證</span>
-                        </button>
                         <div class="flex items-center gap-1.5 text-stone-500">
                             <i class="fa-solid fa-graduation-cap text-stone-400"></i>
                             <span>Gemini 多項教育與應用認證</span>
@@ -174,6 +199,12 @@
         </section>
 
         <!-- 4. 實績與專案作品 -->
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 4. 實績與專案作品 (剩餘 3 個精采作品，形成完美 1 橫列滿網格) -->
         <section id="portfolio" class="space-y-6">
             <div class="border-l-4 border-accent pl-4">
                 <h2 class="text-2xl font-bold text-beige-900 tracking-wide">實績與專案作品</h2>
@@ -243,32 +274,6 @@
                             <a href="tools.html" class="w-full py-2.5 bg-accent hover:bg-beige-900 text-white font-medium text-xs rounded-xl flex items-center justify-center gap-1.5 transition-colors shadow-sm">
                                 <span>立即開啟工具箱</span>
                                 <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 新增：MOS 365 外部認證入口 -->
-                <div class="bg-white rounded-2xl overflow-hidden border border-beige-200 hover:border-accent beige-glow group flex flex-col h-full transition-all duration-300 hover:-translate-y-1">
-                    <div class="h-40 bg-gradient-to-br from-beige-100 to-amber-50 flex items-center justify-center p-6 border-b border-beige-200 relative">
-                        <i class="fa-solid fa-file-contract text-5xl text-accent/50 group-hover:scale-110 transition-transform duration-300"></i>
-                        <span class="absolute top-3 left-3 bg-white/80 backdrop-blur-sm text-[10px] px-2 py-0.5 rounded-md text-stone-500">外部連結</span>
-                    </div>
-                    <div class="p-5 flex-grow flex flex-col justify-between">
-                        <div class="space-y-2">
-                            <h3 class="text-base font-bold text-beige-900">MOS 365 官方認證檢視</h3>
-                            <p class="text-xs text-stone-500 leading-relaxed">
-                                連結至官方認證平台，查閱完整 Microsoft Office Specialist 365 認證資訊與證書明細。
-                            </p>
-                        </div>
-                        <div class="mt-5 space-y-3">
-                            <div class="flex flex-wrap gap-1.5">
-                                <span class="text-[10px] px-2 py-0.5 bg-stone-100 text-stone-600 rounded">Microsoft</span>
-                                <span class="text-[10px] px-2 py-0.5 bg-stone-100 text-stone-600 rounded">Official</span>
-                            </div>
-                            <a href="https://wu2136tr-coder.github.io/portfolio/mos365.html" target="_blank" class="w-full py-2.5 bg-accent hover:bg-beige-900 text-white font-medium text-xs rounded-xl flex items-center justify-center gap-1.5 transition-colors shadow-sm">
-                                <span>前往官方認證頁面</span>
-                                <i class="fa-solid fa-external-link text-[10px]"></i>
                             </a>
                         </div>
                     </div>
