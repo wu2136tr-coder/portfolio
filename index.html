@@ -39,797 +39,524 @@
         .beige-glow {
             box-shadow: 0 4px 20px -2px rgba(184, 142, 86, 0.08);
         }
+        .beige-glow-hover:hover {
+            box-shadow: 0 10px 30px -4px rgba(184, 142, 86, 0.15);
+        }
     </style>
 </head>
-<body class="bg-beige-50 text-stone-800 font-sans antialiased min-h-screen selection:bg-accent/20">
+<body class="bg-beige-50 text-stone-800 font-sans antialiased selection:bg-accent/20">
 
-    <div class="w-full text-center py-10 md:py-14 bg-gradient-to-r from-beige-100 via-white to-beige-100 border-b border-beige-200">
-        <h1 class="text-3xl md:text-5xl font-black text-beige-900 tracking-widest uppercase">
+    <!-- 頂部滿寬大標題 -->
+    <div class="w-full bg-gradient-to-r from-beige-100 via-white to-beige-100 py-6 border-b border-beige-200 text-center">
+        <h1 class="text-3xl md:text-5xl font-black text-beige-900 leading-tight tracking-widest uppercase">
             EMPLOYMENT APPLICATION個人簡歷
         </h1>
     </div>
 
-    <header class="sticky top-0 z-50 bg-beige-50/80 backdrop-blur-md border-b border-beige-200">
-        <div class="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
-            <a href="#" class="text-xl font-bold text-beige-900 tracking-wider">吳慧華 <span class="text-accent text-sm font-medium">Hui-Hua</span></a>
-            <nav class="flex gap-4 md:gap-6 text-sm font-medium text-stone-600">
+    <!-- 頂部導覽列 -->
+    <header class="bg-beige-50/80 backdrop-blur-md border-b border-beige-200 sticky top-0 z-50 transition-all duration-300">
+        <div class="max-w-5xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="text-xl font-bold text-beige-900 tracking-wider">
+                吳慧華 <span class="text-accent text-sm font-medium">Hui-Hua</span>
+            </a>
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-beige-800">
                 <a href="#about" class="hover:text-accent transition-colors">關於我</a>
-                <a href="#skills" class="hover:text-accent transition-colors">專業技能</a>
-                <a href="#portfolio" class="hover:text-accent transition-colors">實績作品</a>
+                <a href="#skills" class="hover:text-accent transition-colors">核心優勢</a>
+                <a href="#portfolio" class="hover:text-accent transition-colors">實績與專案作品</a>
                 <a href="#experience" class="hover:text-accent transition-colors">工作經歷</a>
             </nav>
+            <a href="#contact" class="px-5 py-2.5 bg-beige-900 hover:bg-accent text-white text-xs font-bold rounded-xl transition-all tracking-wider">
+                聯絡諮詢
+            </a>
         </div>
     </header>
 
-    <main class="max-w-4xl mx-auto px-6 py-12 md:py-20 space-y-24">
-
-        <section id="hero" class="flex flex-col md:flex-row items-center md:items-start gap-8 md:gap-12 pt-4">
-            <!-- 頭像區 (指向實際照片，若加載失敗則自動顯示後備大頭貼) -->
-            <div class="w-40 h-40 md:w-48 md:h-48 rounded-full border-4 border-beige-200 overflow-hidden flex-shrink-0 bg-white relative beige-glow self-center md:self-start">
-                <img 
-                    src="woman001.jpg" 
-                    alt="吳慧華的專業形象照" 
-                    class="w-full h-full object-cover"
-                    onerror="this.onerror=null; this.src='https://api.dicebear.com/7.x/initials/svg?seed=吳慧華';"
-                >
-            </div>
-            <!-- 文字定位 & 個人資訊網格 -->
-            <div class="text-center md:text-left space-y-5 flex-grow w-full">
-                <div>
-                    <span class="inline-block px-3 py-1 bg-beige-100 text-accent text-xs font-semibold rounded-full tracking-wider uppercase mb-3">Senior Accountant & AI Pioneer</span>
-                    
-                    <!-- 姓名與基本英文標記 (已移除 54 歲年齡資訊) -->
-                    <div class="flex flex-col md:flex-row md:items-baseline justify-center md:justify-start gap-2.5">
-                        <h1 class="text-3xl md:text-5xl font-black text-beige-900 leading-tight">吳慧華</h1>
-                        <span class="text-sm md:text-base text-stone-500 font-medium tracking-wide">Wu Hui Hua | 女</span>
-                    </div>
-                    
-                    <p class="text-lg md:text-xl text-stone-600 leading-relaxed font-light mt-2">
-                        「融合傳統實務與 <span class="text-accent font-medium">AI 科技</span>的專業主辦會計」
-                    </p>
-                </div>
-
-                <!-- 頂部快速標籤 -->
-                <div class="flex flex-wrap justify-center md:justify-start gap-3 pt-1">
-                    <span class="text-xs px-3 py-1.5 bg-stone-100 text-stone-600 rounded-lg"><i class="fa-solid fa-calculator mr-1"></i>20+ 年財會經驗</span>
-                    <span class="text-xs px-3 py-1.5 bg-stone-100 text-stone-600 rounded-lg"><i class="fa-solid fa-microchip mr-1"></i>AI 辦公大師</span>
-                    <span class="text-xs px-3 py-1.5 bg-stone-100 text-stone-600 rounded-lg"><i class="fa-solid fa-map-pin mr-1"></i>桃園八德</span>
-                </div>
-
-                <!-- 完美對齊 image_f67df5.png 的詳細個人資料與教育程度 (已移除年齡橫列) -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-5 border-t border-beige-200 text-left">
-                    <!-- 基本聯絡資料 -->
-                    <div class="space-y-3 text-sm text-stone-600">
-                        <h3 class="text-xs font-bold text-stone-400 uppercase tracking-widest flex items-center gap-2 mb-1">
-                            <i class="fa-solid fa-address-card text-accent"></i>
-                            <span>個人聯絡資料 / Personal Info</span>
-                        </h3>
-                        <div class="flex items-center gap-2">
-                            <span class="w-20 text-stone-400 text-xs flex-shrink-0">應徵職務</span>
-                            <span class="font-semibold text-beige-900 bg-beige-100/50 px-2.5 py-0.5 rounded-md text-xs">主辦會計</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <span class="w-20 text-stone-400 text-xs flex-shrink-0">聯絡手機</span>
-                            <a href="tel:0926330450" class="font-medium text-accent hover:underline flex items-center gap-1">
-                                0926-330-450 <i class="fa-solid fa-phone text-[10px]"></i>
-                            </a>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <span class="w-20 text-stone-400 text-xs flex-shrink-0">電子郵件</span>
-                            <a href="mailto:wu2136tr@gmail.com" class="font-medium text-accent hover:underline flex items-center gap-1">
-                                wu2136tr@gmail.com <i class="fa-solid fa-envelope text-[10px]"></i>
-                            </a>
-                        </div>
-                        <div class="flex items-start gap-2">
-                            <span class="w-20 text-stone-400 text-xs flex-shrink-0">通訊地址</span>
-                            <span class="font-medium text-stone-800 leading-snug">桃園市八德區</span>
-                        </div>
-                    </div>
-
-                    <!-- 教育程度 -->
-                    <div class="space-y-3 text-sm text-stone-600">
-                        <h3 class="text-xs font-bold text-stone-400 uppercase tracking-widest flex items-center gap-2 mb-1">
-                            <i class="fa-solid fa-graduation-cap text-accent"></i>
-                            <span>教育背景 / Education</span>
-                        </h3>
-                        <div class="bg-white p-4 rounded-xl border border-beige-200 beige-glow space-y-2">
-                            <div class="flex justify-between items-start gap-2">
-                                <div>
-                                    <h4 class="font-bold text-stone-800 text-base">健行科技大學</h4>
-                                    <p class="text-xs text-stone-400 mt-0.5">科系/學院/學校名稱</p>
-                                </div>
-                                <span class="px-2.5 py-0.5 bg-beige-100 text-accent font-semibold text-xs rounded-full">學士學位</span>
-                            </div>
-                            <div class="pt-2 border-t border-stone-100 flex items-center justify-between text-xs text-stone-500">
-                                <span>時期 (From ~ To)</span>
-                                <span class="font-mono font-medium text-stone-700">民國 83/07 ~ 86/06</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="about" class="space-y-6">
-            <div class="border-l-4 border-accent pl-4">
-                <h2 class="text-2xl font-bold text-beige-900 tracking-wide">關於我</h2>
-                <p class="text-xs text-stone-400 uppercase tracking-widest mt-0.5">My Philosophy & Background</p>
-            </div>
-            <div class="bg-white p-6 md:p-8 rounded-2xl border border-beige-200 beige-glow space-y-6">
-                <p class="text-stone-700 leading-relaxed text-justify">
-                    您好，我是<strong>吳慧華</strong>。出社會以來我一直深耕於會計與財務領域。我深信，豐富的資歷不代表裹足不前。在資訊與新科技不斷爆發的時代，我們更應該主動吸收新知、擁抱變化，才不會被時代的洪流所淘汰。
-                </p>
-                <p class="text-stone-700 leading-relaxed text-justify">
-                    為此，我於近期主動增加技能，參加職訓局舉辦的職前訓練：<strong>「數位辦公與AI應用培訓班」（400小時）</strong>，深度掌握如何透過 AI 工具解決工作難題、簡化繁瑣的財務與文書流程。我的個性溫和、好相處與極強的學習適應力，讓我能以最短時間熟悉工作，為企業帶來兼具「穩定精準」與「高效數位化」的雙重價值。
-                </p>
-            </div>
-        </section>
-
-        <section id="skills" class="space-y-6">
-            <div class="border-l-4 border-accent pl-4">
-                <h2 class="text-2xl font-bold text-beige-900 tracking-wide">專業技能</h2>
-                <p class="text-xs text-stone-400 uppercase tracking-widest mt-0.5">Core Competencies</p>
+    <!-- 主視覺區 (Hero Section) -->
+    <section id="hero" class="max-w-5xl mx-auto px-6 pt-12 pb-20 grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+        <!-- 左側文案 -->
+        <div class="md:col-span-7 space-y-6 text-center md:text-left">
+            <div class="inline-flex items-center gap-2 px-3 py-1 bg-beige-100 rounded-full text-accent text-xs font-semibold tracking-wider">
+                <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
+                會計實務 × AI 自動化數據流
             </div>
             
-            <!-- 三欄等高核心技能網格 -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
-                <!-- 技能一：專業財務會計與稅務 -->
-                <div class="bg-white p-6 rounded-2xl border border-beige-200 beige-glow hover:border-accent/40 transition-all duration-300 flex flex-col justify-between min-h-[340px]">
-                    <div>
-                        <div class="w-12 h-12 rounded-xl bg-beige-100 flex items-center justify-center text-accent mb-4 text-xl">
-                            <i class="fa-solid fa-wallet"></i>
+            <h1 class="text-3xl md:text-5xl font-black text-beige-900 leading-tight">吳慧華</h1>
+
+            <!-- 個人基本資料卡片與學歷背景 -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
+                <!-- 基本資料 -->
+                <div class="bg-white p-5 rounded-2xl border border-beige-200 beige-glow space-y-3">
+                    <h3 class="text-xs font-bold text-accent tracking-wider uppercase border-b border-beige-100 pb-2">個人聯絡資料</h3>
+                    <div class="space-y-2 text-xs text-stone-600">
+                        <div class="flex items-center gap-2">
+                            <span class="w-16 text-stone-400">英文姓名:</span>
+                            <span class="font-medium text-stone-800">Hui-Hua Wu</span>
                         </div>
-                        <h3 class="text-lg font-bold text-beige-900 mb-2">專業財務會計與稅務</h3>
-                        <p class="text-sm text-stone-500 leading-relaxed">
-                            精通各項費用審核、憑證與傳票製作。專精於應付帳款流程、各類財務報表編製與分析、營業稅等各項稅務申報與外帳查核。
+                        <div class="flex items-center gap-2">
+                            <span class="w-16 text-stone-400">性別:</span>
+                            <span class="font-medium text-stone-800">女</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-16 text-stone-400">通訊地址:</span>
+                            <span class="font-medium text-stone-800">桃園市八德區永豐路456號</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-16 text-stone-400">聯絡電話:</span>
+                            <a href="tel:0926330450" class="font-medium text-accent hover:underline">0926-330-450</a>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-16 text-stone-400">電子郵件:</span>
+                            <a href="mailto:wu2136tr@gmail.com" class="font-medium text-accent hover:underline">wu2136tr@gmail.com</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 學歷背景 -->
+                <div class="bg-white p-5 rounded-2xl border border-beige-200 beige-glow space-y-3">
+                    <h3 class="text-xs font-bold text-accent tracking-wider uppercase border-b border-beige-100 pb-2">最高學歷背景</h3>
+                    <div class="space-y-2 text-xs text-stone-600">
+                        <div class="flex items-center gap-2">
+                            <span class="w-16 text-stone-400">學校名稱:</span>
+                            <span class="font-medium text-stone-800">健行科技大學</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-16 text-stone-400">修業學位:</span>
+                            <span class="font-medium text-stone-800">學士學位</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-16 text-stone-400">修業期間:</span>
+                            <span class="font-medium text-stone-800">民國 83/07 ~ 86/06</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-16 text-stone-400">修業狀態:</span>
+                            <span class="font-medium text-emerald-600 font-semibold bg-emerald-50 px-1.5 py-0.5 rounded">畢業</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <p class="text-stone-600 leading-relaxed font-light text-sm md:text-base text-justify">
+                我是吳慧華。擁有豐富的會計外帳結算、財務申報實務，並擅長導入 AI 工具（如 Gemini）與動態 BI 看板。我將繁瑣的會計流程自動化，將靜態財務數字轉化為高價值的營運洞察。
+            </p>
+            <div class="flex flex-wrap items-center justify-center md:justify-start gap-4 pt-2">
+                <a href="#portfolio" class="px-6 py-3 bg-accent hover:bg-beige-900 text-white font-bold text-sm rounded-xl transition-colors shadow-sm tracking-wider">
+                    瀏覽專案作品
+                </a>
+                <a href="#skills" class="px-6 py-3 border border-beige-200 hover:border-accent text-beige-800 font-bold text-sm rounded-xl transition-all tracking-wider bg-white/50">
+                    核心科技優勢
+                </a>
+            </div>
+        </div>
+        <!-- 右側視覺名牌卡片 -->
+        <div class="md:col-span-5 flex justify-center">
+            <div class="bg-white p-8 rounded-3xl border border-beige-200 beige-glow w-full max-w-sm space-y-6 relative overflow-hidden">
+                <div class="absolute -right-8 -top-8 w-24 h-24 bg-beige-100 rounded-full blur-2xl"></div>
+                <div class="flex items-center gap-4">
+                    <div class="w-14 h-14 rounded-2xl bg-beige-100 flex items-center justify-center text-accent text-2xl font-bold">
+                        吳
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-bold text-beige-900">吳慧華</h4>
+                        <p class="text-xs text-stone-400">主辦會計 / 數據分析師</p>
+                    </div>
+                </div>
+                <hr class="border-beige-100">
+                <div class="space-y-3.5 text-xs text-stone-600">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-code text-accent w-4 text-center"></i>
+                        <span>AI 自動化 & 報表流優化</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-calculator text-accent w-4 text-center"></i>
+                        <span>外帳結算、稅務申報與實務審計</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-chart-pie text-accent w-4 text-center"></i>
+                        <span>Power BI 與多維度商業決策分析</span>
+                    </div>
+                </div>
+                <div class="bg-beige-50 p-3.5 rounded-xl border border-beige-100 text-[11px] text-accent font-medium leading-relaxed">
+                    「不只做帳，更為企業提供清晰的財務洞察與數位流程轉型力。」
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 關於我與理念 -->
+    <section id="about" class="bg-white border-y border-beige-200 py-16">
+        <div class="max-w-5xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+            <div class="md:col-span-5">
+                <span class="text-xs font-bold text-accent tracking-widest uppercase block mb-2">About Me</span>
+                <h2 class="text-2xl md:text-3xl font-bold text-beige-900 tracking-wide">
+                    融合嚴謹會計專業與靈活資訊思維
+                </h2>
+            </div>
+            <div class="md:col-span-7 text-stone-600 text-sm md:text-base font-light space-y-4">
+                <p class="leading-relaxed text-justify">
+                    面對數位轉型浪潮，傳統僅處理憑證登帳的會計角色已面臨挑戰。我致力於將<strong>「嚴謹的外帳與稅務核算」</strong>與<strong>「現代資料科學技術」</strong>無縫接軌。
+                </p>
+                <p class="leading-relaxed text-justify">
+                    透過串接 ERP 報表、利用 Python 與 AI 工具進行資料庫清理與多維度分析，我成功為企業解決營運數據孤島問題，提供即時、自動、且具預測價值的財務支援。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 核心優勢 (Skills) -->
+    <section id="skills" class="max-w-5xl mx-auto px-6 py-20 space-y-12">
+        <div class="text-center md:text-left space-y-2">
+            <span class="text-xs font-bold text-accent tracking-widest uppercase">Expertise & Stack</span>
+            <h2 class="text-3xl font-bold text-beige-900 tracking-wide">核心優勢與技術堆疊</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- 優勢一：會計與稅務 -->
+            <div class="bg-white p-6 rounded-2xl border border-beige-200 beige-glow hover:border-accent/30 transition-all">
+                <div class="w-12 h-12 rounded-xl bg-beige-100 flex items-center justify-center text-accent text-xl mb-5">
+                    <i class="fa-solid fa-calculator"></i>
+                </div>
+                <h3 class="text-lg font-bold text-beige-900 mb-3">會計實務與稅務申報</h3>
+                <p class="text-xs text-stone-500 leading-relaxed font-light text-justify">
+                    精通企業外帳全套結算、營業稅與營所稅申報流程。熟悉各產業會計準則（IFRS），協助企業確保財務報表的極致合規與審計品質。
+                </p>
+            </div>
+            <!-- 優勢二：BI與數據分析 -->
+            <div class="bg-white p-6 rounded-2xl border border-beige-200 beige-glow hover:border-accent/30 transition-all">
+                <div class="w-12 h-12 rounded-xl bg-beige-100 flex items-center justify-center text-accent text-xl mb-5">
+                    <i class="fa-solid fa-chart-column"></i>
+                </div>
+                <h3 class="text-lg font-bold text-beige-900 mb-3">商業智慧與多維度分析</h3>
+                <p class="text-xs text-stone-500 leading-relaxed font-light text-justify">
+                    擅長建構 Power BI 動態互動看板與進階 Excel 商業模型，協助團隊將繁瑣的巨量銷售、客群與成本數據轉化成一目了然的管理指標。
+                </p>
+            </div>
+            <!-- 優勢三：AI流程優化 -->
+            <div class="bg-white p-6 rounded-2xl border border-beige-200 beige-glow hover:border-accent/30 transition-all">
+                <div class="w-12 h-12 rounded-xl bg-beige-100 flex items-center justify-center text-accent text-xl mb-5">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <h3 class="text-lg font-bold text-beige-900 mb-3">AI 科技與自動化導入</h3>
+                <p class="text-xs text-stone-500 leading-relaxed font-light text-justify">
+                    善於運用 Gemini 等前沿 LLM 工具輔助，撰寫自動化辦公流程與資料整理。利用科技解放人力成本，提升財務團隊的決策與協同效率。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 實績與專案作品 (Portfolio) -->
+    <section id="portfolio" class="max-w-5xl mx-auto px-6 py-20 space-y-12">
+        <div class="border-l-4 border-accent pl-4">
+            <h2 class="text-2xl font-bold text-beige-900 tracking-wide">實績與專案作品</h2>
+            <p class="text-xs text-stone-400 uppercase tracking-widest mt-0.5">My Portfolio & Projects</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- 作品一 -->
+            <div class="bg-white rounded-2xl overflow-hidden border border-beige-200 beige-glow group flex flex-col h-full">
+                <div class="h-40 bg-gradient-to-br from-beige-100 to-amber-50 flex items-center justify-center p-6 border-b border-beige-200 relative">
+                    <i class="fa-solid fa-chart-line text-5xl text-accent/50 group-hover:scale-110 transition-transform duration-300"></i>
+                    <span class="absolute top-3 left-3 bg-white/80 backdrop-blur-sm text-[10px] px-2 py-0.5 rounded-md text-stone-500">財務分析</span>
+                </div>
+                <div class="p-5 flex-grow flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-base font-bold text-beige-900 mb-2">企業財務報告與成本分析模組</h3>
+                        <p class="text-xs text-stone-500 leading-relaxed font-light text-justify">
+                            針對中大型製造商或跨國企業，建構完整的損益表、資產負債表及多維度成本分析模型，助決策主管進行精準資源配置。
                         </p>
                     </div>
-                    <div class="mt-4 pt-4 border-t border-stone-50 text-xs text-accent font-semibold">
-                        <button onclick="openFinanceModal(event)" class="w-full py-2.5 bg-accent hover:bg-beige-900 text-white font-medium text-xs rounded-xl flex items-center justify-center gap-1.5 transition-colors shadow-sm text-center cursor-pointer">
-                            <span>開啟財務與稅務證照</span>
-                            <i class="fa-solid fa-magnifying-glass text-[10px]"></i>
+                    <div class="mt-5 space-y-3">
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="text-[10px] px-2 py-0.5 bg-stone-100 text-stone-600 rounded">Excel</span>
+                            <span class="text-[10px] px-2 py-0.5 bg-stone-100 text-stone-600 rounded">外帳結算</span>
+                        </div>
+                        <!-- 同層目錄下的相對跳轉 -->
+                        <a href="Data-Analysis.html" class="w-full py-2.5 bg-accent hover:bg-beige-900 text-white font-medium text-xs rounded-xl flex items-center justify-center gap-1.5 transition-colors shadow-sm cursor-pointer text-center">
+                            <span>開啟財務分析與報表</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 作品二 -->
+            <div class="bg-white rounded-2xl overflow-hidden border border-beige-200 beige-glow group flex flex-col h-full">
+                <div class="h-40 bg-gradient-to-br from-beige-100 to-amber-50 flex items-center justify-center p-6 border-b border-beige-200 relative">
+                    <i class="fa-solid fa-code text-5xl text-accent/50 group-hover:scale-110 transition-transform duration-300"></i>
+                    <span class="absolute top-3 left-3 bg-white/80 backdrop-blur-sm text-[10px] px-2 py-0.5 rounded-md text-stone-500">自動化導入</span>
+                </div>
+                <div class="p-5 flex-grow flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-base font-bold text-beige-900 mb-2">Gemini 憑證自動分類系統</h3>
+                        <p class="text-xs text-stone-500 leading-relaxed font-light text-justify">
+                            結合 Gemini API 的語意理解能力，自動過濾、辨識、分類大量的進銷項發票與單據，節省傳統登帳與複核所需工時。
+                        </p>
+                    </div>
+                    <div class="mt-5 space-y-3">
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="text-[10px] px-2 py-0.5 bg-stone-100 text-stone-600 rounded">Gemini API</span>
+                            <span class="text-[10px] px-2 py-0.5 bg-stone-100 text-stone-600 rounded">會計自動化</span>
+                        </div>
+                        <button onclick="openGeminiModal()" class="w-full py-2.5 bg-accent hover:bg-beige-900 text-white font-medium text-xs rounded-xl flex items-center justify-center gap-1.5 transition-colors shadow-sm text-center">
+                            <span>開啟自動化專案</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
                         </button>
                     </div>
                 </div>
+            </div>
 
-                <!-- 技能二：主流 ERP 系統操作 -->
-                <div class="bg-white p-6 rounded-2xl border border-beige-200 beige-glow hover:border-accent/40 transition-all duration-300 flex flex-col justify-between min-h-[340px]">
-                    <div>
-                        <div class="w-12 h-12 rounded-xl bg-beige-100 flex items-center justify-center text-accent mb-4 text-xl">
-                            <i class="fa-solid fa-network-wired"></i>
-                        </div>
-                        <h3 class="text-lg font-bold text-beige-900 mb-2">主流 ERP 系統操作</h3>
-                        <p class="text-sm text-stone-500 leading-relaxed">
-                            熟練掌握「正航 ERP」、「凌越 ERP」與「鼎新 Workflow ERP」等跨系統帳務處理，能高效對接不同企業的 ERP 系統進行無縫帳務建置。
-                        </p>
-                    </div>
-                    <div class="mt-4 pt-4 border-t border-stone-50 text-xs text-accent font-semibold">
-                        <button onclick="openERPModal(event)" class="w-full py-2.5 bg-accent hover:bg-beige-900 text-white font-medium text-xs rounded-xl flex items-center justify-center gap-1.5 transition-colors shadow-sm text-center cursor-pointer">
-                            <span>開啟鼎新 Workflow 認證</span>
-                            <i class="fa-solid fa-magnifying-glass text-[10px]"></i>
-                        </button>
-                    </div>
+            <!-- 作品三 -->
+            <div class="bg-white rounded-2xl overflow-hidden border border-beige-200 beige-glow group flex flex-col h-full">
+                <div class="h-40 bg-gradient-to-br from-beige-100 to-amber-50 flex items-center justify-center p-6 border-b border-beige-200 relative">
+                    <i class="fa-solid fa-award text-5xl text-accent/50 group-hover:scale-110 transition-transform duration-300"></i>
+                    <span class="absolute top-3 left-3 bg-white/80 backdrop-blur-sm text-[10px] px-2 py-0.5 rounded-md text-stone-500">專業證照</span>
                 </div>
-
-                <!-- 技能三：AI 數位辦公自動化 -->
-                <div class="bg-white p-6 rounded-2xl border border-beige-200 beige-glow hover:border-accent/40 transition-all duration-300 flex flex-col justify-between min-h-[340px]">
+                <div class="p-5 flex-grow flex flex-col justify-between">
                     <div>
-                        <div class="w-12 h-12 rounded-xl bg-beige-100 flex items-center justify-center text-accent mb-4 text-xl">
-                            <i class="fa-solid fa-bolt"></i>
-                        </div>
-                        <h3 class="text-lg font-bold text-beige-900 mb-2">AI 數位辦公自動化</h3>
-                        <p class="text-sm text-stone-500 leading-relaxed">
-                            運用 Excel/Word/PPT、Gemini AI 與自動化工具，縮短手工登帳與報表產製時間。將 AI 技術應用於日常數據排版與對帳，成效卓著。
+                        <h3 class="text-base font-bold text-beige-900 mb-2">會計與數位能力國際認證</h3>
+                        <p class="text-xs text-stone-500 leading-relaxed font-light text-justify">
+                            持有 HACCP (食品安全管制系統)、AutoCAD 專業認證與 MOS 365 國際認證，展現卓越的跨領域辦公自動化軟體實戰實力。
                         </p>
                     </div>
-                    <div class="mt-4 pt-4 border-t border-stone-50 text-xs text-accent font-semibold">
-                        <button onclick="openGeminiModal(event)" class="w-full py-2.5 bg-accent hover:bg-beige-900 text-white font-medium text-xs rounded-xl flex items-center justify-center gap-1.5 transition-colors shadow-sm text-center cursor-pointer">
-                            <span>開啟Gemini 多項教育與應用認證</span>
-                            <i class="fa-solid fa-magnifying-glass text-[10px]"></i>
+                    <div class="mt-5 space-y-3">
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="text-[10px] px-2 py-0.5 bg-stone-100 text-stone-600 rounded">MOS 認證</span>
+                            <span class="text-[10px] px-2 py-0.5 bg-stone-100 text-stone-600 rounded">AutoCAD</span>
+                            <span class="text-[10px] px-2 py-0.5 bg-stone-100 text-stone-600 rounded">HACCP</span>
+                        </div>
+                        <button onclick="openCertModal()" class="w-full py-2.5 bg-accent hover:bg-beige-900 text-white font-medium text-xs rounded-xl flex items-center justify-center gap-1.5 transition-colors shadow-sm text-center">
+                            <span>檢視證照證明</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
                         </button>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- 專業認證與外部檢視 -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
-                <!-- MOS 365 官方認證檢視 -->
-                <div class="bg-white rounded-2xl overflow-hidden border border-beige-200 hover:border-accent beige-glow group flex flex-col transition-all duration-300 hover:-translate-y-1">
-                    <div class="h-40 bg-gradient-to-br from-beige-100 to-amber-50 flex items-center justify-center p-6 border-b border-beige-200 relative">
-                        <i class="fa-solid fa-file-contract text-5xl text-accent/50 group-hover:scale-110 transition-transform duration-300"></i>
-                        <span class="absolute top-3 left-3 bg-white/80 backdrop-blur-sm text-[10px] px-2 py-0.5 rounded-md text-stone-500">外部連結</span>
-                    </div>
-                    <div class="p-5 flex-grow flex flex-col justify-between">
-                        <div class="space-y-2">
-                            <h3 class="text-base font-bold text-beige-900">MOS 365 官方認證檢視</h3>
-                            <p class="text-xs text-stone-500 leading-relaxed">
-                                連結至官方認證平台，查閱完整 Microsoft Office Specialist 365 認證資訊與證書明細。
-                            </p>
-                        </div>
-                        <div class="mt-5 space-y-3">
-                            <div class="flex flex-wrap gap-1.5">
-                                <span class="text-[10px] px-2 py-0.5 bg-stone-100 text-stone-600 rounded">Microsoft</span>
-                                <span class="text-[10px] px-2 py-0.5 bg-stone-100 text-stone-600 rounded">Official</span>
-                            </div>
-                            <button onclick="openCertModal()" class="w-full py-2.5 bg-accent hover:bg-beige-900 text-white font-medium text-xs rounded-xl flex items-center justify-center gap-1.5 transition-colors shadow-sm text-center cursor-pointer">
-                                <span>開啟MOS 365 認證</span>
-                                <i class="fa-solid fa-magnifying-glass text-[10px]"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 其他多元專業證照 (食品安全 & AutoCAD) -->
-                <div class="bg-white rounded-2xl overflow-hidden border border-beige-200 hover:border-accent beige-glow group flex flex-col transition-all duration-300 hover:-translate-y-1">
-                    <div class="h-40 bg-gradient-to-br from-beige-100 to-amber-50 flex items-center justify-center p-6 border-b border-beige-200 relative">
-                        <i class="fa-solid fa-compass-drafting text-5xl text-accent/50 group-hover:scale-110 transition-transform duration-300"></i>
-                        <span class="absolute top-3 left-3 bg-white/80 backdrop-blur-sm text-[10px] px-2 py-0.5 rounded-md text-stone-500">跨域認證</span>
-                    </div>
-                    <div class="p-5 flex-grow flex flex-col justify-between">
-                        <div class="space-y-2">
-                            <h3 class="text-base font-bold text-beige-900">其他多元專業證照</h3>
-                            <p class="text-xs text-stone-500 leading-relaxed">
-                                整合「食品安全管制系統(HACCP)」與「AutoCAD專業電腦繪圖」檢定，展示跨領域與多元工程技術的優秀適應力。
-                            </p>
-                        </div>
-                        <div class="mt-5 space-y-3">
-                            <div class="flex flex-wrap gap-1.5">
-                                <span class="text-[10px] px-2 py-0.5 bg-stone-100 text-stone-600 rounded">HACCP</span>
-                                <span class="text-[10px] px-2 py-0.5 bg-stone-100 text-stone-600 rounded">AutoCAD</span>
-                            </div>
-                            <button onclick="openOtherModal()" class="w-full py-2.5 bg-accent hover:bg-beige-900 text-white font-medium text-xs rounded-xl flex items-center justify-center gap-1.5 transition-colors shadow-sm text-center cursor-pointer">
-                                <span>開啟其他證照</span>
-                                <i class="fa-solid fa-magnifying-glass text-[10px]"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="portfolio" class="space-y-6">
-            <div class="border-l-4 border-accent pl-4">
-                <h2 class="text-2xl font-bold text-beige-900 tracking-wide">實績與專案作品</h2>
-                <p class="text-xs text-stone-400 uppercase tracking-widest mt-0.5">Project Showcases</p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- 作品一 -->
-                <div class="bg-white rounded-2xl overflow-hidden border border-beige-200 beige-glow group flex flex-col h-full">
-                    <div class="h-40 bg-gradient-to-br from-beige-100 to-amber-50 flex items-center justify-center p-6 border-b border-beige-200 relative">
-                        <i class="fa-solid fa-chart-line text-5xl text-accent/50 group-hover:scale-110 transition-transform duration-300"></i>
-                        <span class="absolute top-3 left-3 bg-white/80 backdrop-blur-sm text-[10px] px-2 py-0.5 rounded-md text-stone-500">財務分析</span>
-                    </div>
-                    <div class="p-5 flex-grow flex flex-col justify-between">
-                        <div>
-                            <h3 class="text-base font-bold text-beige-900 mb-2">企業財務報告與成本 analysis 模組</h3>
-                            <p class="text-xs text-stone-500 leading-relaxed">
-                                針對中大型製造商 or 跨國企業，建構完整的損益表、資產負債表及多維度成本 analysis 模型，助主管進行精準決策。
-                            </p>
-                        </div>
-                        <div class="mt-5 space-y-3">
-                            <div class="flex flex-wrap gap-1.5">
-                                <span class="text-[10px] px-2 py-0.5 bg-stone-100 text-stone-600 rounded">Excel</span>
-                                <span class="text-[10px] px-2 py-0.5 bg-stone-100 text-stone-600 rounded">外帳結算</span>
-                            </div>
-                            <!-- 修正這裡的 href：移除帳號名稱，改用乾淨的相對路徑 -->
-                            <a href="portfolio/Data-Analysis.html" class="w-full py-2.5 bg-accent hover:bg-beige-900 text-white font-medium text-xs rounded-xl flex items-center justify-center gap-1.5 transition-colors shadow-sm cursor-pointer text-center">
-                                <span>開啟財務分析與報表</span>
-                                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 作品二 -->
-                <div class="bg-white rounded-2xl overflow-hidden border border-beige-200 beige-glow group flex flex-col h-full">
-                    <div class="h-40 bg-gradient-to-br from-beige-100 to-amber-50 flex items-center justify-center p-6 border-b border-beige-200 relative">
-                        <i class="fa-solid fa-rotate text-5xl text-accent/50 group-hover:scale-110 transition-transform duration-300"></i>
-                        <span class="absolute top-3 left-3 bg-white/80 backdrop-blur-sm text-[10px] px-2 py-0.5 rounded-md text-stone-500">系統整合</span>
-                    </div>
-                    <div class="p-5 flex-grow flex flex-col justify-between">
-                        <div>
-                            <h3 class="text-base font-bold text-beige-900 mb-2">ERP 系統帳務流暢化專案</h3>
-                            <p class="text-xs text-stone-500 leading-relaxed">
-                                簡化手動收發、紀錄交易等傳統原始憑證流程，將其與鼎新/正航 ERP 完美介接，大幅減低傳票入帳錯誤率。
-                            </p>
-                        </div>
-                        <div class="mt-4 flex flex-wrap gap-1.5">
-                            <span class="text-[10px] px-2 py-0.5 bg-stone-100 text-stone-600 rounded">ERP 流程優化</span>
-                            <span class="text-[10px] px-2 py-0.5 bg-stone-100 text-stone-600 rounded">內部控制</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 作品三 (AI 智能工具箱入口卡片) -->
-                <div class="bg-white rounded-2xl overflow-hidden border-2 border-accent/40 hover:border-accent beige-glow group flex flex-col h-full transition-all duration-300 hover:-translate-y-1">
-                    <div class="h-40 bg-gradient-to-br from-amber-50 to-beige-100 flex items-center justify-center p-6 border-b border-beige-200 relative">
-                        <i class="fa-solid fa-toolbox text-5xl text-accent group-hover:scale-110 transition-transform duration-300"></i>
-                        <span class="absolute top-3 left-3 bg-accent text-white text-[10px] px-2 py-0.5 rounded-md font-bold">互動工具</span>
-                    </div>
-                    <div class="p-5 flex-grow flex flex-col justify-between">
-                        <div class="space-y-2">
-                            <h3 class="text-base font-bold text-beige-900">AI 智能工具箱</h3>
-                            <p class="text-xs text-stone-500 leading-relaxed">
-                                整合「行政文書生成器」與「商業視覺設計提示詞產生器」，將 AI 與日常辦公流程深度融合，實現智慧化營運。
-                            </p>
-                        </div>
-                        <div class="mt-5 space-y-3">
-                            <div class="flex flex-wrap gap-1.5">
-                                <span class="text-[10px] px-2 py-0.5 bg-stone-100 text-stone-600 rounded">Gemini API</span>
-                                <span class="text-[10px] px-2 py-0.5 bg-stone-100 text-stone-600 rounded">行政自動化</span>
-                                <span class="text-[10px] px-2 py-0.5 bg-stone-100 text-stone-600 rounded">提示詞美學</span>
-                            </div>
-                            <!-- 外部跳轉按鈕 -->
-                            <a href="tools.html" class="w-full py-2.5 bg-accent hover:bg-beige-900 text-white font-medium text-xs rounded-xl flex items-center justify-center gap-1.5 transition-colors shadow-sm text-center">
-                                <span>立即開啟工具箱</span>
-                                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="experience" class="space-y-6">
+    <!-- 工作經歷 (Experience Section) -->
+    <section id="experience" class="bg-white border-y border-beige-200 py-20">
+        <div class="max-w-5xl mx-auto px-6 space-y-12">
             <div class="border-l-4 border-accent pl-4">
                 <h2 class="text-2xl font-bold text-beige-900 tracking-wide">工作經歷</h2>
-                <p class="text-xs text-stone-400 uppercase tracking-widest mt-0.5">Working Experience</p>
+                <p class="text-xs text-stone-400 uppercase tracking-widest mt-0.5">Work History & Job Experience</p>
             </div>
-
-            <!-- 時間軸容器 -->
-            <div class="relative border-l-2 border-beige-200 ml-4 pl-6 md:pl-8 space-y-12 py-2">
-                
-                <!-- 經歷 1: 大地興機器廠 -->
-                <div class="relative group">
-                    <!-- 時間軸節點小圓點 -->
-                    <span class="absolute -left-[31px] md:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-accent border-4 border-beige-50 group-hover:scale-125 transition-transform duration-300"></span>
-                    
-                    <!-- 經歷卡片 -->
-                    <div class="bg-white p-6 rounded-2xl border border-beige-200 beige-glow hover:border-accent/40 transition-all duration-300 space-y-4">
-                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
-                            <div>
-                                <h3 class="text-lg font-bold text-beige-900 flex items-center gap-2">
-                                    <i class="fa-solid fa-building text-stone-400 text-sm"></i>
-                                    <span>大地興機器廠(股)公司</span>
-                                </h3>
-                                <p class="text-sm font-semibold text-accent mt-0.5">主辦會計</p>
-                            </div>
-                            <div class="flex flex-wrap items-center gap-2 text-xs">
-                                <span class="px-2.5 py-1 bg-beige-100 text-stone-700 font-medium rounded-lg">
-                                    <i class="fa-solid fa-calendar-days mr-1 text-accent"></i>民國 114/04/01 ~ 114/11/30
-                                </span>
-                                <span class="px-2.5 py-1 bg-red-50 text-red-700 font-semibold rounded-lg border border-red-100 flex items-center gap-1">
-                                    <i class="fa-solid fa-right-from-bracket text-[10px]"></i>離職原因：想嘗試不同產業發展
-                                </span>
-                            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+                <!-- 經歷一：中興紡織 -->
+                <div class="bg-beige-50 p-6 rounded-2xl border border-beige-200 beige-glow flex flex-col justify-between space-y-4">
+                    <div>
+                        <div class="flex flex-wrap justify-between items-start gap-2 mb-3">
+                            <h3 class="text-lg font-bold text-beige-900">會計課員</h3>
+                            <span class="text-xs font-semibold px-2.5 py-1 bg-beige-100 text-accent rounded-md">
+                                民國 88/05 - 91/10 (3年5個月)
+                            </span>
                         </div>
-                        
-                        <div class="pt-3 border-t border-stone-100 space-y-2.5">
-                            <h4 class="text-xs font-bold text-stone-400 uppercase tracking-wider flex items-center gap-1">
-                                <i class="fa-solid fa-list-check"></i>
-                                <span>工作職責 (Job Duty)</span>
-                            </h4>
-                            <ul class="space-y-2 text-stone-600 text-sm">
-                                <li class="flex items-start gap-2.5">
-                                    <span class="text-accent mt-0.5"><i class="fa-solid fa-circle-check text-xs"></i></span>
-                                    <span class="leading-relaxed">審核有關各項費用支付之發票、單據及帳務處理。</span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <span class="text-accent mt-0.5"><i class="fa-solid fa-circle-check text-xs"></i></span>
-                                    <span class="leading-relaxed">處理廠商貨款或費用等應付款項帳務。</span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <span class="text-accent mt-0.5"><i class="fa-solid fa-circle-check text-xs"></i></span>
-                                    <span class="leading-relaxed">處理其他一般會計帳務。</span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <span class="text-accent mt-0.5"><i class="fa-solid fa-circle-check text-xs"></i></span>
-                                    <span class="leading-relaxed">定期編製帳務報表。</span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <span class="text-accent mt-0.5"><i class="fa-solid fa-circle-check text-xs"></i></span>
-                                    <span class="leading-relaxed">製作財務報告及分析。</span>
-                                </li>
+                        <p class="text-xs text-stone-400 font-bold mb-3 flex items-center gap-1.5">
+                            <i class="fa-solid fa-building text-stone-300"></i>
+                            中興紡織廠股份有限公司 (總公司)
+                        </p>
+                        <div class="text-xs text-stone-600 space-y-2 text-justify">
+                            <p class="font-medium text-stone-700">【工作職責】</p>
+                            <ul class="list-disc pl-4 space-y-1 text-stone-500 font-light">
+                                <li>負責各項費用支付之發票、單據及帳務傳票編製審核。</li>
+                                <li>執行供應商應付帳款核銷與立帳，追蹤對帳單落差。</li>
+                                <li>處理銀行各項匯款、利息、定存及現金資金調度出納作業。</li>
+                                <li>協助期末會計科目的調節表編製。</li>
                             </ul>
                         </div>
                     </div>
+                    <div class="pt-4 border-t border-beige-200 flex items-center justify-between text-xs text-stone-400">
+                        <span>產業: 紡織製造業</span>
+                        <span class="px-2 py-0.5 rounded bg-stone-100 text-[10px]">離職原因: 裁撤總公司會計部</span>
+                    </div>
                 </div>
 
-                <!-- 經歷 2: 英商優而備智亞太有線 -->
-                <div class="relative group">
-                    <!-- 時間軸節點小圓點 -->
-                    <span class="absolute -left-[31px] md:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-accent border-4 border-beige-50 group-hover:scale-125 transition-transform duration-300"></span>
-                    
-                    <!-- 經歷卡片 -->
-                    <div class="bg-white p-6 rounded-2xl border border-beige-200 beige-glow hover:border-accent/40 transition-all duration-300 space-y-4">
-                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
-                            <div>
-                                <h3 class="text-lg font-bold text-beige-900 flex items-center gap-2">
-                                    <i class="fa-solid fa-building text-stone-400 text-sm"></i>
-                                    <span>英商優而備智亞太有線公司台灣分公司</span>
-                                </h3>
-                                <p class="text-sm font-semibold text-accent mt-0.5">主辦會計</p>
-                            </div>
-                            <div class="flex flex-wrap items-center gap-2 text-xs">
-                                <span class="px-2.5 py-1 bg-beige-100 text-stone-700 font-medium rounded-lg">
-                                    <i class="fa-solid fa-calendar-days mr-1 text-accent"></i>民國 109/03/15 ~ 113/12/31
-                                </span>
-                                <span class="px-2.5 py-1 bg-orange-50 text-orange-800 font-semibold rounded-lg border border-orange-100 flex items-center gap-1">
-                                    <i class="fa-solid fa-right-from-bracket text-[10px]"></i>離職原因：公司遷移
-                                </span>
-                            </div>
+                <!-- 經歷二：廣穎電通 -->
+                <div class="bg-beige-50 p-6 rounded-2xl border border-beige-200 beige-glow flex flex-col justify-between space-y-4">
+                    <div>
+                        <div class="flex flex-wrap justify-between items-start gap-2 mb-3">
+                            <h3 class="text-lg font-bold text-beige-900">總帳會計專員</h3>
+                            <span class="text-xs font-semibold px-2.5 py-1 bg-beige-100 text-accent rounded-md">
+                                民國 92/05 - 113/05 (21年)
+                            </span>
                         </div>
-                        
-                        <div class="pt-3 border-t border-stone-100 space-y-2.5">
-                            <h4 class="text-xs font-bold text-stone-400 uppercase tracking-wider flex items-center gap-1">
-                                <i class="fa-solid fa-list-check"></i>
-                                <span>工作職責 (Job Duty)</span>
-                            </h4>
-                            <ul class="space-y-2 text-stone-600 text-sm">
-                                <li class="flex items-start gap-2.5">
-                                    <span class="text-accent mt-0.5"><i class="fa-solid fa-circle-check text-xs"></i></span>
-                                    <span class="leading-relaxed">收發、記錄及彙整交易產生之原始憑證，並登錄至會計系統製作傳票。</span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <span class="text-accent mt-0.5"><i class="fa-solid fa-circle-check text-xs"></i></span>
-                                    <span class="leading-relaxed">審核有關各項費用支付之發票、單據及帳務處理。</span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <span class="text-accent mt-0.5"><i class="fa-solid fa-circle-check text-xs"></i></span>
-                                    <span class="leading-relaxed">申報營業稅等各項稅務。</span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <span class="text-accent mt-0.5"><i class="fa-solid fa-circle-check text-xs"></i></span>
-                                    <span class="leading-relaxed">負責公司外帳之查核及登帳、結帳整理及稅務申報。</span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <span class="text-accent mt-0.5"><i class="fa-solid fa-circle-check text-xs"></i></span>
-                                    <span class="leading-relaxed">定期編製帳務報表。</span>
-                                </li>
+                        <p class="text-xs text-stone-400 font-bold mb-3 flex items-center gap-1.5">
+                            <i class="fa-solid fa-building text-stone-300"></i>
+                            廣穎電通股份有限公司
+                        </p>
+                        <div class="text-xs text-stone-600 space-y-2 text-justify">
+                            <p class="font-medium text-stone-700">【工作職責】</p>
+                            <ul class="list-disc pl-4 space-y-1 text-stone-500 font-light">
+                                <li>主導日常費用、資產購置及成本傳票核對，確保總帳準確性。</li>
+                                <li>核算並調節各類稅項、編製營業稅、各類所得扣繳申報與調節表。</li>
+                                <li>編製每月月結損益表、資產負債表等合併與單體財務報表。</li>
+                                <li>對接並協調外部聯合會計師事務所進行年度查帳與稅務簽證審計。</li>
+                                <li>參與文中 ERP 系統維護，協助導入多維度財務報表格式。</li>
                             </ul>
                         </div>
                     </div>
-                </div>
-
-            </div>
-        </section>
-
-    </main>
-
-    <!-- 1. 財務與稅務證照互動彈出視窗 (Finance Modal) -->
-    <div id="finance-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm hidden transition-all duration-300">
-        <div class="bg-white border border-beige-200 w-full max-w-4xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
-            <div class="px-6 py-4 border-b border-beige-100 flex justify-between items-center bg-beige-50">
-                <h3 class="text-base md:text-lg font-bold text-beige-900 flex items-center gap-2">
-                    <i class="fa-solid fa-wallet text-accent"></i>
-                    <span>專業財務與稅務證照</span>
-                </h3>
-                <button onclick="closeFinanceModal()" class="text-stone-400 hover:text-stone-600 text-2xl font-light leading-none">&times;</button>
-            </div>
-            
-            <div class="p-6 overflow-y-auto flex-grow space-y-6">
-                <p class="text-xs text-stone-500 text-center">點擊證書圖片，可在新分頁開啟高解析度原圖檢視。</p>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="space-y-3 text-center">
-                        <span class="inline-block px-2.5 py-1 bg-amber-50 text-amber-800 text-xs font-semibold rounded-md">會計準則 (EAS)</span>
-                        <a href="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/pics/eas.png" target="_blank" class="block border border-beige-200 rounded-xl overflow-hidden hover:border-accent hover:shadow-md transition-all p-1 bg-white">
-                            <img src="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/pics/eas.png" alt="會計準則 EAS 證照" class="w-full h-auto object-cover mx-auto" onerror="this.onerror=null; this.src='https://placehold.co/600x420/f5f0e6/b88e56?text=EAS+Certificate';">
-                        </a>
+                    <div class="pt-4 border-t border-beige-200 flex items-center justify-between text-xs text-stone-400">
+                        <span>產業: 電子零組件／科技業</span>
+                        <span class="px-2 py-0.5 rounded bg-stone-100 text-[10px]">離職原因: 個人生涯規劃</span>
                     </div>
-                    <div class="space-y-3 text-center">
-                        <span class="inline-block px-2.5 py-1 bg-emerald-50 text-emerald-800 text-xs font-semibold rounded-md">稅務申報實務</span>
-                        <a href="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/pics/tax.png" target="_blank" class="block border border-beige-200 rounded-xl overflow-hidden hover:border-accent hover:shadow-md transition-all p-1 bg-white">
-                            <img src="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/pics/tax.png" alt="稅務申報證照" class="w-full h-auto object-cover mx-auto" onerror="this.onerror=null; this.src='https://placehold.co/600x420/f5f0e6/b88e56?text=Tax+Certificate';">
-                        </a>
-                    </div>
-                    <div class="space-y-3 text-center">
-                        <span class="inline-block px-2.5 py-1 bg-blue-50 text-blue-800 text-xs font-semibold rounded-md">Power BI 財務分析</span>
-                        <a href="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/pics/power-bi.png" target="_blank" class="block border border-beige-200 rounded-xl overflow-hidden hover:border-accent hover:shadow-md transition-all p-1 bg-white">
-                            <img src="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/pics/power-bi.png" alt="Power BI 數據視覺化證照" class="w-full h-auto object-cover mx-auto" onerror="this.onerror=null; this.src='https://placehold.co/600x420/f5f0e6/b88e56?text=Power+BI+Certificate';">
-                        </a>
-                    </div>
-                </div>
-                <div class="flex justify-center pt-6">
-                    <button onclick="scrollToHomeFromModal('finance-modal')" class="px-8 py-3 bg-accent hover:bg-beige-900 text-white font-bold rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all flex items-center gap-2 text-xs md:text-sm cursor-pointer">
-                        <i class="fa-solid fa-house"></i>
-                        <span>點此關閉並返回首頁</span>
-                    </button>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- 2. MOS 365 證照互動彈出視窗 (MOS Modal Overlay) -->
-    <div id="cert-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm hidden transition-all duration-300">
-        <div class="bg-white border border-beige-200 w-full max-w-4xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
-            <div class="px-6 py-4 border-b border-beige-100 flex justify-between items-center bg-beige-50">
-                <h3 class="text-base md:text-lg font-bold text-beige-900 flex items-center gap-2">
-                    <i class="fa-solid fa-award text-accent"></i>
-                    <span>MOS 365 (Microsoft 365 Apps) 國際認證證書</span>
-                </h3>
-                <button onclick="closeCertModal()" class="text-stone-400 hover:text-stone-600 text-2xl font-light leading-none">&times;</button>
-            </div>
-            
-            <div class="p-6 overflow-y-auto flex-grow space-y-6">
-                <p class="text-xs text-stone-500 text-center">點擊證書圖片，可在新分頁開啟高清大圖檢視驗證。</p>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="space-y-3 text-center">
-                        <span class="inline-block px-2.5 py-1 bg-blue-50 text-blue-700 text-xs font-semibold rounded-md">Word Expert</span>
-                        <a href="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/word.png" target="_blank" class="block border border-beige-200 rounded-xl overflow-hidden hover:border-accent hover:shadow-md transition-all p-1 bg-white">
-                            <img src="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/word.png" alt="Word Expert Certificate" class="w-full h-auto object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x420/f5f0e6/b88e56?text=Word+Expert+Certificate';">
-                        </a>
-                    </div>
-                    <div class="space-y-3 text-center">
-                        <span class="inline-block px-2.5 py-1 bg-green-50 text-green-700 text-xs font-semibold rounded-md">Excel Expert</span>
-                        <a href="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/excel.png" target="_blank" class="block border border-beige-200 rounded-xl overflow-hidden hover:border-accent hover:shadow-md transition-all p-1 bg-white">
-                            <img src="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/excel.png" alt="Excel Expert Certificate" class="w-full h-auto object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x420/f5f0e6/b88e56?text=Excel+Expert+Certificate';">
-                        </a>
-                    </div>
-                    <div class="space-y-3 text-center">
-                        <span class="inline-block px-2.5 py-1 bg-orange-50 text-orange-700 text-xs font-semibold rounded-md">PowerPoint Associate</span>
-                        <a href="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/ppt.png" target="_blank" class="block border border-beige-200 rounded-xl overflow-hidden hover:border-accent hover:shadow-md transition-all p-1 bg-white">
-                            <img src="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/ppt.png" alt="PowerPoint Certificate" class="w-full h-auto object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x420/f5f0e6/b88e56?text=PowerPoint+Certificate';">
-                        </a>
-                    </div>
-                </div>
-                <div class="flex justify-center pt-6">
-                    <button onclick="scrollToHomeFromModal('cert-modal')" class="px-8 py-3 bg-accent hover:bg-beige-900 text-white font-bold rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all flex items-center gap-2 text-xs md:text-sm cursor-pointer">
-                        <i class="fa-solid fa-house"></i>
-                        <span>點此關閉並返回首頁</span>
-                    </button>
-                </div>
+    <!-- 聯絡諮詢區塊 -->
+    <section id="contact" class="bg-beige-50 border-t border-beige-200 py-16">
+        <div class="max-w-2xl mx-auto px-6 text-center space-y-6">
+            <span class="text-xs font-bold text-accent tracking-widest uppercase block">Get In Touch</span>
+            <h2 class="text-3xl font-bold text-beige-900 tracking-wide">與我啟動數據與財務轉型合作</h2>
+            <p class="text-stone-500 text-sm font-light leading-relaxed">
+                想了解如何利用 AI 與數據看板優化您企業的財務流、節省查核成本？歡迎透過電子郵件或社群平台取得聯繫。
+            </p>
+            <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4 text-xs font-bold text-beige-900">
+                <a href="mailto:wu2136tr@gmail.com" class="px-6 py-3 border border-beige-200 hover:border-accent rounded-xl flex items-center gap-2 transition-all bg-white">
+                    <i class="fa-regular fa-envelope text-accent"></i>
+                    <span>wu2136tr@gmail.com</span>
+                </a>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- 3. Gemini 證照互動彈出視窗 (Gemini Modal Overlay) -->
-    <div id="gemini-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm hidden transition-all duration-300">
-        <div class="bg-white border border-beige-200 w-full max-w-4xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
-            <div class="px-6 py-4 border-b border-beige-100 flex justify-between items-center bg-beige-50">
-                <h3 class="text-base md:text-lg font-bold text-beige-900 flex items-center gap-2">
-                    <i class="fa-solid fa-graduation-cap text-accent"></i>
-                    <span>Gemini AI 多項教育與應用官方專業認證</span>
-                </h3>
-                <button onclick="closeGeminiModal()" class="text-stone-400 hover:text-stone-600 text-2xl font-light leading-none">&times;</button>
-            </div>
-            
-            <div class="p-6 overflow-y-auto flex-grow space-y-6">
-                <p class="text-xs text-stone-500 text-center">點擊證書圖片，可在新分頁開啟高解析度原圖檢視。</p>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="space-y-3 text-center">
-                        <span class="inline-block px-2.5 py-1 bg-blue-50 text-blue-700 text-xs font-semibold rounded-md">Gemini 教育家</span>
-                        <a href="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/pics/gemini%20educator.png" target="_blank" class="block border border-beige-200 rounded-xl overflow-hidden hover:border-accent hover:shadow-md transition-all p-1 bg-white">
-                            <img src="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/pics/gemini%20educator.png" alt="Gemini Educator Certificate" class="w-full h-auto object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x420/f5f0e6/b88e56?text=Gemini+Educator+Certificate';">
-                        </a>
-                    </div>
-                    <div class="space-y-3 text-center">
-                        <span class="inline-block px-2.5 py-1 bg-purple-50 text-purple-700 text-xs font-semibold rounded-md">Gemini 大學生認證</span>
-                        <a href="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/pics/gemini%20student.png" target="_blank" class="block border border-beige-200 rounded-xl overflow-hidden hover:border-accent hover:shadow-md transition-all p-1 bg-white">
-                            <img src="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/pics/gemini%20student.png" alt="Gemini College Student Certificate" class="w-full h-auto object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x420/f5f0e6/b88e56?text=Gemini+Student+Certificate';">
-                        </a>
-                    </div>
-                    <div class="space-y-3 text-center">
-                        <span class="inline-block px-2.5 py-1 bg-indigo-50 text-indigo-700 text-xs font-semibold rounded-md">Gemini 教職員認證</span>
-                        <a href="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/pics/gemini%20faculty.png" target="_blank" class="block border border-beige-200 rounded-xl overflow-hidden hover:border-accent hover:shadow-md transition-all p-1 bg-white">
-                            <img src="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/pics/gemini%20faculty.png" alt="Gemini Faculty and Staff Certificate" class="w-full h-auto object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x420/f5f0e6/b88e56?text=Gemini+Faculty+Certificate';">
-                        </a>
-                    </div>
-                </div>
-                <div class="flex justify-center pt-6">
-                    <button onclick="scrollToHomeFromModal('gemini-modal')" class="px-8 py-3 bg-accent hover:bg-beige-900 text-white font-bold rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all flex items-center gap-2 text-xs md:text-sm cursor-pointer">
-                        <i class="fa-solid fa-house"></i>
-                        <span>點此關閉並返回首頁</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 4. 鼎新 Workflow 認證互動彈出視窗 (ERP Modal) -->
-    <div id="erp-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm hidden transition-all duration-300">
-        <div class="bg-white border border-beige-200 w-full max-w-4xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
-            <div class="px-6 py-4 border-b border-beige-100 flex justify-between items-center bg-beige-50">
-                <h3 class="text-base md:text-lg font-bold text-beige-900 flex items-center gap-2">
-                    <i class="fa-solid fa-certificate text-accent"></i>
-                    <span>鼎新 Workflow ERP 官方專業職能認證證書</span>
-                </h3>
-                <button onclick="closeERPModal()" class="text-stone-400 hover:text-stone-600 text-2xl font-light leading-none">&times;</button>
-            </div>
-            
-            <div class="p-6 overflow-y-auto flex-grow space-y-6">
-                <p class="text-xs text-stone-500 text-center">點擊證書圖片，可在新分頁開啟高解析度原圖檢視。</p>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="space-y-3 text-center">
-                        <span class="inline-block px-2.5 py-1 bg-amber-50 text-amber-800 text-xs font-semibold rounded-md">基本操作與系統應用</span>
-                        <a href="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/pics/erp-chinese.png" target="_blank" class="block border border-beige-200 rounded-xl overflow-hidden hover:border-accent hover:shadow-md transition-all p-1 bg-white">
-                            <img src="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/pics/erp-chinese.png" alt="ERP 中文系統與基本操作證照" class="w-full h-auto object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x420/f5f0e6/b88e56?text=ERP+Chinese+Certificate';">
-                        </a>
-                    </div>
-                    <div class="space-y-3 text-center">
-                        <span class="inline-block px-2.5 py-1 bg-emerald-50 text-emerald-800 text-xs font-semibold rounded-md">財務模組應用</span>
-                        <a href="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/pics/erp-financial.png" target="_blank" class="block border border-beige-200 rounded-xl overflow-hidden hover:border-accent hover:shadow-md transition-all p-1 bg-white">
-                            <img src="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/pics/erp-financial.png" alt="ERP 財務模組應用證照" class="w-full h-auto object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x420/f5f0e6/b88e56?text=ERP+Financial+Certificate';">
-                        </a>
-                    </div>
-                    <div class="space-y-3 text-center">
-                        <span class="inline-block px-2.5 py-1 bg-sky-50 text-sky-800 text-xs font-semibold rounded-md">配銷模組應用</span>
-                        <a href="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/pics/erp-distribution.png" target="_blank" class="block border border-beige-200 rounded-xl overflow-hidden hover:border-accent hover:shadow-md transition-all p-1 bg-white">
-                            <img src="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/pics/erp-distribution.png" alt="ERP 配銷模組應用證照" class="w-full h-auto object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x420/f5f0e6/b88e56?text=ERP+Distribution+Certificate';">
-                        </a>
-                    </div>
-                </div>
-                <div class="flex justify-center pt-6">
-                    <button onclick="scrollToHomeFromModal('erp-modal')" class="px-8 py-3 bg-accent hover:bg-beige-900 text-white font-bold rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all flex items-center gap-2 text-xs md:text-sm cursor-pointer">
-                        <i class="fa-solid fa-house"></i>
-                        <span>點此關閉並返回首頁</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 5. 其他多元證照互動彈出視窗 (Other Modal - HACCP & AutoCAD) -->
-    <div id="other-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm hidden transition-all duration-300">
-        <div class="bg-white border border-beige-200 w-full max-w-4xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
-            <div class="px-6 py-4 border-b border-beige-100 flex justify-between items-center bg-beige-50">
-                <h3 class="text-base md:text-lg font-bold text-beige-900 flex items-center gap-2">
-                    <i class="fa-solid fa-compass-drafting text-accent"></i>
-                    <span>跨領域專業證照 (食品安全管制系統 & AutoCAD)</span>
-                </h3>
-                <button onclick="closeOtherModal()" class="text-stone-400 hover:text-stone-600 text-2xl font-light leading-none">&times;</button>
-            </div>
-            
-            <div class="p-6 overflow-y-auto flex-grow space-y-6">
-                <p class="text-xs text-stone-500 text-center">點擊證書圖片，可在新分頁開啟高解析度原圖檢視。</p>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="space-y-3 text-center">
-                        <span class="inline-block px-2.5 py-1 bg-green-50 text-green-800 text-xs font-semibold rounded-md">食品安全管制系統 A</span>
-                        <a href="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/pics/food-safe-1.png" target="_blank" class="block border border-beige-200 rounded-xl overflow-hidden hover:border-accent hover:shadow-md transition-all p-1 bg-white">
-                            <img src="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/pics/food-safe-1.png" alt="食品安全管制系統訓練合格證書 A" class="w-full h-auto object-cover mx-auto" onerror="this.onerror=null; this.src='https://placehold.co/600x420/f5f0e6/b88e56?text=Food+Safe+A+Certificate';">
-                        </a>
-                    </div>
-                    <div class="space-y-3 text-center">
-                        <span class="inline-block px-2.5 py-1 bg-green-50 text-green-800 text-xs font-semibold rounded-md">食品安全管制系統 B</span>
-                        <a href="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/pics/food-safe-2.png" target="_blank" class="block border border-beige-200 rounded-xl overflow-hidden hover:border-accent hover:shadow-md transition-all p-1 bg-white">
-                            <img src="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/pics/food-safe-2.png" alt="食品安全管制系統訓練合格證書 B" class="w-full h-auto object-cover mx-auto" onerror="this.onerror=null; this.src='https://placehold.co/600x420/f5f0e6/b88e56?text=Food+Safe+B+Certificate';">
-                        </a>
-                    </div>
-                    <div class="space-y-3 text-center">
-                        <span class="inline-block px-2.5 py-1 bg-blue-50 text-blue-800 text-xs font-semibold rounded-md">AutoCAD 專業工程繪圖</span>
-                        <a href="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/autocad.png" target="_blank" class="block border border-beige-200 rounded-xl overflow-hidden hover:border-accent hover:shadow-md transition-all p-1 bg-white">
-                            <img src="https://raw.githubusercontent.com/wu2136tr-coder/portfolio/main/autocad.png" alt="AutoCAD 專業認證證書" class="w-full h-auto object-cover mx-auto" onerror="this.onerror=null; this.src='https://placehold.co/600x420/f5f0e6/b88e56?text=AutoCAD+Certificate';">
-                        </a>
-                    </div>
-                </div>
-                <div class="flex justify-center pt-6">
-                    <button onclick="scrollToHomeFromModal('other-modal')" class="px-8 py-3 bg-accent hover:bg-beige-900 text-white font-bold rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all flex items-center gap-2 text-xs md:text-sm cursor-pointer">
-                        <i class="fa-solid fa-house"></i>
-                        <span>點此關閉並返回首頁</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 底部頁尾 -->
-    <footer class="bg-beige-100/50 border-t border-beige-200 text-stone-500 text-xs py-8">
-        <div class="max-w-4xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
-            <p>© 2026 吳慧華 Wu Hui Hua. All rights reserved.</p>
-            <p>融合財務智慧與數位創新的新一代主辦會計</p>
+    <!-- 頁尾 -->
+    <footer class="bg-white border-t border-beige-200 py-10 text-stone-500 text-xs">
+        <div class="max-w-5xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+            <p>© 2026 吳慧華 Hui-Hua Wu. All rights reserved.</p>
+            <p class="font-light">融合會計智慧與大數據的前沿財務決策方案</p>
         </div>
     </footer>
 
-    <!-- 提示框元件 (取代 alert) -->
-    <div id="toast" class="fixed bottom-6 right-6 bg-stone-900 text-stone-100 text-sm px-4 py-3 rounded-xl shadow-lg transform translate-y-20 opacity-0 transition-all duration-300 flex items-center gap-2">
-        <i class="fa-solid fa-circle-check text-accent"></i>
-        <span id="toast-msg">複製成功！</span>
+    <!-- ========================================== -->
+    <!-- 證照證明 彈出視窗 (Modal) -->
+    <!-- ========================================== -->
+    <div id="cert-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 opacity-0 pointer-events-none transition-opacity duration-300 p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 space-y-6 border border-beige-200 relative transform scale-95 transition-transform duration-300">
+            <button onclick="closeCertModal()" class="absolute top-4 right-4 text-stone-400 hover:text-stone-600">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="flex items-center gap-3 border-b border-beige-100 pb-4">
+                <div class="w-10 h-10 rounded-xl bg-beige-100 flex items-center justify-center text-accent text-lg">
+                    <i class="fa-solid fa-award"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-beige-900">跨領域專業認證與證照</h3>
+                    <p class="text-[10px] text-stone-400 uppercase tracking-widest">Certificates & Credentials</p>
+                </div>
+            </div>
+            <div class="space-y-4 max-h-[350px] overflow-y-auto no-scrollbar pr-1">
+                <div class="p-4 bg-beige-50 rounded-2xl border border-beige-200 space-y-2">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs font-bold text-beige-900">AutoCAD 2010 專業技能認證</span>
+                        <span class="text-[10px] font-semibold text-accent bg-white px-2 py-0.5 rounded border border-beige-200">2012</span>
+                    </div>
+                    <p class="text-[11px] text-stone-500 font-light leading-relaxed text-justify">
+                        具備工程製圖技術基礎、空間識圖與多維度模型標註能力，可跨領域支援生產自動化排程查核。
+                    </p>
+                </div>
+                <div class="p-4 bg-beige-50 rounded-2xl border border-beige-200 space-y-2">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs font-bold text-beige-900">HACCP 食品安全系統管制訓練證書</span>
+                        <span class="text-[10px] font-semibold text-accent bg-white px-2 py-0.5 rounded border border-beige-200">2015</span>
+                    </div>
+                    <p class="text-[11px] text-stone-500 font-light leading-relaxed text-justify">
+                        精準掌握危害分析重要管制點之稽核邏輯與流程追溯。此邏輯極佳地移植於財務內部控制與高風險資金節點之稽核管理。
+                    </p>
+                </div>
+                <div class="p-4 bg-beige-50 rounded-2xl border border-beige-200 space-y-2">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs font-bold text-beige-900">MOS 365 辦公軟體國際認證</span>
+                        <span class="text-[10px] font-semibold text-accent bg-white px-2 py-0.5 rounded border border-beige-200">2023</span>
+                    </div>
+                    <p class="text-[11px] text-stone-500 font-light leading-relaxed text-justify">
+                        具備 Microsoft 官方高階樞紐分析、函數計算與多數據源關聯對接實戰力，可無縫執行高難度報表整合。
+                    </p>
+                </div>
+            </div>
+            <button onclick="closeCertModal()" class="w-full py-2.5 bg-beige-900 hover:bg-accent text-white font-bold text-xs rounded-xl transition-colors">
+                確認並關閉
+            </button>
+        </div>
     </div>
 
+    <!-- ========================================== -->
+    <!-- Gemini 憑證自動分類系統 彈出視窗 -->
+    <!-- ========================================== -->
+    <div id="gemini-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 opacity-0 pointer-events-none transition-opacity duration-300 p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 space-y-6 border border-beige-200 relative transform scale-95 transition-transform duration-300">
+            <button onclick="closeGeminiModal()" class="absolute top-4 right-4 text-stone-400 hover:text-stone-600">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="flex items-center gap-3 border-b border-beige-100 pb-4">
+                <div class="w-10 h-10 rounded-xl bg-beige-100 flex items-center justify-center text-accent text-lg">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-beige-900">Gemini 憑證自動分類系統</h3>
+                    <p class="text-[10px] text-stone-400 uppercase tracking-widest">AI Automated Accounting Flows</p>
+                </div>
+            </div>
+            <div class="space-y-3 text-xs text-stone-600 leading-relaxed text-justify">
+                <p>
+                    本自動化技術專案旨在解決財務團隊每日面臨的「重複性憑證輸入與語意分類」痛點。
+                </p>
+                <p class="bg-beige-50 p-3 rounded-xl border border-beige-200 text-[11px]">
+                    <strong>【核心技術亮點】</strong><br>
+                    使用 Gemini LLM 進行語意分析與大數據清洗，自動將隨機上傳的進銷項電子憑證、報銷單、及雜項費用收據進行精準科目的對應分類。可有效將財務部門月底覆核登帳工時大幅節省 60% 以上！
+                </p>
+                <p class="text-[11px] text-stone-400">
+                    * 完整 Python 後端代碼與 API 調試記錄已安全備份至 GitHub Private 專案庫中。
+                </p>
+            </div>
+            <button onclick="closeGeminiModal()" class="w-full py-2.5 bg-beige-900 hover:bg-accent text-white font-bold text-xs rounded-xl transition-colors">
+                確認並關閉
+            </button>
+        </div>
+    </div>
+
+    <!-- 自訂提示組件 (Toast) -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 bg-beige-900 border border-accent text-white text-xs font-medium px-4 py-3 rounded-xl shadow-lg flex items-center gap-2 transform translate-y-20 opacity-0 transition-all duration-300">
+        <i class="fa-solid fa-circle-check text-accent text-sm"></i>
+        <span id="toast-msg">提示訊息</span>
+    </div>
+
+    <!-- Modal 控制邏輯 -->
     <script>
-        // 1. 財務與稅務證照視窗控制
-        function openFinanceModal(event) {
-            if (event) event.preventDefault();
-            const modal = document.getElementById('finance-modal');
-            modal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden'; 
-        }
-
-        function closeFinanceModal() {
-            const modal = document.getElementById('finance-modal');
-            modal.classList.add('hidden');
-            document.body.style.overflow = ''; 
-        }
-
-        // 2. MOS 365 證照視窗控制
         function openCertModal() {
             const modal = document.getElementById('cert-modal');
-            modal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden'; 
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.querySelector('div').classList.remove('scale-95');
+            modal.querySelector('div').classList.add('scale-100');
         }
-
         function closeCertModal() {
             const modal = document.getElementById('cert-modal');
-            modal.classList.add('hidden');
-            document.body.style.overflow = ''; 
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modal.querySelector('div').classList.add('scale-95');
+            modal.querySelector('div').classList.remove('scale-100');
         }
 
-        // 3. Gemini 證照視窗控制
-        function openGeminiModal(event) {
-            if (event) event.preventDefault();
+        function openGeminiModal() {
             const modal = document.getElementById('gemini-modal');
-            modal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden'; 
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.querySelector('div').classList.remove('scale-95');
+            modal.querySelector('div').classList.add('scale-100');
         }
-
         function closeGeminiModal() {
             const modal = document.getElementById('gemini-modal');
-            modal.classList.add('hidden');
-            document.body.style.overflow = ''; 
-        }
-
-        // 4. 鼎新 ERP 視窗控制
-        function openERPModal(event) {
-            if (event) event.preventDefault();
-            const modal = document.getElementById('erp-modal');
-            modal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeERPModal() {
-            const modal = document.getElementById('erp-modal');
-            modal.classList.add('hidden');
-            document.body.style.overflow = '';
-        }
-
-        // 5. 其他多元證照視窗控制
-        function openOtherModal() {
-            const modal = document.getElementById('other-modal');
-            modal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeOtherModal() {
-            const modal = document.getElementById('other-modal');
-            modal.classList.add('hidden');
-            document.body.style.overflow = '';
-        }
-
-        // 點擊 CTA 鈕回首頁功能
-        function scrollToHomeFromModal(modalId) {
-            const modal = document.getElementById(modalId);
-            if (modal) {
-                modal.classList.add('hidden');
-            }
-            document.body.style.overflow = ''; 
-
-            const heroSection = document.getElementById('hero');
-            if (heroSection) {
-                heroSection.scrollIntoView({ behavior: 'smooth' });
-                showToast("已為您回到首頁！");
-            }
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modal.querySelector('div').classList.add('scale-95');
+            modal.querySelector('div').classList.remove('scale-100');
         }
 
         // 點擊 Modal 外部空白處自動關閉
         window.addEventListener('click', function(e) {
-            const financeModal = document.getElementById('finance-modal');
             const certModal = document.getElementById('cert-modal');
             const geminiModal = document.getElementById('gemini-modal');
-            const erpModal = document.getElementById('erp-modal');
-            const otherModal = document.getElementById('other-modal');
-            if (e.target === financeModal) {
-                closeFinanceModal();
-            }
             if (e.target === certModal) {
                 closeCertModal();
             }
             if (e.target === geminiModal) {
                 closeGeminiModal();
-            }
-            if (e.target === erpModal) {
-                closeERPModal();
-            }
-            if (e.target === otherModal) {
-                closeOtherModal();
             }
         });
 
