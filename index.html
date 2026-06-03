@@ -62,9 +62,9 @@
 
     <main class="max-w-4xl mx-auto px-6 py-12 md:py-20 space-y-24">
 
-        <section id="hero" class="flex flex-col md:flex-row items-center gap-8 md:gap-12 pt-4">
+        <section id="hero" class="flex flex-col md:flex-row items-center md:items-start gap-8 md:gap-12 pt-4">
             <!-- 頭像區 (指向實際照片，若加載失敗則自動顯示後備大頭貼) -->
-            <div class="w-40 h-40 md:w-48 md:h-48 rounded-full border-4 border-beige-200 overflow-hidden flex-shrink-0 bg-white relative beige-glow">
+            <div class="w-40 h-40 md:w-48 md:h-48 rounded-full border-4 border-beige-200 overflow-hidden flex-shrink-0 bg-white relative beige-glow self-center md:self-start">
                 <img 
                     src="woman001.jpg" 
                     alt="吳慧華的專業形象照" 
@@ -72,17 +72,83 @@
                     onerror="this.onerror=null; this.src='https://api.dicebear.com/7.x/initials/svg?seed=吳慧華';"
                 >
             </div>
-            <!-- 文字定位 -->
-            <div class="text-center md:text-left space-y-4">
-                <span class="inline-block px-3 py-1 bg-beige-100 text-accent text-xs font-semibold rounded-full tracking-wider uppercase">Senior Accountant & AI Pioneer</span>
-                <h1 class="text-3xl md:text-5xl font-black text-beige-900 leading-tight">吳慧華</h1>
-                <p class="text-lg md:text-xl text-stone-600 leading-relaxed font-light">
-                    「融合傳統實務與 <span class="text-accent font-medium">AI 科技</span>的專業主辦會計」
-                </p>
-                <div class="flex flex-wrap justify-center md:justify-start gap-3 pt-2">
+            <!-- 文字定位 & 個人資訊網格 -->
+            <div class="text-center md:text-left space-y-5 flex-grow w-full">
+                <div>
+                    <span class="inline-block px-3 py-1 bg-beige-100 text-accent text-xs font-semibold rounded-full tracking-wider uppercase mb-3">Senior Accountant & AI Pioneer</span>
+                    
+                    <!-- 姓名與基本英文標記 -->
+                    <div class="flex flex-col md:flex-row md:items-baseline justify-center md:justify-start gap-2.5">
+                        <h1 class="text-3xl md:text-5xl font-black text-beige-900 leading-tight">吳慧華</h1>
+                        <span class="text-sm md:text-base text-stone-500 font-medium tracking-wide">Wu Hui Hua | 女 | 54 歲</span>
+                    </div>
+                    
+                    <p class="text-lg md:text-xl text-stone-600 leading-relaxed font-light mt-2">
+                        「融合傳統實務與 <span class="text-accent font-medium">AI 科技</span>的專業主辦會計」
+                    </p>
+                </div>
+
+                <!-- 頂部快速標籤 -->
+                <div class="flex flex-wrap justify-center md:justify-start gap-3 pt-1">
                     <span class="text-xs px-3 py-1.5 bg-stone-100 text-stone-600 rounded-lg"><i class="fa-solid fa-calculator mr-1"></i>20+ 年財會經驗</span>
                     <span class="text-xs px-3 py-1.5 bg-stone-100 text-stone-600 rounded-lg"><i class="fa-solid fa-microchip mr-1"></i>AI 辦公大師</span>
                     <span class="text-xs px-3 py-1.5 bg-stone-100 text-stone-600 rounded-lg"><i class="fa-solid fa-map-pin mr-1"></i>桃園八德</span>
+                </div>
+
+                <!-- 完美對齊 image_f67df5.png 的詳細個人資料與教育程度 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-5 border-t border-beige-200 text-left">
+                    <!-- 基本聯絡資料 -->
+                    <div class="space-y-3 text-sm text-stone-600">
+                        <h3 class="text-xs font-bold text-stone-400 uppercase tracking-widest flex items-center gap-2 mb-1">
+                            <i class="fa-solid fa-address-card text-accent"></i>
+                            <span>個人聯絡資料 / Personal Info</span>
+                        </h3>
+                        <div class="flex items-center gap-2">
+                            <span class="w-20 text-stone-400 text-xs flex-shrink-0">應徵職務</span>
+                            <span class="font-semibold text-beige-900 bg-beige-100/50 px-2.5 py-0.5 rounded-md text-xs">主辦會計</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-20 text-stone-400 text-xs flex-shrink-0">出生日期</span>
+                            <span class="font-medium text-stone-800">民國 61 年 01 月 17 日</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-20 text-stone-400 text-xs flex-shrink-0">聯絡手機</span>
+                            <a href="tel:0926330450" class="font-medium text-accent hover:underline flex items-center gap-1">
+                                0926-330-450 <i class="fa-solid fa-phone text-[10px]"></i>
+                            </a>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-20 text-stone-400 text-xs flex-shrink-0">電子郵件</span>
+                            <a href="mailto:wu2136tr@gmail.com" class="font-medium text-accent hover:underline flex items-center gap-1">
+                                wu2136tr@gmail.com <i class="fa-solid fa-envelope text-[10px]"></i>
+                            </a>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <span class="w-20 text-stone-400 text-xs flex-shrink-0">通訊地址</span>
+                            <span class="font-medium text-stone-800 leading-snug">桃園市八德區永豐路456號</span>
+                        </div>
+                    </div>
+
+                    <!-- 教育程度 -->
+                    <div class="space-y-3 text-sm text-stone-600">
+                        <h3 class="text-xs font-bold text-stone-400 uppercase tracking-widest flex items-center gap-2 mb-1">
+                            <i class="fa-solid fa-graduation-cap text-accent"></i>
+                            <span>教育背景 / Education</span>
+                        </h3>
+                        <div class="bg-white p-4 rounded-xl border border-beige-200 beige-glow space-y-2">
+                            <div class="flex justify-between items-start gap-2">
+                                <div>
+                                    <h4 class="font-bold text-stone-800 text-base">健行科技大學</h4>
+                                    <p class="text-xs text-stone-400 mt-0.5">科系/學院/學校名稱</p>
+                                </div>
+                                <span class="px-2.5 py-0.5 bg-beige-100 text-accent font-semibold text-xs rounded-full">學士學位</span>
+                            </div>
+                            <div class="pt-2 border-t border-stone-100 flex items-center justify-between text-xs text-stone-500">
+                                <span>時期 (From ~ To)</span>
+                                <span class="font-mono font-medium text-stone-700">民國 83/07 ~ 86/06</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
